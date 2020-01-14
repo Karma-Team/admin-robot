@@ -3,6 +3,7 @@
 	<name>admin-robot</name>
 	<comment></comment>
 	<projects>
+		<project>cmn-lib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
