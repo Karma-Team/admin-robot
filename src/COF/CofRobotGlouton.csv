@@ -1,0 +1,10 @@
+pidKpA,3.5
+pidKiA,5.001
+pidKdA,7.0080
+coeffLongueurRoueGauche,0.189933523267
+coeffLongueurRoueDroite,0.188040616773
+coeffAngleRoueGauche,0.040600759942565
+coeffAngleRoueDroite,0.040600759942565
+moteursI2cAddr,8
+codeurSerieTty,ttyUSB0
+servoSerieTty,ttyUSB1

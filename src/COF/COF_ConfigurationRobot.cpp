@@ -1,0 +1,76 @@
+/**
+ * COF_ConfigurationRobot.cpp
+ * @brief permet de charger la configuration du robot au demarrage
+ */
+
+#include "COF_ConfigurationRobot.hpp"
+#include <csv.hpp>
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+
+COF::CConfigurationRobot::CConfigurationRobot(char * p_csvConfigFile)
+{
+	snprintf(m_csvConfigFileName, sizeof(m_csvConfigFileName), "%s", p_csvConfigFile);
+	CConfigurationRobot::readCsv();
+}
+
+COF::CConfigurationRobot::~CConfigurationRobot()
+{
+	// rien a faire
+}
+
+void COF::CConfigurationRobot::readCsv()
+{
+	char* type;
+	double value;
+
+	io::CSVReader<2> in(m_csvConfigFileName);
+
+	in.read_row(type, value);
+	m_configRobotStruc.pidKpA = value;
+
+	in.read_row(type, value);
+	m_configRobotStruc.pidKiA = value;
+
+	in.read_row(type, value);
+	m_configRobotStruc.pidKdA = value;
+
+	in.read_row(type, value);
+	m_configRobotStruc.coeffLongueurRoueGauche = value;
+
+	in.read_row(type, value);
+	m_configRobotStruc.coeffLongueurRoueDroite = value;
+
+	in.read_row(type, value);
+	m_configRobotStruc.coeffAngleRoueGauche = value;
+
+	in.read_row(type, value);
+	m_configRobotStruc.coeffAngleRoueDroite = value;
+
+	int addr = 0;
+	in.read_row(type, addr);
+	m_configRobotStruc.moteursI2cAddr = addr;
+
+	char *device;
+	in.read_row(type, device);
+	snprintf(m_configRobotStruc.codeurSerieTty, sizeof(m_configRobotStruc.codeurSerieTty), "%s", device);
+
+
+	in.read_row(type, device);
+	snprintf(m_configRobotStruc.servoSerieTty, sizeof(m_configRobotStruc.servoSerieTty), "%s", device);
+
+}
+
+COF::SConfigRobot COF::CConfigurationRobot::getConfRobot()
+{
+	return m_configRobotStruc;
+}
+
+
+
+
