@@ -1,5 +1,4 @@
-/*
-#include "SerialCodeurManager.h"
+#include "COD_SerialCodeurManager.hpp"
 
 #include <cstdint>
 #include <unistd.h>
@@ -15,6 +14,7 @@
 #include <signal.h>
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <errno.h>
 
@@ -24,28 +24,35 @@
 using namespace std;
 
 
-int arduino;
 unsigned int nextTime ;
 int count = 1;
 int fd ;
 
-SerialCodeurManager::SerialCodeurManager(int init) :
-	 initCodeur(init)
+COD::CSerialCodeurManager::CSerialCodeurManager(char* p_servoSerieTty)
 {
+	snprintf(m_servoSerieTty, sizeof(m_servoSerieTty), "/dev/%s", p_servoSerieTty);
+	m_leftTicks = 0;
+	m_rightTicks = 0;
 
+	initialisation();
 }
 
-void SerialCodeurManager::CloseS()
+COD::CSerialCodeurManager::~CSerialCodeurManager()
+{
+	closeS();
+}
+
+void COD::CSerialCodeurManager::closeS()
 {
 	serialClose(fd);
 	printf("Close serial\n");
 }
 
-void SerialCodeurManager::Initialisation()
+void COD::CSerialCodeurManager::initialisation()
 {
 	printf("Initialisation codeur\n");
 	
-	if ((fd = serialOpen ("/dev/ttyUSB0", 115200)) < 0)
+	if ((fd = serialOpen (m_servoSerieTty, 115200)) < 0)
 		{
 		    	fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
 		    	//return 1 ;
@@ -60,7 +67,7 @@ void SerialCodeurManager::Initialisation()
 	nextTime = millis () + 10 ;
 }
 
-void SerialCodeurManager::readAndReset()
+void COD::CSerialCodeurManager::readAndReset()
 {
 	
 		int ticks[4];
@@ -159,19 +166,29 @@ void SerialCodeurManager::readAndReset()
 		
 		if(ticks[0] == ticks[2] && ticks[1] == ticks[3])	
 		{
-			leftTicks = ticks[0];
-			rightTicks = ticks[1];
+			m_leftTicks = ticks[0];
+			m_rightTicks = ticks[1];
 			
 		}
 		else
 		{
-			leftTicks = 0;
-			rightTicks = 0;	
+			m_leftTicks = 0;
+			m_rightTicks = 0;
 		}
 }
 
-void SerialCodeurManager::reset()
+void COD::CSerialCodeurManager::reset()
 {
-	serialPutchar (fd, 'R');
+	serialPutchar(fd, 'R');
 }
-*/
+
+int COD::CSerialCodeurManager::getRightTicks()
+{
+	return m_rightTicks;
+}
+
+int COD::CSerialCodeurManager::getLeftTicks()
+{
+	return m_leftTicks;
+}
+

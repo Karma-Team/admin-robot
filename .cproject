@@ -72,6 +72,10 @@
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/COF}&quot;"/>
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/cmn-lib/src/CSV}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/MOT}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/COD}&quot;"/>
                                     								
                                 </option>
                                 								
@@ -106,6 +110,10 @@
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/cmn-lib/src/CSV}&quot;"/>
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/COF}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/MOT}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/COD}&quot;"/>
                                     								
                                 </option>
                                 								
@@ -158,6 +166,10 @@
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/COF}&quot;"/>
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/cmn-lib/src/CSV}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/MOT}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/COD}&quot;"/>
                                     								
                                 </option>
                                 								

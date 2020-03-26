@@ -10,10 +10,14 @@
 #include <iomanip>      // std::setprecision
 #include <wiringPi.h>
 #include "COF_ConfigurationRobot.hpp"
+#include "MOT_MoteurManager.hpp"
+#include "COD_SerialCodeurManager.hpp"
 
 using namespace std;
 
 int main() {
+
+	// Lecture de la configuration
 	cout << "Lecture de la Configuration du robot" << endl;
 
 	COF::CConfigurationRobot csvConfigurationRobot = COF::CConfigurationRobot("CofRobotGlouton.csv");
@@ -35,6 +39,12 @@ int main() {
 	cout << "servoSerieTty = " <<  configRobot.servoSerieTty << endl;
 
 	cout << "Fin de la lecture de la configuration du robot" << endl;
+
+	// Construction du manageur moteur
+	MOT::CMoteurManager moteurManager = MOT::CMoteurManager(configRobot.moteursI2cAddr);
+
+	// Construction du manager des codeurs et de la communication serie
+	COD::CSerialCodeurManager codeurManager = COD::CSerialCodeurManager(configRobot.servoSerieTty);
 
 	return 0;
 }
