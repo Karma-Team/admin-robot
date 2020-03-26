@@ -23,9 +23,18 @@ int main() {
 	COF::CConfigurationRobot csvConfigurationRobot = COF::CConfigurationRobot("CofRobotGlouton.csv");
 	COF::SConfigRobot configRobot = csvConfigurationRobot.getConfRobot();
 
-	cout << "P = " <<  setprecision(15) << configRobot.pidKpA << endl;
-	cout << "I = " <<  setprecision(15) << configRobot.pidKiA << endl;
-	cout << "D = " <<  setprecision(15) << configRobot.pidKdA << endl;
+	cout << "PA = " <<  setprecision(15) << configRobot.pidKpA << endl;
+	cout << "IA = " <<  setprecision(15) << configRobot.pidKiA << endl;
+	cout << "DA = " <<  setprecision(15) << configRobot.pidKdA << endl;
+
+	cout << "PD = " <<  setprecision(15) << configRobot.pidKpD << endl;
+	cout << "ID = " <<  setprecision(15) << configRobot.pidKiD << endl;
+	cout << "DD = " <<  setprecision(15) << configRobot.pidKdD << endl;
+
+	cout << "PP = " <<  setprecision(15) << configRobot.pidKpP << endl;
+	cout << "IP = " <<  setprecision(15) << configRobot.pidKiP << endl;
+	cout << "DP = " <<  setprecision(15) << configRobot.pidKdP << endl;
+
 
 	cout << "coeffLongueurRoueGauche = " <<  setprecision(15) << configRobot.coeffLongueurRoueGauche << endl;
 	cout << "coeffLongueurRoueDroite = " <<  setprecision(15) << configRobot.coeffLongueurRoueDroite << endl;

@@ -14,9 +14,17 @@ namespace COF
 	 */
 	struct SConfigRobot
 	{
-		double pidKpA; //< P asservissement
-		double pidKiA; //< I asservissement
-		double pidKdA; //< D asservissement
+		double pidKpA; //< P asservissement Angle
+		double pidKiA; //< I asservissement Angle
+		double pidKdA; //< D asservissement Angle
+
+		double pidKpD; //< P asservissement Direction
+		double pidKiD; //< I asservissement Direction
+		double pidKdD; //< D asservissement Direction
+
+		double pidKpP; //< P asservissement Position
+		double pidKiP; //< I asservissement Position
+		double pidKdP; //< D asservissement Position
 
 		double coeffLongueurRoueGauche; //< Coefficient de longeur pour la roue gauche
 		double coeffLongueurRoueDroite; //< Coefficient de longeur pour la roue droite

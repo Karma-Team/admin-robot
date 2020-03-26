@@ -1,6 +1,12 @@
-pidKpA,3.5
-pidKiA,5.001
-pidKdA,7.0080
+pidKpA,7
+pidKiA,0.05
+pidKdA,57
+pidKpD,7.0080
+pidKiD,0.02
+pidKdD,75
+pidKpP,2
+pidKiP,0.00002
+pidKdP,9
 coeffLongueurRoueGauche,0.189933523267
 coeffLongueurRoueDroite,0.188040616773
 coeffAngleRoueGauche,0.040600759942565

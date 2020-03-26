@@ -41,6 +41,24 @@ void COF::CConfigurationRobot::readCsv()
 	m_configRobotStruc.pidKdA = value;
 
 	in.read_row(type, value);
+	m_configRobotStruc.pidKpD = value;
+
+	in.read_row(type, value);
+	m_configRobotStruc.pidKiD = value;
+
+	in.read_row(type, value);
+	m_configRobotStruc.pidKdD = value;
+
+	in.read_row(type, value);
+	m_configRobotStruc.pidKpP = value;
+
+	in.read_row(type, value);
+	m_configRobotStruc.pidKiP = value;
+
+	in.read_row(type, value);
+	m_configRobotStruc.pidKdP = value;
+
+	in.read_row(type, value);
 	m_configRobotStruc.coeffLongueurRoueGauche = value;
 
 	in.read_row(type, value);

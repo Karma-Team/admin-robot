@@ -1,4 +1,4 @@
-/*#include "Point.h"
+#include "Point.h"
 
 #include <iostream>
 #include <string>
@@ -161,4 +161,4 @@ int Point::getTimeout(){
 void Point::setTimeout(int millis){
     timeout = millis;
 }
-*/
+

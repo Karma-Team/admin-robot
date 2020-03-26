@@ -76,6 +76,10 @@
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/MOT}&quot;"/>
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/COD}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/ASV}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/POT}&quot;"/>
                                     								
                                 </option>
                                 								
@@ -114,6 +118,10 @@
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/MOT}&quot;"/>
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/COD}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/ASV}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/POT}&quot;"/>
                                     								
                                 </option>
                                 								
@@ -170,6 +178,10 @@
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/MOT}&quot;"/>
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/COD}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/POT}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/ASV}&quot;"/>
                                     								
                                 </option>
                                 								

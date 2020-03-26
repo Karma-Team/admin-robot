@@ -1,42 +1,42 @@
-/*#include "ASV_AsservRasp.hpp"
+#include "ASV_AsservRasp.hpp"
 
-#include <iostream>
 #include <cmath>
 #include <cstdint>
 #include <string>
+#include <stdlib.h>
 
 using namespace std;
 
-Asservissement::Asservissement(
-		MoteurManager& mots,
-		ICodeurManager& cods,
-		const vector<Point>& pts) :
-	moteurs(mots),
-	codeurs(cods),
-	indexPointActuel(0),
-	points(pts)
+ASV::CAsservissement::CAsservissement(MOT::CMoteurManager* p_moteursManager, COD::CSerialCodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct, const vector<Point>& p_points): points(p_points)
 {
-
+	moteurs = p_moteursManager;
+	codeurs = p_codeursManager;
+	configStruct = p_configStruct;
 }
 
-void Asservissement::stop()
+ASV::CAsservissement::~CAsservissement()
+{
+	stop();
+}
+
+void ASV::CAsservissement::stop()
 {
 	cerr << "STOP" << endl;
-	moteurs.stop();
-	moteurs.apply();
+	moteurs->stop();
+	moteurs->apply();
 }
 
-Point Asservissement::pointActuel() const
+Point ASV::CAsservissement::pointActuel() const
 {
 	return points.at(indexPointActuel);
 }
 
-void Asservissement::autoriserPointSuivant()
+void ASV::CAsservissement::autoriserPointSuivant()
 {
 	demandePointSuivant = false;
 	pointSuivantAutorise = true;
 }
-void Asservissement::pointSuivant()
+void ASV::CAsservissement::pointSuivant()
 {
 
 	//Demande de passage au point suivant au main
@@ -61,7 +61,7 @@ void Asservissement::pointSuivant()
 	{
 		indexPointActuel = nbPoints()-1;
 		cout << "\nPlus de points\n";
-		moteurs.stop();
+		moteurs->stop();
 		suite = 1;
 		//return;
 	}
@@ -74,12 +74,12 @@ void Asservissement::pointSuivant()
 	}
 }
 
-int Asservissement::nbPoints() const
+int ASV::CAsservissement::nbPoints() const
 {
 	return points.size();
 }
 
-bool Asservissement::isFinished()
+bool ASV::CAsservissement::isFinished()
 {
 	if (indexPointActuel >= nbPoints())
 	{
@@ -89,7 +89,7 @@ bool Asservissement::isFinished()
 }
 
 
-void Asservissement::verifOverflowCommandes()
+void ASV::CAsservissement::verifOverflowCommandes()
 {
 
 	if (cmdG < -255) cmdG = -255;
@@ -100,7 +100,7 @@ void Asservissement::verifOverflowCommandes()
 }
 
 
-void Asservissement::reorientation()
+void ASV::CAsservissement::reorientation()
 {
 	if (abs(consigne_orientation - orientation) > 180) {
 		if (orientation > 0) {
@@ -114,7 +114,7 @@ void Asservissement::reorientation()
 	}
 }
 
-void Asservissement::initialiser(Point pt)
+void ASV::CAsservissement::initialiser(Point pt)
 {
 	// Initialisation des coordonnées à partir du point initial
 	xC = pt.getX();
@@ -146,7 +146,7 @@ void Asservissement::initialiser(Point pt)
 }
 
 
-void Asservissement::calculConsigne()
+void ASV::CAsservissement::calculConsigne()
 {
 	// Pour savoir si la cible est à gauche ou à droite du robot, on
 	// calcule le sinus de l'angle entre la cible et le robot
@@ -188,7 +188,7 @@ void Asservissement::calculConsigne()
 }
 
 
-void Asservissement::asservir()
+void ASV::CAsservissement::asservir()
 {
 	nbAsservCalled++;
 	//printf("asservir : %d\n", nbAsservCalled);//debug
@@ -202,17 +202,17 @@ void Asservissement::asservir()
 	// dOrientation = angle effectué par le robot
 
 	// Lecture et réinitialisation des codeurs
-	codeurs.readAndReset();
+	codeurs->readAndReset();
 
 	// Lecture des valeurs lues depuis les codeurs pour connaître la variation
 	// entre deux appels de la fonction d'asservissement.
-	comptG = codeurs.getLeftTicks();
-	comptD = codeurs.getRightTicks();
+	comptG = codeurs->getLeftTicks();
+	comptD = codeurs->getRightTicks();
 	int saveG = comptG;
 	int saveD = comptD;
 	// Calcul de la différence du nombre de tic entre chaque codeur (car
 	// différent si on ne roule pas droit) qu'on converti en angle
-	float dOrientation = CoeffGAngl * comptG - CoeffDAngl * comptD;
+	float dOrientation = configStruct->coeffAngleRoueGauche * comptG - configStruct->coeffAngleRoueDroite * comptD;
 	orientation += dOrientation;
 
 	// orientationP = moyenne des angles pour connaître le cap exact
@@ -221,7 +221,7 @@ void Asservissement::asservir()
 
 	// Calcul de la distance parcourue par le centre de la base roulante grâce
 	// à une conversion nombre de tic / distance en mm.
-	dDepl = (CoeffDLong * comptD + CoeffGLong * comptG) / 2;
+	dDepl = (configStruct->coeffLongueurRoueDroite * comptD + configStruct->coeffLongueurRoueGauche * comptG) / 2;
 	distanParcourue += dDepl;
 	
 	//cout << "Coefs " << CoeffGLong << " " << CoeffDLong << " " << CoeffGAngl << " " << CoeffDAngl << endl;
@@ -388,7 +388,7 @@ void Asservissement::asservir()
 	float delta_erreurP = erreurP - erreur_precedenteP; // Dérivée de l'erreur
 	erreur_precedenteP = erreurP;
 
-	cmdP =  kpP * erreurP + kdP * delta_erreurP + kiP * somme_erreurP;
+	cmdP =  configStruct->pidKpP * erreurP + configStruct->pidKdP * delta_erreurP + configStruct->pidKiP * somme_erreurP;
 
 	if(erreurP < 0)
 		{
@@ -422,11 +422,11 @@ void Asservissement::asservir()
 	
 	if(pointActuel().getCoeff() == 0.0)
 	{
-		cmdA =  pointActuel().getAcc() * kpA * erreurA  + kdA * delta_erreurA + kiA*somme_erreurA;
+		cmdA =  pointActuel().getAcc() * configStruct->pidKpA * erreurA  + configStruct->pidKdA * delta_erreurA + configStruct->pidKiA*somme_erreurA;
 	}
 	else 
 	{
-		cmdA =  pointActuel().getAcc() * kpD * erreurA  + kdD * delta_erreurA + kiD*somme_erreurA;
+		cmdA =  pointActuel().getAcc() * configStruct->pidKpD * erreurA  + configStruct->pidKdD * delta_erreurA + configStruct->pidKiD*somme_erreurA;
 	}
 	
 	
@@ -468,48 +468,33 @@ void Asservissement::asservir()
 
 		if (!derriere) { // Marche avant
 
-			if (cmdG < 0) moteurs.gauchePWM(abs(cmdG), 0);
-			else moteurs.gauchePWM(0, cmdG);
+			if (cmdG < 0) moteurs->gauchePWM(abs(cmdG), 0);
+			else moteurs->gauchePWM(0, cmdG);
 
-			if(cmdD < 0) moteurs.droitePWM(abs(cmdD), 0);
-			else moteurs.droitePWM(0, cmdD);
+			if(cmdD < 0) moteurs->droitePWM(abs(cmdD), 0);
+			else moteurs->droitePWM(0, cmdD);
 
 		} else { // Marche arrière
 
-			if (cmdD < 0) moteurs.gauchePWM(0, abs(cmdD));
-			else moteurs.gauchePWM(cmdD, 0);
+			if (cmdD < 0) moteurs->gauchePWM(0, abs(cmdD));
+			else moteurs->gauchePWM(cmdD, 0);
 
-			if(cmdG < 0) moteurs.droitePWM(0, abs(cmdG));
-			else moteurs.droitePWM(cmdG, 0);
+			if(cmdG < 0) moteurs->droitePWM(0, abs(cmdG));
+			else moteurs->droitePWM(cmdG, 0);
 		}
 
 	} else {
 		// Arrêt des moteurs
-		moteurs.stop();
+		moteurs->stop();
 	}
 	
 	// On envoie l'ordre que l'on vient d'affecter aux moteurs
 	//cout<<"cmdD : "<< cmdD << "   cmdG : "<< cmdG<<endl; 
-	moteurs.apply();
+	moteurs->apply();
 
 	//changment du signe de la distance parcourue du a la décrémentation des codeurs en cas de marche arrière
-   if(pointActuel().getSens() == 1)
-		distanParcourue = -distanParcourue;
-	}
+   if(pointActuel().getSens() == 1)	distanParcourue = -distanParcourue;
+}
 	
 
-void Asservissement::loadConfig(Config conf)
-{	
-	kpA = 7;
-	kiA = 0.05;
-	kdA = 57;
 
-	kpP = 2;
-	kiP = 0.00002;
-	kdP = 9;
-
-	kpD = 7;
-	kiD = 0.02;
-	kdD = 75;	
-}
-*/
