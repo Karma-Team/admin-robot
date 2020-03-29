@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstdio>
 #include <unistd.h>
+#include <wiringPiI2C.h>
 
 using namespace std;
 
@@ -11,10 +12,11 @@ MOT::CMoteurManager::CMoteurManager(int p_i2cAddrMoteur)
 {
 	m_ordreGauche = 128;
 	m_ordreDroit =  128;
-	m_i2cAddrMoteur = p_i2cAddrMoteur;
+	m_i2cAddrMoteur = wiringPiI2CSetup(p_i2cAddrMoteur);
 
-	// Arret des moteurs
+	//Arret des moteurs
 	apply();
+
 }
 
 MOT::CMoteurManager::~CMoteurManager()
