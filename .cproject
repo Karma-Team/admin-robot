@@ -80,6 +80,8 @@
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/ASV}&quot;"/>
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/POT}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/STR}&quot;"/>
                                     								
                                 </option>
                                 								
@@ -122,6 +124,8 @@
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/ASV}&quot;"/>
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/POT}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/STR}&quot;"/>
                                     								
                                 </option>
                                 								
@@ -182,6 +186,8 @@
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/POT}&quot;"/>
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/ASV}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/STR}&quot;"/>
                                     								
                                 </option>
                                 								
