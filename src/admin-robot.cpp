@@ -10,10 +10,8 @@
 #include <iomanip>      // std::setprecision
 #include <wiringPi.h>
 #include <string.h>
-#include "COF_ConfigurationRobot.hpp"
-#include "MOT_MoteurManager.hpp"
-#include "COD_SerialCodeurManager.hpp"
 #include "STR_Remote.hpp"
+#include "STR_Autonome.hpp"
 
 using namespace std;
 
@@ -24,6 +22,8 @@ int main(int argc, char** argv) {
 
 	COF::CConfigurationRobot csvConfigurationRobot = COF::CConfigurationRobot("CofRobotGlouton.csv");
 	COF::SConfigRobot configRobot = csvConfigurationRobot.getConfRobot();
+
+	cout << "IpServeurTcp = " <<  setprecision(15) << configRobot.ipTcpServeur << endl;
 
 	cout << "PA = " <<  setprecision(15) << configRobot.pidKpA << endl;
 	cout << "IA = " <<  setprecision(15) << configRobot.pidKiA << endl;
@@ -57,8 +57,6 @@ int main(int argc, char** argv) {
 	// Construction du manager des codeurs et de la communication serie
 	COD::CSerialCodeurManager codeurManager = COD::CSerialCodeurManager(configRobot.servoSerieTty);
 
-	cout << "argv " << argv[1] << endl;
-
 	if(strcmp(argv[1],"-remote") == 0)
 	{
 		STR::CRemote remoteManager = STR::CRemote(&moteurManager);
@@ -66,7 +64,8 @@ int main(int argc, char** argv) {
 	}
 	else
 	{
-
+		STR::CAutonome autonomeManager = STR::CAutonome(&moteurManager,&codeurManager,&configRobot);
+		autonomeManager.startAutonome();
 	}
 
 	return 0;

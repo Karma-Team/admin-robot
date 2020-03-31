@@ -3,6 +3,8 @@
  * @brief permet de charger la configuration du robot au demarrage
  */
 
+#include "TCP/TCP_Common.hpp"
+
 #ifndef _CONFCONFIG_
 #define _CONFCONFIG_
 
@@ -14,6 +16,7 @@ namespace COF
 	 */
 	struct SConfigRobot
 	{
+		char ipTcpServeur[16]; // ip Serveur tcp
 		double pidKpA; //< P asservissement Angle
 		double pidKiA; //< I asservissement Angle
 		double pidKdA; //< D asservissement Angle

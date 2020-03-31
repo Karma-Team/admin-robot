@@ -27,9 +27,16 @@ COF::CConfigurationRobot::~CConfigurationRobot()
 void COF::CConfigurationRobot::readCsv()
 {
 	char* type;
-	double value;
+
 
 	io::CSVReader<2> in(m_csvConfigFileName);
+
+	char* ip;
+
+	in.read_row(type, ip);
+	snprintf(m_configRobotStruc.ipTcpServeur, sizeof(m_configRobotStruc.ipTcpServeur), "%s", ip);
+
+	double value;
 
 	in.read_row(type, value);
 	m_configRobotStruc.pidKpA = value;
