@@ -227,15 +227,22 @@ void STR::CRemote::printValeurCodeur()
 
 void STR::CRemote::asservTest()
 {
-	int x,y;
+	int x,y,angle,vitesse;
+	char* action;
 	int cmd;
+
 	while((cmd=getchar())!= '.')
 	{
 		printf("Entrer x: ");
 		scanf("%d",&x);
-		printf("Entrer y: ");
+		printf("\nEntrer y: ");
 		scanf("%d",&y);
-
+		printf("\nEntrer angle: ");
+		scanf("%d",&angle);
+		printf("\nEntrer vitesse: ");
+		scanf("%d",&vitesse);
+		printf("\nEntrer action: ");
+		scanf("%s",&action);
 	}
 }
 
