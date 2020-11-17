@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
 
 	if(strcmp(argv[1],"-remote") == 0)
 	{
-		STR::CRemote remoteManager = STR::CRemote(&moteurManager);
+		STR::CRemote remoteManager = STR::CRemote(&moteurManager, &codeurManager,&configRobot);
 		remoteManager.startRemote();
 	}
 	else

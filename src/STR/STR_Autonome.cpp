@@ -16,6 +16,11 @@ STR::CAutonome::CAutonome(MOT::CMoteurManager *p_moteurManager, COD::CSerialCode
 	m_codeursManager = p_codeursManager;
 	m_configStruct = p_configStruct;
 
+	if (m_moteurManager == NULL or m_codeursManager == NULL or m_configStruct == NULL) {
+		printf("Pointeur NULL !!!!!");
+		exit(1);
+	}
+
 	stringstream copyString;
 	copyString << m_configStruct->ipTcpServeur;
 	copyString >> m_ipServeur;
