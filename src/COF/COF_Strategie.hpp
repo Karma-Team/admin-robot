@@ -3,12 +3,9 @@
  * @brief permet de charger la strategie
  */
 
-
-
 #ifndef _CONFSTG_
 #define _CONFSTG_
 
-#endif /* _CONFSTG_ */
 
 namespace COF
 {
@@ -51,7 +48,7 @@ namespace COF
 
 			int getSizeStrategie();
 
-			private:
+		private:
 
 			/**
 			* @brief read csv
@@ -62,3 +59,5 @@ namespace COF
 			SStrategieDeplacement m_strategieDeplacementStruct[]; //< structure de la strategie de deplacement
 		};
 }
+
+#endif /* _CONFSTG_ */

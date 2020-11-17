@@ -19,6 +19,11 @@ COF::CStrategieDeplacement::CStrategieDeplacement(char * p_csvStrategieDeplaceme
 	CStrategieDeplacement::readCsv();
 }
 
+COF::CStrategieDeplacement::~CStrategieDeplacement()
+{
+	// rien a faire
+}
+
 void COF::CStrategieDeplacement::readCsv()
 {
 	int x = 0;

@@ -1,6 +1,9 @@
-#include "MOT_MoteurManager.hpp"
 #include "COF_ConfigurationRobot.hpp"
-#include "ASV_AsservRasp.hpp"
+#include "MOT_MoteurManager.hpp"
+#include "COF_Strategie.hpp"
+
+namespace ASV { class CAsservissement;};
+namespace COD { class CSerialCodeurManager;};
 
 #ifndef _REMOTE_
 #define _REMOTE_

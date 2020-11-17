@@ -8,7 +8,7 @@
 #include <iostream>
 #include <iomanip>      // std::setprecision
 #include "STR_Remote.hpp"
-#include "COF_Strategie.hpp"
+#include "COD_SerialCodeurManager.hpp"
 
 using namespace std;
 
