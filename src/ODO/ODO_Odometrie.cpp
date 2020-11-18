@@ -44,5 +44,22 @@ void ODO::COdometrie::reorientation()
 	}
 }
 
+void ODO::COdometrie::calculConsigne()
+{
+       /* Pour savoir si la cible est à gauche ou à droite du robot, on
+	* calcule le sinus de l'angle entre la cible et le robot
+	* sin = Opp/Hyp, on a opp et on retrouve hyp grâce à Pythagore
+	* Sinus auxiliaire pour savoir où se trouve la cible par
+	* rapport au robot
+	*/
+	float sinAux = (yC - yA) / (sqrt((xC - xA) * (xC - xA) + (yC - yA) * (yC - yA)));
+	float aco = acos((xC - xA) / ((sqrt((xC-xA)*(xC-xA) + (yC-yA)*(yC-yA))))) * 360 /(2 * M_PI);
+
+	// On change la consigne selon le fait que la cible soit à gauche
+	// (-aco) ou a droite (+aco) du robot
+	m_odometrieStruct->angleConsigne = sinAux > 0 ? -aco : +aco;
+    	reorientation();
+}
+
 
 
