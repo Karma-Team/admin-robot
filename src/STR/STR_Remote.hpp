@@ -1,6 +1,7 @@
 #include "COF_ConfigurationRobot.hpp"
 #include "MOT_MoteurManager.hpp"
 #include "COF_Strategie.hpp"
+#include "ODO_Odometrie.hpp"
 
 namespace ASV { class CAsservissement;};
 namespace COD { class CSerialCodeurManager;};

@@ -6,6 +6,9 @@
  */
 #include "COF_Strategie.hpp"
 #include <iostream>
+#include <math.h>
+
+namespace COD {class CSerialCodeurManager;};
 
 #ifndef _ODO_ODOMETRIE_HPP_
 #define _ODO_ODOMETRIE_HPP_
@@ -17,8 +20,8 @@ namespace ODO
 	{
 		int xDepart;
 		int yDepart;
-		int xConsigne;
-		int yConsigne;
+		int xArrive;
+		int yArrive;
 		int angleConsigne;
 		int angleActuel;
 		int vitesse;
@@ -41,6 +44,7 @@ namespace ODO
 			void initialiser();
 			void reorientation();
 			void calculConsigne();
+			void miseAJourPosition();
 
 			COF::CStrategieDeplacement* m_strategieDepalcement;
 			COD::CSerialCodeurManager* m_codeursManager;
