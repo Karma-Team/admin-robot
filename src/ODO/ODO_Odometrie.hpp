@@ -30,7 +30,6 @@ namespace ODO
 
 	class COdometrie
 	{
-
 		public:
 
 			COdometrie(COF::CStrategieDeplacement* p_strategieDeplacement,  COD::CSerialCodeurManager* p_codeursManager);
@@ -41,14 +40,12 @@ namespace ODO
 
 			void initialiser();
 			void reorientation();
+			void calculConsigne();
 
 			COF::CStrategieDeplacement* m_strategieDepalcement;
 			COD::CSerialCodeurManager* m_codeursManager;
 			ODO::SOdometrieVariables m_odometrieStruct;
-
 	};
-
 }
-
 
 #endif /* _ODO_ODOMETRIE_HPP_ */
