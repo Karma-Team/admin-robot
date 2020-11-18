@@ -19,7 +19,7 @@ STR::CRemote::CRemote(MOT::CMoteurManager *p_moteurManager, COD::CSerialCodeurMa
 	m_configStruct = p_configStruct;
 	m_vitesse = 0;
 
-	if(m_moteurManager == NULL or m_codeursManager == NULL or m_configStruct == NULL)
+	if(m_moteurManager == NULL || m_codeursManager == NULL || m_configStruct == NULL)
 	{
 		printf("Pointeur NULL !!!!!");
 		exit(1);
