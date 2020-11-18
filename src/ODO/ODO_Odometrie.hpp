@@ -36,7 +36,7 @@ namespace ODO
 
 			virtual ~COdometrie();
 
-		private :
+		private:
 
 			void initialiser();
 			void reorientation();
