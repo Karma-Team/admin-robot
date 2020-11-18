@@ -7,12 +7,13 @@
 
 #include "ODO_Odometrie.hpp"
 
-ODO::COdometrie::COdometrie(COF::SStrategieDeplacement* p_strategieDeplacement)
+ODO::COdometrie::COdometrie(COF::SStrategieDeplacement* p_strategieDeplacement, COD::CSerialCodeurManager* p_codeursManager)
 {
 	m_odometrieStruct = {0};
 	m_strategieDepalcement = p_strategieDeplacement;
+	m_codeursManager = p_codeursManager;
 
-	if (m_strategieDepalcement == NULL) {
+	if (m_strategieDepalcement == NULL || m_codeursManager == NULL) {
 		printf("Pointeur NULL !!!!!");
 		exit(1);
 	}
