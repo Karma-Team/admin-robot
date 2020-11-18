@@ -33,7 +33,7 @@ namespace ODO
 
 		public:
 
-			COdometrie(COF::SStrategieDeplacement* p_strategieDeplacement);
+			COdometrie(COF::SStrategieDeplacement* p_strategieDeplacement,  COD::CSerialCodeurManager* p_codeursManager);
 
 			virtual ~COdometrie();
 
@@ -42,6 +42,7 @@ namespace ODO
 			void initialiser();
 
 			COF::SStrategieDeplacement* m_strategieDepalcement;
+			COD::CSerialCodeurManager* m_codeursManager;
 			ODO::SOdometrieVariables m_odometrieStruct;
 
 	};
