@@ -36,10 +36,10 @@ namespace ODO
 		float orientationConsigne;
 		float orientationDerive;
 		float orientationMoyenne;
-		float orientationVersCible;
+		float orientationConsigne;
 		float distanceParcourue;
 		float distancePrecedent;
-		float distanceCible;
+		float distanceConsigne;
 	};
 
 	class COdometrie
