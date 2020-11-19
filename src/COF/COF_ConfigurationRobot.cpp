@@ -91,9 +91,9 @@ void COF::CConfigurationRobot::readCsv()
 
 }
 
-COF::SConfigRobot COF::CConfigurationRobot::getConfRobot()
+COF::SConfigRobot* COF::CConfigurationRobot::getConfRobot()
 {
-	return m_configRobotStruc;
+	return &m_configRobotStruc;
 }
 
 

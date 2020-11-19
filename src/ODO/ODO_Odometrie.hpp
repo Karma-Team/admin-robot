@@ -36,36 +36,21 @@ namespace ODO
 		float orientationConsigne;
 		float orientationDerive;
 		float orientationMoyenne;
-		float orientationConsigne;
+		float orientationVersCible;
 		float distanceParcourue;
 		float distancePrecedent;
 		float distanceConsigne;
-	};
-	
-	struct SPid
-	{
-		float erreurOrientationKp;
-		float erreurOrientationPrecedente;
-		float deltaErreurOrientationKd;
-		float sommeErreurOrientationKi;
-		
-		float orientationPid;
-		
-		float erreurDistanceKp;
-		float erreurDistancePrecedente;
-		float deltaErreurDistanceKd;
-		float sommeErreurDistanceKi;
-		
-		float distancePid;
 	};
 
 	class COdometrie
 	{
 		public:
 
-			COdometrie(COF::CStrategieDeplacement* p_strategieDeplacement, COF::CConfigurationRobot* p_configStruct,  COD::CSerialCodeurManager* p_codeursManager);
+			COdometrie(COF::CStrategieDeplacement* p_strategieDeplacement, COF::SConfigRobot* p_configStruct,  COD::CSerialCodeurManager* p_codeursManager);
 
 			virtual ~COdometrie();
+
+			SOdometrieVariables* getOdometrieVariables();
 
 		private:
 			
@@ -74,15 +59,16 @@ namespace ODO
 			void calculConsigne();
 			void miseAJourPosition();
 			void calculConsigneDeplacement();
+			void asservirVersCible();
 			
 			int m_index;
 			int m_cmdMoteurDroit;
 			int m_cmdMoteurGauche;
 			COF::CStrategieDeplacement* m_strategieDepalcement;
-			COF::CConfigurationRobot* m_configStruct;
+			COF::SConfigRobot* m_configStruct;
 			COD::CSerialCodeurManager* m_codeursManager;
 			ODO::SOdometrieVariables m_odometrieStruct;
-			ODO::SPid m_structPid;
+
 	};
 }
 
