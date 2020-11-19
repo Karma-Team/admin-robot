@@ -36,6 +36,7 @@ namespace ODO
 		float orientation;
 		float orientationDerive;
 		float orientationMoyenne;
+		float orientationVersCible;
 		float distanceParcourue;
 		float distancePrecedent;
 		float distanceCible;
