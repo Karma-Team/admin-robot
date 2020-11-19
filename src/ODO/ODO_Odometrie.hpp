@@ -78,6 +78,7 @@ namespace ODO
 			COF::CConfigurationRobot* m_configStruct;
 			COD::CSerialCodeurManager* m_codeursManager;
 			ODO::SOdometrieVariables m_odometrieStruct;
+			ODO::SPid m_structPid;
 	};
 }
 
