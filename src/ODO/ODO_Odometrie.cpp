@@ -11,10 +11,13 @@
 ODO::COdometrie::COdometrie(COF::CStrategieDeplacement* p_strategieDeplacement, COF::CConfigurationRobot* p_configStruct, COD::CSerialCodeurManager* p_codeursManager)
 {
 	m_odometrieStruct = {0};
+	m_structPid = {0};
 	m_strategieDepalcement = p_strategieDeplacement;
 	m_configStruct = p_configStruct;
 	m_codeursManager = p_codeursManager;
 	m_index = 0;
+	m_cmdMoteurDroit = 0;
+	m_cmdMoteurGauche = 0;
 
 	if (m_strategieDepalcement == NULL || m_codeursManager == NULL || m_configStruct == NULL) {
 		printf("Pointeur NULL !!!!!");
@@ -68,11 +71,31 @@ void ODO::COdometrie::calculConsigneDeplacement()
 	m_odometrieStruct.yArrive = m_strategieDepalcement->getStrategieDeplacement(m_index)->y;
 	
 	// Calcul de la distance qui separe le robot de la cible
-	m_odometrieStruct.distanceCible = sqrt(((m_odometrieStruct.xArrive - m_odometrieStruct.xActuel) * (m_odometrieStruct.xArrive - m_odometrieStruct.xActuel)) + ((m_odometrieStruct.yArrive - m_odometrieStruct.yActuel) * (m_odometrieStruct.yArrive - m_odometrieStruct.yActuel)));
+	m_odometrieStruct.distanceConsigne = sqrt(((m_odometrieStruct.xArrive - m_odometrieStruct.xActuel) * (m_odometrieStruct.xArrive - m_odometrieStruct.xActuel)) + ((m_odometrieStruct.yArrive - m_odometrieStruct.yActuel) * (m_odometrieStruct.yArrive - m_odometrieStruct.yActuel)));
 	
 	// Calcul de l'orientation du robot pour faire face a la cible
 	m_odometireStruct.orientationVersCible = arctg((m_odometrieStruct.xArrive - m_odometrieStruct.xActuel)/(m_odometrieStruct.yArrive - m_odometrieStruct.yActuel));
 	m_odometireStruct.orientationConsigne = m_odometireStruct.orientationVersCible - m_odometireStruct.orientationActuel;
+}
+
+void ODO::COdometrie::asservirVersCible()
+{
+	// Calcul PID de orientation
+	m_structPid.erreurOrientationKp = m_odometireStruct.orientationConsigne - m_odometrieStruct.orientationActuel;
+	m_structPid.sommeErreurOrientationKi += m_structPid.erreurOrientationKp;
+	m_structPid.deltaErreurOrientationKd = m_structPid.erreurOrientationKp - m_structPid.erreurOrientationPrecedente;
+	m_structPid.erreurOrientationPrecedente = m_structPid.erreurOrientationKp
+		
+	m_structPid.orientationPid = (m_configStruct->pidKpA*m_structPid.erreurOrientationKp) + (m_configStruct->pidKdA*m_structPid.deltaErreurOrientationKd) + (m_configStruct->pidKiA*m_structPid.sommeErreurOrientationKi);
+	
+	// Calcul PID de la distance
+	m_structPid.erreurDistanceKp = m_odometireStruct.distanceConsigne - m_odometrieStruct.distanceParcourue;
+	m_structPid.sommeErreurDistanceKi += m_structPid.erreurDistanceKp;
+	m_structPid.deltaErreurDistanceKd = m_structPid.erreurDistanceKp - m_structPid.erreurDistancePrecedente;
+	m_structPid.erreurDistancePrecedente = m_structPid.erreurDistanceKp
+		
+	m_structPid.distancePid = (m_configStruct->pidKpD*m_structPid.erreurDistanceKp) + (m_configStruct->pidKdD*m_structPid.deltaErreurDistanceKd) + (m_configStruct->pidKiD*m_structPid.sommeErreurDistanceKi);
+	
 }
 
 
