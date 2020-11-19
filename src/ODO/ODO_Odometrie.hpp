@@ -56,6 +56,7 @@ namespace ODO
 			void reorientation();
 			void calculConsigne();
 			void miseAJourPosition();
+			void calculConsigneDeplacement();
 			
 			int m_index;
 			COF::CStrategieDeplacement* m_strategieDepalcement;
