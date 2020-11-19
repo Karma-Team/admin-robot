@@ -59,6 +59,8 @@ namespace ODO
 			void calculConsigneDeplacement();
 			
 			int m_index;
+			int m_cmdMoteurDroit;
+			int m_cmdMoteurGauche;
 			COF::CStrategieDeplacement* m_strategieDepalcement;
 			COF::CConfigurationRobot* m_configStruct;
 			COD::CSerialCodeurManager* m_codeursManager;
