@@ -38,6 +38,7 @@ namespace ODO
 		float orientationMoyenne;
 		float distanceParcourue;
 		float distancePrecedent;
+		float distanceCible;
 	};
 
 	class COdometrie
