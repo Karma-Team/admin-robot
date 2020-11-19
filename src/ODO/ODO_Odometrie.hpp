@@ -41,6 +41,19 @@ namespace ODO
 		float distancePrecedent;
 		float distanceConsigne;
 	};
+	
+	struct SPid
+	{
+		float erreurOrientationKp;
+		float erreurOrientationPrecedente;
+		float deltaErreurOrientationKd;
+		float sommeErreurOrientationKi;
+		
+		float erreurDistanceKp;
+		float erreurDistancePrecedente;
+		float deltaErreurDistanceKd;
+		float sommeErreurDistanceKi;
+	};
 
 	class COdometrie
 	{
