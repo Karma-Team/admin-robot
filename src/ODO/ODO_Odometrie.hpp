@@ -49,10 +49,14 @@ namespace ODO
 		float deltaErreurOrientationKd;
 		float sommeErreurOrientationKi;
 		
+		float orientationPid;
+		
 		float erreurDistanceKp;
 		float erreurDistancePrecedente;
 		float deltaErreurDistanceKd;
 		float sommeErreurDistanceKi;
+		
+		float distancePid;
 	};
 
 	class COdometrie
