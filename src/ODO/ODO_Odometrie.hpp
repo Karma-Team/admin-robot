@@ -32,8 +32,8 @@ namespace ODO
 		int vitesse;
 		int nbTickDroit;
 		int nbTickGauche;
-		float consigneOrientation;
 		float orientation;
+		float orientationConsigne;
 		float orientationDerive;
 		float orientationMoyenne;
 		float orientationVersCible;
