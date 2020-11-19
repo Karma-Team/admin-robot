@@ -23,6 +23,8 @@ namespace ODO
 		int yDepart;
 		int xArrive;
 		int yArrive;
+		int xActuel;
+		int yActuel;
 		float xDelta;
 		float yDelta;
 		int angleConsigne;
