@@ -49,12 +49,13 @@ namespace ODO
 			virtual ~COdometrie();
 
 		private:
-
+			
 			void initialiser();
 			void reorientation();
 			void calculConsigne();
 			void miseAJourPosition();
-
+			
+			int m_index;
 			COF::CStrategieDeplacement* m_strategieDepalcement;
 			COF::CConfigurationRobot* m_configStruct;
 			COD::CSerialCodeurManager* m_codeursManager;
