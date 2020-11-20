@@ -26,8 +26,10 @@ ASV::CAsserv::~CAsserv()
 	// rien a faire
 }
 
-void ASV::CAsserv::asservirVersCible()
+bool ASV::CAsserv::asservirVersCible()
 {
+	bool enCours = false;
+	
 	// Calcul PID de orientation
 	m_structPid.erreurOrientationKp = m_odometrie->getOdometrieVariables()->orientationConsigne - m_odometrie->getOdometrieVariables()->orientationActuel;
 	m_structPid.sommeErreurOrientationKi += m_structPid.erreurOrientationKp;
@@ -44,8 +46,17 @@ void ASV::CAsserv::asservirVersCible()
 
 	m_structPid.distancePid = (m_configStruct->pidKpD*m_structPid.erreurDistanceKp) + (m_configStruct->pidKdD*m_structPid.deltaErreurDistanceKd) + (m_configStruct->pidKiD*m_structPid.sommeErreurDistanceKi);
 
-	calculCmdMoteur();
-	appliquerCmdMoteur();
+	if(m_structPid.erreurDistanceKp > 0)
+	{
+		calculCmdMoteur();
+		appliquerCmdMoteur();
+	}
+	else
+	{
+		enCours =  true;
+	}
+	
+	return enCours;
 }
 
 void ASV::CAsserv::calculCmdMoteur()
