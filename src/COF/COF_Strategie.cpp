@@ -53,3 +53,7 @@ COF::SStrategieDeplacement* COF::CStrategieDeplacement::getStrategieDeplacement(
 	return &m_strategieDeplacementStruct[p_index];
 }
 
+int COF::CStrategieDeplacement getSizeStrategie()
+{
+	return sizoef(m_strategieDeplacementStruct);
+}
