@@ -236,8 +236,12 @@ void STR::CRemote::asservTest()
 	
 	ASV::CAsserv asserv = ASV::CAsserv(m_moteurManager, m_configStruct, odometrie);
 	
+	indexStrategie++;
+	pointStrategieDeplacement = COF::CStrategieDeplacement::getStrategieDeplacement(indexStrategie);
+	
 	while(indexStrategie != csvStrategieDeplacement.getSizeStrategiet())
 	{
+		odometrie.setStrategieDeplacement(pointStrategieDeplacement);
 		odometrie.miseAJourPosition();
 		odometrie.calculConsigneDeplacement();
 		if(asserv.asservirVersCible())
