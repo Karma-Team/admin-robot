@@ -9,6 +9,7 @@
 #include <iomanip>      // std::setprecision
 #include "STR_Remote.hpp"
 #include "COD_SerialCodeurManager.hpp"
+#include "COF_Strategie.hpp"
 
 using namespace std;
 
@@ -227,22 +228,24 @@ void STR::CRemote::printValeurCodeur()
 
 void STR::CRemote::asservTest()
 {
-	int x,y,angle,vitesse;
-	char* action;
-	int cmd;
-
-	while((cmd=getchar())!= '.')
+	int indexStrategie = 0;
+	COF::CStrategieDeplacement csvStrategieDeplacement = COF::CStrategieDeplacement("StrategieDeplacement.csv");
+	COF::SStrategieDeplacement* pointStrategieDeplacement = COF::CStrategieDeplacement::getStrategieDeplacement(indexStrategie);
+	ODO::COdometrie odometrie = ODO::COdometrie(pointStrategieDeplacement, m_configStruct, m_codeursManager);
+	odometrie.initialiser();
+	
+	ASV::CAsserv asserv = ASV::CAsserv(m_moteurManager, m_configStruct, odometrie);
+	
+	while(indexStrategie != csvStrategieDeplacement.getSizeStrategiet())
 	{
-		printf("Entrer x: ");
-		scanf("%d",&x);
-		printf("\nEntrer y: ");
-		scanf("%d",&y);
-		printf("\nEntrer angle: ");
-		scanf("%d",&angle);
-		printf("\nEntrer vitesse: ");
-		scanf("%d",&vitesse);
-		printf("\nEntrer action: ");
-		scanf("%s",&action);
+		odometrie.miseAJourPosition();
+		odometrie.calculConsigneDeplacement();
+		if(asserv.asservirVersCible())
+		{
+			indexStrategie++;
+			pointStrategieDeplacement = COF::CStrategieDeplacement::getStrategieDeplacement(indexStrategie);
+		}
+		usleep(10000);
 	}
 }
 
