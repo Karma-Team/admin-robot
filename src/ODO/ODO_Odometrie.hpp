@@ -51,6 +51,8 @@ namespace ODO
 			virtual ~COdometrie();
 
 			SOdometrieVariables* getOdometrieVariables();
+		
+			void setStrategieDeplacement(COF::SStrategieDeplacement* p_strategieDepalcement);
 
 		private:
 			
