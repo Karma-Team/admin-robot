@@ -37,6 +37,11 @@ void ODO::COdometrie::initialiser()
 	m_odometrieStruct.vitesse = 0;
 }
 
+void ODO::COdometrie::setStrategieDeplacement(COF::SStrategieDeplacement* p_strategieDepalcement)
+{
+	m_strategieDepalcement = p_strategieDepalcement;
+}
+
 void ODO::COdometrie::miseAJourPosition()
 {
 	// Lecture et reinitialisation des codeurs
