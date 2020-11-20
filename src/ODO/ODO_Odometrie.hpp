@@ -46,7 +46,7 @@ namespace ODO
 	{
 		public:
 
-			COdometrie(COF::CStrategieDeplacement* p_strategieDeplacement, COF::SConfigRobot* p_configStruct,  COD::CSerialCodeurManager* p_codeursManager);
+			COdometrie(COF::SStrategieDeplacement* p_strategieDeplacement, COF::SConfigRobot* p_configStruct,  COD::CSerialCodeurManager* p_codeursManager);
 
 			virtual ~COdometrie();
 
@@ -64,7 +64,7 @@ namespace ODO
 			int m_index;
 			int m_cmdMoteurDroit;
 			int m_cmdMoteurGauche;
-			COF::CStrategieDeplacement* m_strategieDepalcement;
+			COF::SStrategieDeplacement* m_strategieDepalcement;
 			COF::SConfigRobot* m_configStruct;
 			COD::CSerialCodeurManager* m_codeursManager;
 			ODO::SOdometrieVariables m_odometrieStruct;
