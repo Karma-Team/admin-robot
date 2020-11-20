@@ -31,9 +31,9 @@ ODO::COdometrie::~COdometrie()
 
 void ODO::COdometrie::initialiser()
 {
-	m_odometrieStruct.xActuel = m_strategieDepalcement->getStrategieDeplacement(m_index)->x;
-	m_odometrieStruct.yActuel = m_strategieDepalcement->getStrategieDeplacement(m_index)->y;
-	m_odometrieStruct.angleConsigne = m_strategieDepalcement->getStrategieDeplacement(m_index)->angle;
+	m_odometrieStruct.xActuel = m_strategieDepalcement->x;
+	m_odometrieStruct.yActuel = m_strategieDepalcement->y;
+	m_odometrieStruct.angleConsigne = m_strategieDepalcement->angle;
 	m_odometrieStruct.vitesse = 0;
 }
 
@@ -66,8 +66,8 @@ void ODO::COdometrie::miseAJourPosition()
 void ODO::COdometrie::calculConsigneDeplacement()
 {
 	// Recuperation de la position de destination
-	m_odometrieStruct.xArrive = m_strategieDepalcement->getStrategieDeplacement(m_index)->x;
-	m_odometrieStruct.yArrive = m_strategieDepalcement->getStrategieDeplacement(m_index)->y;
+	m_odometrieStruct.xArrive = m_strategieDepalcement->x;
+	m_odometrieStruct.yArrive = m_strategieDepalcement->y;
 	
 	// Calcul de la distance qui separe le robot de la cible
 	m_odometrieStruct.distanceConsigne = sqrt(((m_odometrieStruct.xArrive - m_odometrieStruct.xActuel) * (m_odometrieStruct.xArrive - m_odometrieStruct.xActuel)) + ((m_odometrieStruct.yArrive - m_odometrieStruct.yActuel) * (m_odometrieStruct.yArrive - m_odometrieStruct.yActuel)));
