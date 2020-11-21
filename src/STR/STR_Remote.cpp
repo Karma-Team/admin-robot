@@ -10,6 +10,7 @@
 #include "STR_Remote.hpp"
 #include "COD_SerialCodeurManager.hpp"
 #include "COF_Strategie.hpp"
+#include "ASV_Asserv.hpp"
 
 using namespace std;
 
@@ -230,16 +231,16 @@ void STR::CRemote::asservTest()
 {
 	int indexStrategie = 0;
 	COF::CStrategieDeplacement csvStrategieDeplacement = COF::CStrategieDeplacement("StrategieDeplacement.csv");
-	COF::SStrategieDeplacement* pointStrategieDeplacement = COF::CStrategieDeplacement::getStrategieDeplacement(indexStrategie);
+	COF::SStrategieDeplacement* pointStrategieDeplacement = csvStrategieDeplacement.getStrategieDeplacement(indexStrategie);
 	ODO::COdometrie odometrie = ODO::COdometrie(pointStrategieDeplacement, m_configStruct, m_codeursManager);
 	odometrie.initialiser();
 	
-	ASV::CAsserv asserv = ASV::CAsserv(m_moteurManager, m_configStruct, odometrie);
+	ASV::CAsserv asserv = ASV::CAsserv(m_moteurManager, m_configStruct, &odometrie);
 	
 	indexStrategie++;
-	pointStrategieDeplacement = COF::CStrategieDeplacement::getStrategieDeplacement(indexStrategie);
+	pointStrategieDeplacement = csvStrategieDeplacement.getStrategieDeplacement(indexStrategie);
 	
-	while(indexStrategie != csvStrategieDeplacement.getSizeStrategiet())
+	while(indexStrategie != csvStrategieDeplacement.getSizeStrategie())
 	{
 		odometrie.setStrategieDeplacement(pointStrategieDeplacement);
 		odometrie.miseAJourPosition();
@@ -247,7 +248,7 @@ void STR::CRemote::asservTest()
 		if(asserv.asservirVersCible())
 		{
 			indexStrategie++;
-			pointStrategieDeplacement = COF::CStrategieDeplacement::getStrategieDeplacement(indexStrategie);
+			pointStrategieDeplacement = csvStrategieDeplacement.getStrategieDeplacement(indexStrategie);
 		}
 		usleep(10000);
 	}

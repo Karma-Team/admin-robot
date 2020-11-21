@@ -16,6 +16,7 @@ using namespace std;
 COF::CStrategieDeplacement::CStrategieDeplacement(char * p_csvStrategieDeplacementFile)
 {
 	snprintf(m_csvStrategieDeplacementFile, sizeof(p_csvStrategieDeplacementFile), "%s", p_csvStrategieDeplacementFile);
+	m_index = 0;
 	CStrategieDeplacement::readCsv();
 }
 
@@ -45,6 +46,7 @@ void COF::CStrategieDeplacement::readCsv()
 		snprintf(m_strategieDeplacementStruct[index].actions, sizeof(m_strategieDeplacementStruct[index].actions), "%s", actions);
 		index++;
 	}
+	m_index = index;
 
 }
 
@@ -53,7 +55,7 @@ COF::SStrategieDeplacement* COF::CStrategieDeplacement::getStrategieDeplacement(
 	return &m_strategieDeplacementStruct[p_index];
 }
 
-int COF::CStrategieDeplacement getSizeStrategie()
+int COF::CStrategieDeplacement::getSizeStrategie()
 {
-	return sizoef(m_strategieDeplacementStruct);
+	return m_index;
 }

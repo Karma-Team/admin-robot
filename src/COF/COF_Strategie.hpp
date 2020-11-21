@@ -55,8 +55,9 @@ namespace COF
 			*/
 			void readCsv();
 
+			int m_index;
 			char m_csvStrategieDeplacementFile[20]; //< nom du fichier de stategie
-			SStrategieDeplacement m_strategieDeplacementStruct[]; //< structure de la strategie de deplacement
+			SStrategieDeplacement m_strategieDeplacementStruct[10000]; //< structure de la strategie de deplacement
 		};
 }
 

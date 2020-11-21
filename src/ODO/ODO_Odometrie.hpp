@@ -54,13 +54,14 @@ namespace ODO
 		
 			void setStrategieDeplacement(COF::SStrategieDeplacement* p_strategieDepalcement);
 
-		private:
-			
 			void initialiser();
-			void reorientation();
-			void calculConsigne();
 			void miseAJourPosition();
 			void calculConsigneDeplacement();
+
+		private:
+			
+			void reorientation();
+			void calculConsigne();
 			void asservirVersCible();
 			
 			int m_index;
