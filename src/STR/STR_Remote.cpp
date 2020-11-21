@@ -55,6 +55,7 @@ int STR::CRemote::startRemote()
 
 		switch(cmd)
 		{
+			case 'a':
 			case 'z':
 			case 's':
 			case 'q':
@@ -114,7 +115,6 @@ int STR::CRemote::startRemote()
 
 	}
 	system ("/bin/stty cooked");
-
 
 	sleep(1);
 	m_moteurManager->stop();
@@ -230,7 +230,7 @@ void STR::CRemote::printValeurCodeur()
 void STR::CRemote::asservTest()
 {
 	int indexStrategie = 0;
-	COF::CStrategieDeplacement csvStrategieDeplacement = COF::CStrategieDeplacement("StrategieDeplacement.csv");
+	COF::CStrategieDeplacement csvStrategieDeplacement = COF::CStrategieDeplacement("StDeplacement.csv");
 	COF::SStrategieDeplacement* pointStrategieDeplacement = csvStrategieDeplacement.getStrategieDeplacement(indexStrategie);
 	ODO::COdometrie odometrie = ODO::COdometrie(pointStrategieDeplacement, m_configStruct, m_codeursManager);
 	odometrie.initialiser();
@@ -245,12 +245,14 @@ void STR::CRemote::asservTest()
 		odometrie.setStrategieDeplacement(pointStrategieDeplacement);
 		odometrie.miseAJourPosition();
 		odometrie.calculConsigneDeplacement();
+		odometrie.debug();
 		if(asserv.asservirVersCible())
 		{
 			indexStrategie++;
 			pointStrategieDeplacement = csvStrategieDeplacement.getStrategieDeplacement(indexStrategie);
 		}
-		usleep(10000);
+		asserv.debug();
+		sleep(0.001);
 	}
 }
 

@@ -7,7 +7,7 @@ namespace COD
 	{
 		public:
 
-			CSerialCodeurManager(char* p_servoSerieTty);
+			CSerialCodeurManager(char* m_codeurSerieTty);
 
 			virtual ~CSerialCodeurManager();
 
@@ -22,7 +22,7 @@ namespace COD
 
 
 		private:
-			char m_servoSerieTty[14];
+			char m_codeurSerieTty[14];
 			int m_leftTicks;
 			int m_rightTicks;
 

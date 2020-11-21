@@ -57,6 +57,7 @@ namespace ODO
 			void initialiser();
 			void miseAJourPosition();
 			void calculConsigneDeplacement();
+			void debug();
 
 		private:
 			

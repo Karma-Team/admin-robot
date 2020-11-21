@@ -55,17 +55,16 @@ int main(int argc, char** argv) {
 	MOT::CMoteurManager moteurManager = MOT::CMoteurManager(configRobot->moteursI2cAddr);
 
 	// Construction du manager des codeurs et de la communication serie
-	COD::CSerialCodeurManager codeurManager = COD::CSerialCodeurManager(configRobot->servoSerieTty);
-
-	if(strcmp(argv[1],"-remote") == 0)
-	{
-		STR::CRemote remoteManager = STR::CRemote(&moteurManager, &codeurManager, configRobot);
-		remoteManager.startRemote();
-	}
-	else
+	COD::CSerialCodeurManager codeurManager = COD::CSerialCodeurManager(configRobot->codeurSerieTty);
+	if(argv[1] != NULL)
 	{
 		STR::CAutonome autonomeManager = STR::CAutonome(&moteurManager,&codeurManager, configRobot);
 		autonomeManager.startAutonome();
+	}
+	else
+	{
+		STR::CRemote remoteManager = STR::CRemote(&moteurManager, &codeurManager, configRobot);
+		remoteManager.startRemote();
 	}
 
 	return 0;

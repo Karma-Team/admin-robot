@@ -15,7 +15,7 @@ using namespace std;
 
 COF::CStrategieDeplacement::CStrategieDeplacement(char * p_csvStrategieDeplacementFile)
 {
-	snprintf(m_csvStrategieDeplacementFile, sizeof(p_csvStrategieDeplacementFile), "%s", p_csvStrategieDeplacementFile);
+	snprintf(m_csvStrategieDeplacementFile, sizeof(m_csvStrategieDeplacementFile), "%s", p_csvStrategieDeplacementFile);
 	m_index = 0;
 	CStrategieDeplacement::readCsv();
 }
@@ -35,7 +35,6 @@ void COF::CStrategieDeplacement::readCsv()
 	int index = 0;
 
 	io::CSVReader<5> in(m_csvStrategieDeplacementFile);
-	in.read_row(x, y, angle, vitesse, actions);
 
 	while(in.read_row(x, y, angle, vitesse, actions))
 	{

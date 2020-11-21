@@ -46,6 +46,7 @@ namespace ASV
 			virtual ~CAsserv();
 
 			bool asservirVersCible();
+			void debug();
 
 		private:
 

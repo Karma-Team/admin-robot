@@ -7,6 +7,8 @@
 
 #include "ASV_Asserv.hpp"
 
+using namespace std;
+
 ASV::CAsserv::CAsserv(MOT::CMoteurManager* p_moteurManager, COF::SConfigRobot* p_configStruct, ODO::COdometrie* p_odometrie)
 {
 	m_configStruct = p_configStruct;
@@ -66,8 +68,8 @@ void ASV::CAsserv::calculCmdMoteur()
 
 	verifOverflowCommandes();
 
-	m_cmdMoteur.cmdMoteurDroit *= m_odometrie->getOdometrieVariables()->vitesse / 100;
-	m_cmdMoteur.cmdMoteurGauche *= m_odometrie->getOdometrieVariables()->vitesse / 100;
+	/*m_cmdMoteur.cmdMoteurDroit *= m_odometrie->getOdometrieVariables()->vitesse / 100;
+	m_cmdMoteur.cmdMoteurGauche *= m_odometrie->getOdometrieVariables()->vitesse / 100;*/
 
 	appliquerCmdMoteur();
 }
@@ -110,5 +112,15 @@ void ASV::CAsserv::appliquerCmdMoteur()
 			else
 				m_moteurManager->droitePWM(m_cmdMoteur.cmdMoteurGauche, 0);
 	}
+	m_moteurManager->apply();
 }
 
+void ASV::CAsserv::debug()
+{
+	cout << "erreurOrientationKp " << m_structPid.erreurOrientationKp << endl;
+	cout << "erreurDistanceKp " << m_structPid.erreurDistanceKp << endl;
+	cout << "orientationPid " << m_structPid.orientationPid << endl;
+	cout << "distancePid " << m_structPid.distancePid << endl;
+	cout << "cmdMoteurDroit " << m_cmdMoteur.cmdMoteurDroit << endl;
+	cout << "cmdMoteurGauche " << m_cmdMoteur.cmdMoteurGauche << endl;
+}

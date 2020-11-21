@@ -7,6 +7,8 @@
 
 #include "ODO_Odometrie.hpp"
 #include "COD_SerialCodeurManager.hpp"
+using namespace std;
+
 
 ODO::COdometrie::COdometrie(COF::SStrategieDeplacement* p_strategieDeplacement, COF::SConfigRobot* p_configStruct, COD::CSerialCodeurManager* p_codeursManager)
 {
@@ -85,4 +87,19 @@ void ODO::COdometrie::calculConsigneDeplacement()
 ODO::SOdometrieVariables* ODO::COdometrie::getOdometrieVariables()
 {
 	return &m_odometrieStruct;
+}
+
+void ODO::COdometrie::debug()
+{
+	cout << "orientationActuel " << m_odometrieStruct.orientationActuel << endl;
+	cout << "distanceParcourue " << m_odometrieStruct.distanceParcourue << endl;
+	cout << "vitesse " << m_odometrieStruct.vitesse << endl;
+	cout << "xActuel " << m_odometrieStruct.xActuel << endl;
+	cout << "yActuel " << m_odometrieStruct.yActuel << endl;
+	cout << "xArrive " << m_odometrieStruct.xArrive << endl;
+	cout << "yArrive " << m_odometrieStruct.yArrive << endl;
+	cout << "distanceConsigne " << m_odometrieStruct.distanceConsigne << endl;
+	cout << "orientationVersCible " << m_odometrieStruct.orientationVersCible << endl;
+	cout << "orientationConsigne " << m_odometrieStruct.orientationConsigne << endl;
+
 }

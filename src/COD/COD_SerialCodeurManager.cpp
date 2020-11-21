@@ -28,9 +28,9 @@ unsigned int nextTime ;
 int count = 1;
 int fd ;
 
-COD::CSerialCodeurManager::CSerialCodeurManager(char* p_servoSerieTty)
+COD::CSerialCodeurManager::CSerialCodeurManager(char* p_codeurSerieTty)
 {
-	snprintf(m_servoSerieTty, sizeof(m_servoSerieTty), "/dev/%s", p_servoSerieTty);
+	snprintf(m_codeurSerieTty, sizeof(m_codeurSerieTty), "/dev/%s", p_codeurSerieTty);
 	m_leftTicks = 0;
 	m_rightTicks = 0;
 
@@ -52,7 +52,7 @@ void COD::CSerialCodeurManager::initialisation()
 {
 	printf("Initialisation codeur\n");
 	
-	if ((fd = serialOpen (m_servoSerieTty, 115200)) < 0)
+	if ((fd = serialOpen (m_codeurSerieTty, 115200)) < 0)
 		{
 		    	fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
 		    	//return 1 ;
@@ -89,9 +89,11 @@ void COD::CSerialCodeurManager::readAndReset()
 		memset(tickChar, ' ', 10000);
 		memset(tickd, ' ', 10000);
 		memset(tickg, ' ', 10000);
-				
 
-	  	if (millis () > nextTime)
+		fflush (stdout) ;
+		serialPutchar (fd, 'C') ;
+
+	  	/*if (millis () > nextTime)
 		{
 			//Debuguer
 			//printf ("\nOut: %3d: ", count) ;
@@ -99,7 +101,7 @@ void COD::CSerialCodeurManager::readAndReset()
 		    serialPutchar (fd, 'C') ;
 		    nextTime += 10 ;
 		    ++count ;
-		}
+		}*/
 
 		//delay (10) ;
 
@@ -175,6 +177,7 @@ void COD::CSerialCodeurManager::readAndReset()
 			m_leftTicks = 0;
 			m_rightTicks = 0;
 		}
+		reset();
 }
 
 void COD::CSerialCodeurManager::reset()
