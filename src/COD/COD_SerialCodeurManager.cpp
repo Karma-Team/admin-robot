@@ -75,15 +75,16 @@ void COD::CSerialCodeurManager::readAndReset()
 		char tickDroit[1000] = {0};
 
 		int index = 0;
+		int serialDataAvailable = 0;
 
-		serialPutchar (fd, 'C') ;
-
-		while(serialDataAvail(fd) != 0)
+		while (serialDataAvailable <= 4)
 		{
-
+			serialPutchar (fd, 'C') ;
+			serialDataAvailable = serialDataAvail (fd);
+			cout << "serialDataAvail = " << serialDataAvailable << endl;
 		}
 
-		while (serialDataAvail (fd))
+		while (index < serialDataAvailable)
 		{
 			SerilDataTab[index] = serialGetchar (fd);
 			fflush (stdout) ;
