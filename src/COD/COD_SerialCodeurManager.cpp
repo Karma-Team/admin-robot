@@ -78,6 +78,11 @@ void COD::CSerialCodeurManager::readAndReset()
 
 		serialPutchar (fd, 'C') ;
 
+		while(serialDataAvail(fd) != 0)
+		{
+
+		}
+
 		while (serialDataAvail (fd))
 		{
 			SerilDataTab[index] = serialGetchar (fd);
@@ -88,7 +93,7 @@ void COD::CSerialCodeurManager::readAndReset()
 		bool codeurDroit = false;
 		int j = 0;
 		
-		for(int i = 1; i < index; i++)
+		for(int i = 0; i < index; i++)
 		{
 			if(SerilDataTab[i] != '\0')
 			{
