@@ -23,14 +23,8 @@
 
 using namespace std;
 
-
-unsigned int nextTime ;
-int count = 1;
-int fd ;
-
-COD::CSPICodeurManager::CSPICodeurManager(char* p_codeurSerieTty)
+COD::CSPICodeurManager::CSPICodeurManager()
 {
-	snprintf(m_codeurSerieTty, sizeof(m_codeurSerieTty), "/dev/%s", p_codeurSerieTty);
 	m_leftTicks = 0;
 	m_rightTicks = 0;
 
@@ -55,7 +49,7 @@ void COD::CSPICodeurManager::initialisation()
 	if (fd == -1)
 	{
 		std::cout << "Failed to init SPI communication.\n";
-		return -1;
+		exit(1);
 	}
 	std::cout << "SPI communication successfully setup.\n";
 
@@ -63,24 +57,24 @@ void COD::CSPICodeurManager::initialisation()
 
 void COD::CSPICodeurManager::readAndReset()
 {
-	unsigned char buffer[2] = { 1, 0 };
-	wiringPiSPIDataRW(SPI_CHANNEL, buffer, 2);
-	std::cout << "Codeur Droit : " << +buffer[1] << "\n";
-	m_rightTicks = +buffer[1];
+	unsigned char bufferD[2] = { 1, 0 };
+	wiringPiSPIDataRW(SPI_CHANNEL, bufferD, 2);
+	std::cout << "Codeur Droit : " << +bufferD[1] << "\n";
+	m_rightTicks = +bufferD[1];
 
-	unsigned char buffer[2] = { 2, 0 };
-	wiringPiSPIDataRW(SPI_CHANNEL, buffer, 2);
-	std::cout << "Codeur Gauche : " << +buffer[1] << "\n";
-	m_leftTicks = +buffer[1];
+	unsigned char bufferG[2] = { 2, 0 };
+	wiringPiSPIDataRW(SPI_CHANNEL, bufferG, 2);
+	std::cout << "Codeur Gauche : " << +bufferG[1] << "\n";
+	m_leftTicks = +bufferG[1];
 
 	reset();
 }
 
 void COD::CSPICodeurManager::reset()
 {
-	unsigned char buffer[2] = { 3, 0 };
-	wiringPiSPIDataRW(SPI_CHANNEL, buffer, 2);
-	std::cout << "RESET CODEUR : " << +buffer[1] << "\n";
+	unsigned char bufferR[2] = { 3, 0 };
+	wiringPiSPIDataRW(SPI_CHANNEL, bufferR, 2);
+	std::cout << "RESET CODEUR : " << +bufferR[1] << "\n";
 }
 
 int COD::CSPICodeurManager::getRightTicks()

@@ -1,5 +1,4 @@
 
-#define CMD_RESET -3
 #define SPI_CHANNEL 0
 #define SPI_CLOCK_SPEED 1000000
 
@@ -9,7 +8,7 @@ namespace COD
 	{
 		public:
 
-			CSPICodeurManager(char* m_codeurSerieTty);
+			CSPICodeurManager();
 
 			virtual ~CSPICodeurManager();
 
@@ -24,7 +23,6 @@ namespace COD
 
 
 		private:
-			char m_codeurSerieTty[14];
 			int m_leftTicks;
 			int m_rightTicks;
 
