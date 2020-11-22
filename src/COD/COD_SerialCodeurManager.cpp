@@ -84,24 +84,35 @@ void COD::CSerialCodeurManager::readAndReset()
 			fflush (stdout) ;
 			index++;
 		}
+
+		bool codeurDroit = false;
+		int j = 0;
 		
 		for(int i = 1; i < index; i++)
 		{
-			if(SerilDataTab[index] != '\0')
+			if(SerilDataTab[i] != '\0')
 			{
-				if(SerilDataTab[index] != '!')
+				if(SerilDataTab[i] == '!')
 				{
-					strcpy(tickGauche, &SerilDataTab[index]);
+					codeurDroit = true;
+					j = 0;
 				}
-				else
+				if(codeurDroit != true)
 				{
-					strcpy(tickDroit, &SerilDataTab[index]);
+					tickGauche[j] = SerilDataTab[i];
+					j++;
+				}
+				else if (SerilDataTab[i] != '!')
+				{
+					tickDroit[j] =  SerilDataTab[i];
+					j++;
 				}
 			}
 			else
 			{
 				break;
 			}
+
 		}
 
 		m_rightTicks = atoi(tickDroit);
