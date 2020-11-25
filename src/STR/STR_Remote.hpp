@@ -3,7 +3,7 @@
 #include "COF_Strategie.hpp"
 #include "ODO_Odometrie.hpp"
 
-namespace COD { class CSerialCodeurManager;};
+namespace COD { class CSerialCodeurManager; class CSPICodeurManager;};
 
 #ifndef _REMOTE_
 #define _REMOTE_
@@ -14,7 +14,7 @@ namespace STR
 	{
 		public:
 
-			CRemote(MOT::CMoteurManager *p_moteurManager, COD::CSerialCodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct);
+			CRemote(MOT::CMoteurManager *p_moteurManager, COD::CSPICodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct);
 
 			virtual ~CRemote();
 
@@ -33,7 +33,7 @@ namespace STR
 
 			int m_vitesse;
 			MOT::CMoteurManager *m_moteurManager;
-			COD::CSerialCodeurManager* m_codeursManager;
+			COD::CSPICodeurManager* m_codeursManager;
 			COF::SConfigRobot* m_configStruct;
 	};
 }

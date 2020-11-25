@@ -57,15 +57,11 @@ void COD::CSPICodeurManager::initialisation()
 
 void COD::CSPICodeurManager::readAndReset()
 {
-	unsigned char bufferD[2] = { 1, 0 };
-	wiringPiSPIDataRW(SPI_CHANNEL, bufferD, 2);
-	std::cout << "Codeur Droit : " << +bufferD[1] << "\n";
-	m_rightTicks = +bufferD[1];
-
-	unsigned char bufferG[2] = { 2, 0 };
-	wiringPiSPIDataRW(SPI_CHANNEL, bufferG, 2);
-	std::cout << "Codeur Gauche : " << +bufferG[1] << "\n";
-	m_leftTicks = +bufferG[1];
+	unsigned char buffer[3] = { 1, 0, 0};
+	wiringPiSPIDataRW(SPI_CHANNEL, buffer, 3);
+	std::cout << "Codeur Droit : " << buffer[1] << "Codeur Gauche : " << buffer[2] << "\n";
+	m_rightTicks = buffer[1];
+	m_leftTicks = buffer[2];
 
 	reset();
 }

@@ -12,6 +12,7 @@
 #include <string.h>
 #include "STR_Remote.hpp"
 #include "STR_Autonome.hpp"
+#include "COD_SPICodeurManager.hpp"
 
 using namespace std;
 
@@ -55,17 +56,19 @@ int main(int argc, char** argv) {
 	MOT::CMoteurManager moteurManager = MOT::CMoteurManager(configRobot->moteursI2cAddr);
 
 	// Construction du manager des codeurs et de la communication serie
-	COD::CSerialCodeurManager codeurManager = COD::CSerialCodeurManager(configRobot->codeurSerieTty);
+	//COD::CSerialCodeurManager codeurManager = COD::CSerialCodeurManager(configRobot->codeurSerieTty);
+	COD::CSPICodeurManager codeurManager = COD::CSPICodeurManager();
+
 	if(argv[1] != NULL)
 	{
-		STR::CAutonome autonomeManager = STR::CAutonome(&moteurManager,&codeurManager, configRobot);
-		autonomeManager.startAutonome();
+		///STR::CAutonome autonomeManager = STR::CAutonome(&moteurManager,&codeurManager, configRobot);
+		//autonomeManager.startAutonome();
 	}
-	else
-	{
+	//else
+	//{
 		STR::CRemote remoteManager = STR::CRemote(&moteurManager, &codeurManager, configRobot);
 		remoteManager.startRemote();
-	}
+	//}
 
 	return 0;
 }

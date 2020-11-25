@@ -9,12 +9,13 @@
 #include <iomanip>      // std::setprecision
 #include "STR_Remote.hpp"
 #include "COD_SerialCodeurManager.hpp"
+#include "COD_SPICodeurManager.hpp"
 #include "COF_Strategie.hpp"
 #include "ASV_Asserv.hpp"
 
 using namespace std;
 
-STR::CRemote::CRemote(MOT::CMoteurManager *p_moteurManager, COD::CSerialCodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct)
+STR::CRemote::CRemote(MOT::CMoteurManager *p_moteurManager, COD::CSPICodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct)
 {
 	m_moteurManager = p_moteurManager;
 	m_codeursManager = p_codeursManager;

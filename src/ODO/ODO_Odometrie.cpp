@@ -7,10 +7,12 @@
 
 #include "ODO_Odometrie.hpp"
 #include "COD_SerialCodeurManager.hpp"
+#include "COD_SPICodeurManager.hpp"
+
 using namespace std;
 
 
-ODO::COdometrie::COdometrie(COF::SStrategieDeplacement* p_strategieDeplacement, COF::SConfigRobot* p_configStruct, COD::CSerialCodeurManager* p_codeursManager)
+ODO::COdometrie::COdometrie(COF::SStrategieDeplacement* p_strategieDeplacement, COF::SConfigRobot* p_configStruct, COD::CSPICodeurManager* p_codeursManager)
 {
 	m_odometrieStruct = {0};
 	m_strategieDepalcement = p_strategieDeplacement;
