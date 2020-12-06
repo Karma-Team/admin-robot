@@ -27,8 +27,6 @@ volatile int m_TicksCodeurDroit = 0;
 
 COD::CThreadCodeurManager::CThreadCodeurManager()
 {
-
-
 	initialisation();
 }
 
@@ -40,6 +38,15 @@ COD::CThreadCodeurManager::~CThreadCodeurManager()
 
 void COD::CThreadCodeurManager::initialisation()
 {
+	// Setup wiringPi library
+
+	if (wiringPiSetupGpio() < 0) {
+
+		cerr << "Erreur d'initialisation de wiringPi: " << strerror(errno)
+				<< endl;
+		exit(1);
+	}
+
 	printf("Initialisation codeur\n");
 	pinMode(PIN_GPIO_SA_DROITE,INPUT);
 	pinMode(PIN_GPIO_SB_DROITE,INPUT);
@@ -54,7 +61,7 @@ void COD::CThreadCodeurManager::initialisation()
 	      fprintf (stderr, "Unable to setup ISR: %s\n", strerror (errno));
 	      exit(1);
 	}
-	if(wiringPiISR(PIN_GPIO_SB_GAUCHE, INT_EDGE_RISING, &compterTicGauche) < 0 )
+	if(wiringPiISR(PIN_GPIO_SA_GAUCHE, INT_EDGE_RISING, &compterTicGauche) < 0 )
 	{
 	      fprintf (stderr, "Unable to setup ISR: %s\n", strerror (errno));
 	      exit(1);
@@ -70,6 +77,7 @@ void COD::CThreadCodeurManager::reset()
 
 void COD::CThreadCodeurManager::compterTicDroit ()
 {
+	//printf("in tick droit\n");
 	  if (digitalRead(PIN_GPIO_SB_DROITE) == HIGH)
 	  {
 		  m_TicksCodeurDroit--;
@@ -82,6 +90,7 @@ void COD::CThreadCodeurManager::compterTicDroit ()
 
 void COD::CThreadCodeurManager::compterTicGauche ()
 {
+	//printf("in tick gauche\n");
 	  if (digitalRead(PIN_GPIO_SB_GAUCHE) == HIGH)
 	  {
 		  m_TicksCodeurGauche++;

@@ -12,7 +12,7 @@
 #include <string.h>
 #include "STR_Remote.hpp"
 #include "STR_Autonome.hpp"
-#include "COD_SPICodeurManager.hpp"
+#include "COD_ThreadCodeurManager.hpp"
 
 using namespace std;
 
@@ -57,7 +57,7 @@ int main(int argc, char** argv) {
 
 	// Construction du manager des codeurs et de la communication serie
 	//COD::CSerialCodeurManager codeurManager = COD::CSerialCodeurManager(configRobot->codeurSerieTty);
-	COD::CSPICodeurManager codeurManager = COD::CSPICodeurManager();
+	COD::CThreadCodeurManager codeurManager = COD::CThreadCodeurManager();
 
 	if(argv[1] != NULL)
 	{

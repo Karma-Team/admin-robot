@@ -9,7 +9,7 @@
 #include <iostream>
 #include <math.h>
 
-namespace COD { class CSerialCodeurManager; class CSPICodeurManager;};
+namespace COD { class CSerialCodeurManager; class CSPICodeurManager; class CThreadCodeurManager;};
 
 #ifndef _ODO_ODOMETRIE_HPP_
 #define _ODO_ODOMETRIE_HPP_
@@ -46,7 +46,7 @@ namespace ODO
 	{
 		public:
 
-			COdometrie(COF::SStrategieDeplacement* p_strategieDeplacement, COF::SConfigRobot* p_configStruct,  COD::CSPICodeurManager* p_codeursManager);
+			COdometrie(COF::SStrategieDeplacement* p_strategieDeplacement, COF::SConfigRobot* p_configStruct,  COD::CThreadCodeurManager* p_codeursManager);
 
 			virtual ~COdometrie();
 
@@ -70,7 +70,7 @@ namespace ODO
 			int m_cmdMoteurGauche;
 			COF::SStrategieDeplacement* m_strategieDepalcement;
 			COF::SConfigRobot* m_configStruct;
-			COD::CSPICodeurManager* m_codeursManager;
+			COD::CThreadCodeurManager* m_codeursManager;
 			ODO::SOdometrieVariables m_odometrieStruct;
 
 	};

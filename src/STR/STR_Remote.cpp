@@ -9,13 +9,13 @@
 #include <iomanip>      // std::setprecision
 #include "STR_Remote.hpp"
 #include "COD_SerialCodeurManager.hpp"
-#include "COD_SPICodeurManager.hpp"
+#include "COD_ThreadCodeurManager.hpp"
 #include "COF_Strategie.hpp"
 #include "ASV_Asserv.hpp"
 
 using namespace std;
 
-STR::CRemote::CRemote(MOT::CMoteurManager *p_moteurManager, COD::CSPICodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct)
+STR::CRemote::CRemote(MOT::CMoteurManager *p_moteurManager, COD::CThreadCodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct)
 {
 	m_moteurManager = p_moteurManager;
 	m_codeursManager = p_codeursManager;
@@ -91,6 +91,12 @@ int STR::CRemote::startRemote()
 			case 'e':
 			{
 				printValeurCodeur();
+			}
+			break;
+
+			case 't':
+			{
+				testCodeurValue();
 			}
 			break;
 
@@ -181,6 +187,7 @@ void STR::CRemote::printCommands()
 	printf("B C : Rotation sur une roue\n");
 	printf("A : Arrêt du robot\n");
 	printf("E : Récupérer les valeurs des codeurs (fausse la génération de points !)\n");
+	printf("T : Test le retour des codeurs)\n");
 	printf("W : Test Asserv");
 	printf("0-9-* : Réglage de la vitesse du robot de 0 à 100\n");
 	printf(" . puis CTRL-C : Quitter\n");
@@ -224,8 +231,16 @@ int STR::CRemote::askedSpeed(int p_cmd)
 
 void STR::CRemote::printValeurCodeur()
 {
-	m_codeursManager->readAndReset();
-	printf("CG:%d, CD:%d",m_codeursManager->getLeftTicks(), m_codeursManager->getRightTicks());
+	printf("CG:%d, CD:%d",m_codeursManager->getTicksGauche(), m_codeursManager->getTicksDroit());
+	m_codeursManager->reset();
+}
+
+void STR::CRemote::testCodeurValue()
+{
+	while(true)
+	{
+		printf("CG:%d, CD:%d",m_codeursManager->getTicksGauche(), m_codeursManager->getTicksDroit());
+	}
 }
 
 void STR::CRemote::asservTest()
@@ -253,7 +268,7 @@ void STR::CRemote::asservTest()
 			pointStrategieDeplacement = csvStrategieDeplacement.getStrategieDeplacement(indexStrategie);
 		}
 		asserv.debug();
-		sleep(0.001);
+		usleep(10000);
 	}
 }
 

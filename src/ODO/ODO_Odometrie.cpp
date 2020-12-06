@@ -7,12 +7,12 @@
 
 #include "ODO_Odometrie.hpp"
 #include "COD_SerialCodeurManager.hpp"
-#include "COD_SPICodeurManager.hpp"
+#include "COD_ThreadCodeurManager.hpp"
 
 using namespace std;
 
 
-ODO::COdometrie::COdometrie(COF::SStrategieDeplacement* p_strategieDeplacement, COF::SConfigRobot* p_configStruct, COD::CSPICodeurManager* p_codeursManager)
+ODO::COdometrie::COdometrie(COF::SStrategieDeplacement* p_strategieDeplacement, COF::SConfigRobot* p_configStruct, COD::CThreadCodeurManager* p_codeursManager)
 {
 	m_odometrieStruct = {0};
 	m_strategieDepalcement = p_strategieDeplacement;
@@ -49,9 +49,9 @@ void ODO::COdometrie::setStrategieDeplacement(COF::SStrategieDeplacement* p_stra
 void ODO::COdometrie::miseAJourPosition()
 {
 	// Lecture et reinitialisation des codeurs
-	m_codeursManager->readAndReset();
-	m_odometrieStruct.nbTickDroit = m_codeursManager->getRightTicks();
-	m_odometrieStruct.nbTickGauche = m_codeursManager->getLeftTicks();
+	m_odometrieStruct.nbTickDroit = m_codeursManager->getTicksDroit();
+	m_odometrieStruct.nbTickGauche = m_codeursManager->getTicksGauche();
+	m_codeursManager->reset();
 
 	// Calcul de l'orientation du robot actuel
 	m_odometrieStruct.orientationActuel = (m_configStruct->coeffAngleRoueGauche * m_odometrieStruct.nbTickGauche - m_configStruct->coeffAngleRoueDroite * m_odometrieStruct.nbTickDroit) + m_odometrieStruct.orientationDerive;
@@ -93,6 +93,8 @@ ODO::SOdometrieVariables* ODO::COdometrie::getOdometrieVariables()
 
 void ODO::COdometrie::debug()
 {
+	cout << endl;
+	cout << "tickGauche : " << m_odometrieStruct.nbTickGauche << " tickDroit : "  << m_odometrieStruct.nbTickDroit << endl;
 	cout << "orientationActuel " << m_odometrieStruct.orientationActuel << endl;
 	cout << "distanceParcourue " << m_odometrieStruct.distanceParcourue << endl;
 	cout << "vitesse " << m_odometrieStruct.vitesse << endl;
@@ -103,5 +105,5 @@ void ODO::COdometrie::debug()
 	cout << "distanceConsigne " << m_odometrieStruct.distanceConsigne << endl;
 	cout << "orientationVersCible " << m_odometrieStruct.orientationVersCible << endl;
 	cout << "orientationConsigne " << m_odometrieStruct.orientationConsigne << endl;
-
+	cout << endl;
 }
