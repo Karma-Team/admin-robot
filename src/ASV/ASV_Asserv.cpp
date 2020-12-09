@@ -47,29 +47,31 @@ bool ASV::CAsserv::asservirVersCible()
 	m_structPid.erreurDistancePrecedente = m_structPid.erreurDistanceKp;
 
 	m_structPid.distancePid = (m_configStruct->pidKpD*m_structPid.erreurDistanceKp) + (m_configStruct->pidKdD*m_structPid.deltaErreurDistanceKd) + (m_configStruct->pidKiD*m_structPid.sommeErreurDistanceKi);
-
+	
 	if(m_structPid.erreurDistanceKp > 0)
 	{
 		calculCmdMoteur();
-		appliquerCmdMoteur();
 	}
 	else
 	{
 		enCours =  true;
 	}
-	
+
+
 	return enCours;
 }
 
 void ASV::CAsserv::calculCmdMoteur()
 {
-	m_cmdMoteur.cmdMoteurDroit = m_structPid.orientationPid + m_structPid.distancePid;
-	m_cmdMoteur.cmdMoteurGauche = m_structPid.orientationPid + m_structPid.distancePid;
+	m_cmdMoteur.cmdMoteurDroit -= m_structPid.orientationPid + m_structPid.distancePid;
+	m_cmdMoteur.cmdMoteurGauche += m_structPid.orientationPid + m_structPid.distancePid;
 
 	verifOverflowCommandes();
 
-	/*m_cmdMoteur.cmdMoteurDroit *= m_odometrie->getOdometrieVariables()->vitesse / 100;
-	m_cmdMoteur.cmdMoteurGauche *= m_odometrie->getOdometrieVariables()->vitesse / 100;*/
+	//m_cmdMoteur.cmdMoteurDroit *= /*m_odometrie->getOdometrieVariables()->vitesse*/ 10 / 100;
+	//m_cmdMoteur.cmdMoteurGauche *= /*m_odometrie->getOdometrieVariables()->vitesse*/ 10 / 100;
+
+	//verifOverflowCommandes();
 
 	appliquerCmdMoteur();
 }
@@ -117,10 +119,10 @@ void ASV::CAsserv::appliquerCmdMoteur()
 
 void ASV::CAsserv::debug()
 {
-	cout << "erreurOrientationKp " << m_structPid.erreurOrientationKp << endl;
-	cout << "erreurDistanceKp " << m_structPid.erreurDistanceKp << endl;
-	cout << "orientationPid " << m_structPid.orientationPid << endl;
-	cout << "distancePid " << m_structPid.distancePid << endl;
-	cout << "cmdMoteurDroit " << m_cmdMoteur.cmdMoteurDroit << endl;
-	cout << "cmdMoteurGauche " << m_cmdMoteur.cmdMoteurGauche << endl;
+	cout << "erreurOrientationKp " << m_structPid.erreurOrientationKp ;
+	cout << " erreurDistanceKp " << m_structPid.erreurDistanceKp;
+	cout << " orientationPid " << m_structPid.orientationPid ;
+	cout << " distancePid " << m_structPid.distancePid ;
+	cout << " cmdMoteurDroit " << m_cmdMoteur.cmdMoteurDroit ;
+	cout << " cmdMoteurGauche " << m_cmdMoteur.cmdMoteurGauche << endl;
 }

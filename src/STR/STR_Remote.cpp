@@ -256,12 +256,12 @@ void STR::CRemote::asservTest()
 	indexStrategie++;
 	pointStrategieDeplacement = csvStrategieDeplacement.getStrategieDeplacement(indexStrategie);
 	
-	while(indexStrategie != csvStrategieDeplacement.getSizeStrategie())
+	while(1)//indexStrategie != csvStrategieDeplacement.getSizeStrategie())
 	{
 		odometrie.setStrategieDeplacement(pointStrategieDeplacement);
 		odometrie.miseAJourPosition();
 		odometrie.calculConsigneDeplacement();
-		odometrie.debug();
+		//odometrie.debug();
 		if(asserv.asservirVersCible())
 		{
 			indexStrategie++;
