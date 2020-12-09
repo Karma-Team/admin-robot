@@ -82,7 +82,18 @@ void ODO::COdometrie::calculConsigneDeplacement()
 	m_odometrieStruct.distanceConsigne = sqrt(((m_odometrieStruct.xArrive - m_odometrieStruct.xActuel) * (m_odometrieStruct.xArrive - m_odometrieStruct.xActuel)) + ((m_odometrieStruct.yArrive - m_odometrieStruct.yActuel) * (m_odometrieStruct.yArrive - m_odometrieStruct.yActuel)));
 	
 	// Calcul de l'orientation du robot pour faire face a la cible
-	m_odometrieStruct.orientationVersCible = atan((m_odometrieStruct.xArrive - m_odometrieStruct.xActuel)/(m_odometrieStruct.yArrive - m_odometrieStruct.yActuel));
+	float xdistance = (m_odometrieStruct.xArrive - m_odometrieStruct.xActuel);
+	float ydistance = (m_odometrieStruct.yArrive - m_odometrieStruct.yActuel);
+
+	if((xdistance != 0) && (ydistance != 0))
+	{
+		m_odometrieStruct.orientationVersCible = atan(xdistance/ydistance);
+	}
+	else
+	{
+		m_odometrieStruct.orientationVersCible = 0;
+	}
+
 	m_odometrieStruct.orientationConsigne = m_odometrieStruct.orientationVersCible - m_odometrieStruct.orientationActuel;
 }
 
