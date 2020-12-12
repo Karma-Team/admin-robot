@@ -261,7 +261,7 @@ void STR::CRemote::asservTest()
 		odometrie.setStrategieDeplacement(pointStrategieDeplacement);
 		odometrie.miseAJourPosition();
 		odometrie.calculConsigneDeplacement();
-		//odometrie.debug();
+		odometrie.debug();
 		if(asserv.asservirVersCible())
 		{
 			indexStrategie++;

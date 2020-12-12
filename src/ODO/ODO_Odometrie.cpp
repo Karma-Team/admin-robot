@@ -54,11 +54,11 @@ void ODO::COdometrie::miseAJourPosition()
 	m_codeursManager->reset();
 
 	// Calcul de l'orientation du robot actuel
-	m_odometrieStruct.orientationActuel = (m_configStruct->coeffAngleRoueGauche * m_odometrieStruct.nbTickGauche - m_configStruct->coeffAngleRoueDroite * m_odometrieStruct.nbTickDroit) + m_odometrieStruct.orientationDerive;
+	m_odometrieStruct.orientationActuel = (m_configStruct->coeffAngleRoueGauche * m_odometrieStruct.nbTickGauche - m_configStruct->coeffAngleRoueDroite * m_odometrieStruct.nbTickDroit) - m_odometrieStruct.orientationDerive;
 	m_odometrieStruct.orientationDerive = m_odometrieStruct.orientationActuel;
 
 	// Calcul de la distance parcourue
-	m_odometrieStruct.distanceParcourue = (m_configStruct->coeffLongueurRoueGauche * m_odometrieStruct.nbTickGauche + m_configStruct->coeffLongueurRoueDroite * m_odometrieStruct.nbTickDroit) / 2;
+	m_odometrieStruct.distanceParcourue += (m_configStruct->coeffLongueurRoueGauche * m_odometrieStruct.nbTickGauche + m_configStruct->coeffLongueurRoueDroite * m_odometrieStruct.nbTickDroit) / 2;
 
 	// Calcul de la vitesse de deplacement
 	m_odometrieStruct.vitesse = m_odometrieStruct.distanceParcourue - m_odometrieStruct.distancePrecedent;
@@ -94,7 +94,7 @@ void ODO::COdometrie::calculConsigneDeplacement()
 		m_odometrieStruct.orientationVersCible = 0;
 	}
 
-	m_odometrieStruct.orientationConsigne = m_odometrieStruct.orientationVersCible - m_odometrieStruct.orientationActuel;
+	m_odometrieStruct.orientationConsigne -= m_odometrieStruct.orientationVersCible - m_odometrieStruct.orientationActuel;
 }
 
 ODO::SOdometrieVariables* ODO::COdometrie::getOdometrieVariables()

@@ -63,8 +63,8 @@ bool ASV::CAsserv::asservirVersCible()
 
 void ASV::CAsserv::calculCmdMoteur()
 {
-	m_cmdMoteur.cmdMoteurDroit -= m_structPid.orientationPid + m_structPid.distancePid;
-	m_cmdMoteur.cmdMoteurGauche += m_structPid.orientationPid + m_structPid.distancePid;
+	m_cmdMoteur.cmdMoteurDroit += m_structPid.orientationPid + m_structPid.distancePid;
+	m_cmdMoteur.cmdMoteurGauche -= m_structPid.orientationPid + m_structPid.distancePid;
 
 	verifOverflowCommandes();
 
