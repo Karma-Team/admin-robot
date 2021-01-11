@@ -63,7 +63,7 @@ namespace COF
 			 * @brief retourne la structure de la configuration du robot
 			 * @return SConfigRobot
 			 */
-			SConfigRobot getConfRobot();
+			SConfigRobot* getConfRobot();
 
 
 		private:

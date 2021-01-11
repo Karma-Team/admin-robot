@@ -1,15 +1,16 @@
 
-#define CMD_RESET -3
+#define SPI_CHANNEL 0
+#define SPI_CLOCK_SPEED 1000000
 
 namespace COD
 {
-	class CSerialCodeurManager
+	class CSPICodeurManager
 	{
 		public:
 
-			CSerialCodeurManager(char* m_codeurSerieTty);
+			CSPICodeurManager();
 
-			virtual ~CSerialCodeurManager();
+			virtual ~CSPICodeurManager();
 
 			void initialisation();
 			void closeS();
@@ -22,7 +23,6 @@ namespace COD
 
 
 		private:
-			char m_codeurSerieTty[14];
 			int m_leftTicks;
 			int m_rightTicks;
 
