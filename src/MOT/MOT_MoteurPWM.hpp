@@ -1,6 +1,17 @@
 #include <unistd.h>
 #include <stdint.h>
 
+#define MGinARR 6//moteur gauche arrière
+#define MGinAV  9 //moteur gauche avant
+#define MDinAV  10  //moteur droit avant 
+#define MDinARR 11  //moteur droit arrière
+
+#define AV 1 //indexs pour les tableaux de retour de la fonction de conversion
+#define ARR 0
+
+#define END 7
+#define ENG 8
+
 #ifndef _MOTMOTEURPWM_
 #define _MOTMOTEURPWM_
 
