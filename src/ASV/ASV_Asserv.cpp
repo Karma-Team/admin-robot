@@ -10,15 +10,15 @@
 
 using namespace std;
 
-ASV::CAsserv::CAsserv(MOT::CMoteurManager* p_moteurManager, COF::SConfigRobot* p_configStruct, ODO::COdometrie* p_odometrie)
+ASV::CAsserv::CAsserv( COF::SConfigRobot* p_configStruct, ODO::COdometrie* p_odometrie)
 {
 	m_configStruct = p_configStruct;
-	m_moteurManager = p_moteurManager;
+
 	m_odometrie = p_odometrie;
 	m_structPid = {0};
 	m_cmdMoteur = {0};
 
-	if (m_odometrie == NULL || m_moteurManager == NULL || m_configStruct == NULL) {
+	if (m_odometrie == NULL || m_configStruct == NULL) {
 		printf("Pointeur NULL !!!!!");
 		exit(1);
 	}
@@ -92,17 +92,13 @@ void ASV::CAsserv::appliquerCmdMoteur()
 	{ // Marche avant
 
 			if (m_cmdMoteur.cmdMoteurGauche < 0)
-				//m_moteurManager->gauchePWM(abs(m_cmdMoteur.cmdMoteurGauche), 0);
 				MOT::CMoteurPWM::inst()->setMoteurSpeed(0, 0 ,abs(m_cmdMoteur.cmdMoteurGauche), 0);
 			else
-				//m_moteurManager->gauchePWM(0, m_cmdMoteur.cmdMoteurGauche);
 				MOT::CMoteurPWM::inst()->setMoteurSpeed(0, 0 ,0, abs(m_cmdMoteur.cmdMoteurGauche));
 
 			if (m_cmdMoteur.cmdMoteurDroit < 0)
-				//m_moteurManager->droitePWM(abs(m_cmdMoteur.cmdMoteurDroit), 0);
 				MOT::CMoteurPWM::inst()->setMoteurSpeed(abs(m_cmdMoteur.cmdMoteurDroit), 0 ,0, 0);
 			else
-				//m_moteurManager->droitePWM(0, m_cmdMoteur.cmdMoteurDroit);
 				MOT::CMoteurPWM::inst()->setMoteurSpeed(0, abs(m_cmdMoteur.cmdMoteurDroit) ,0, 0);
 	}
 
@@ -110,20 +106,15 @@ void ASV::CAsserv::appliquerCmdMoteur()
 	{ // Marche arrière
 
 			if (m_cmdMoteur.cmdMoteurDroit < 0)
-				//m_moteurManager->gauchePWM(0, abs(m_cmdMoteur.cmdMoteurDroit));
 				MOT::CMoteurPWM::inst()->setMoteurSpeed(0, abs(m_cmdMoteur.cmdMoteurDroit) ,0, 0);
 			else
-				//m_moteurManager->gauchePWM(m_cmdMoteur.cmdMoteurDroit, 0);
 				MOT::CMoteurPWM::inst()->setMoteurSpeed(abs(m_cmdMoteur.cmdMoteurDroit), 0 ,0, 0);
 
 			if (m_cmdMoteur.cmdMoteurGauche < 0)
-				//m_moteurManager->droitePWM(0, abs(m_cmdMoteur.cmdMoteurGauche));
 				MOT::CMoteurPWM::inst()->setMoteurSpeed(0, 0 ,abs(m_cmdMoteur.cmdMoteurGauche), 0);
 			else
-				//m_moteurManager->droitePWM(m_cmdMoteur.cmdMoteurGauche, 0);
 				MOT::CMoteurPWM::inst()->setMoteurSpeed(0, 0 ,0, abs(m_cmdMoteur.cmdMoteurGauche));
 	}
-	//m_moteurManager->apply();
 }
 
 void ASV::CAsserv::debug()

@@ -1,5 +1,4 @@
 #include "COF_ConfigurationRobot.hpp"
-#include "MOT_MoteurManager.hpp"
 #include "COF_Strategie.hpp"
 #include "ODO_Odometrie.hpp"
 
@@ -14,7 +13,7 @@ namespace STR
 	{
 		public:
 
-			CRemote(MOT::CMoteurManager *p_moteurManager, COD::CThreadCodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct);
+			CRemote(COD::CThreadCodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct);
 
 			virtual ~CRemote();
 
@@ -34,7 +33,6 @@ namespace STR
 			void testCodeurValue();
 
 			int m_vitesse;
-			MOT::CMoteurManager *m_moteurManager;
 			COD::CThreadCodeurManager* m_codeursManager;
 			COF::SConfigRobot* m_configStruct;
 	};

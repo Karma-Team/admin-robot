@@ -1,13 +1,14 @@
 #include "MOT_MoteurPWM.hpp"
 #include <wiringPi.h>
 #include <softPwm.h>
+#include <iostream>
 
 
 MOT::CMoteurPWM* MOT::CMoteurPWM::inst()
 {
   static CMoteurPWM m_singleton;
   
-  return(m_singleton);
+  return(&m_singleton);
 }
 
 MOT::CMoteurPWM::CMoteurPWM()
@@ -56,7 +57,7 @@ void MOT::CMoteurPWM::setMoteurSpeedGauche(int p_inAv, int p_inArr)
   
 bool MOT::CMoteurPWM::isBetween(int p_min, int p_val, int p_max)
  {
-        if(val < min || val > max)
+        if(p_val < p_min || p_val > p_max)
                 return false;
         return true;
  }

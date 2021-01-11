@@ -8,7 +8,6 @@
 #include <iostream>
 #include <iomanip>      // std::setprecision
 #include "STR_Remote.hpp"
-#include "COD_SerialCodeurManager.hpp"
 #include "COD_ThreadCodeurManager.hpp"
 #include "COF_Strategie.hpp"
 #include "ASV_Asserv.hpp"
@@ -16,14 +15,13 @@
 
 using namespace std;
 
-STR::CRemote::CRemote(MOT::CMoteurManager *p_moteurManager, COD::CThreadCodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct)
+STR::CRemote::CRemote(COD::CThreadCodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct)
 {
-	m_moteurManager = p_moteurManager;
 	m_codeursManager = p_codeursManager;
 	m_configStruct = p_configStruct;
 	m_vitesse = 0;
 
-	if(m_moteurManager == NULL || m_codeursManager == NULL || m_configStruct == NULL)
+	if( m_codeursManager == NULL || m_configStruct == NULL)
 	{
 		printf("Pointeur NULL !!!!!");
 		exit(1);
@@ -114,19 +112,12 @@ int STR::CRemote::startRemote()
 
 		}
 
-		m_moteurManager->dummy = true;
-
-		m_moteurManager->dummy = false;
-
-
 		system ("/bin/stty raw");
 
 	}
 	system ("/bin/stty cooked");
 
 	sleep(1);
-	m_moteurManager->stop();
-	m_moteurManager->apply();
 
 
 	return 0;
@@ -134,9 +125,6 @@ int STR::CRemote::startRemote()
 
 bool STR::CRemote::askedMove(int p_cmd, int p_vitesse)
 {
-
-	bool ServoUtiliser = false;
-
 	switch(p_cmd)
 	{
 		case 'z': //haut
@@ -167,8 +155,6 @@ bool STR::CRemote::askedMove(int p_cmd, int p_vitesse)
 		default:
 			return false;
 	}
-	if(ServoUtiliser == false)
-		m_moteurManager->apply();
 
 	return true;
 }
@@ -245,7 +231,7 @@ void STR::CRemote::asservTest()
 	ODO::COdometrie odometrie = ODO::COdometrie(pointStrategieDeplacement, m_configStruct, m_codeursManager);
 	odometrie.initialiser();
 	
-	ASV::CAsserv asserv = ASV::CAsserv(m_moteurManager, m_configStruct, &odometrie);
+	ASV::CAsserv asserv = ASV::CAsserv(m_configStruct, &odometrie);
 	
 	indexStrategie++;
 	pointStrategieDeplacement = csvStrategieDeplacement.getStrategieDeplacement(indexStrategie);
