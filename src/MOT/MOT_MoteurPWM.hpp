@@ -43,7 +43,7 @@ namespace MOT
 		       void setMoteurSpeed(int p_dArr, int p_dAvt, int p_gArr, int p_gAvt);
 
 
-			private:
+		private:
 
 				  /**
 		       * @brief Constructeur
@@ -76,6 +76,17 @@ namespace MOT
 		       * @param[in] p_inArr : consigne arriere 
 		       **/
 		      void setMoteurSpeedGauche(int p_inAv, int p_inArr);
+		
+		protected:
+		
+			/** 
+			  * @brief Verfication des bornes de la variable
+			  * @param[in] p_min : minimum
+			  * @param[in] p_val : valeur a tester
+			  * @param[in] p_mac : maximum
+			  * @return true valeur valide entre les borne false sinon
+			  **/
+			bool isBetween(int p_min, int p_val, int p_max);
     
 	};
 }
