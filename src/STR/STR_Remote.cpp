@@ -12,7 +12,7 @@
 #include "COD_ThreadCodeurManager.hpp"
 #include "COF_Strategie.hpp"
 #include "ASV_Asserv.hpp"
-#include "MOT_MoteurPWM.h"
+#include "MOT_MoteurPWM.hpp"
 
 using namespace std;
 
