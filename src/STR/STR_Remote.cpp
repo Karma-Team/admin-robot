@@ -139,32 +139,25 @@ bool STR::CRemote::askedMove(int p_cmd, int p_vitesse)
 	switch(p_cmd)
 	{
 		case 'z': //haut
-			m_moteurManager->gauchePWM(0, p_vitesse);
-			m_moteurManager->droitePWM(0, p_vitesse);
+			MOT::CMoteurPWM::inst()->setMoteurSpeed(0, p_vitesse, 0, p_vitesse);
 		break;
 		case 's': //bas
-			m_moteurManager->gauchePWM(p_vitesse, 0);
-			m_moteurManager->droitePWM(p_vitesse, 0);
+			MOT::CMoteurPWM::inst()->setMoteurSpeed(p_vitesse, 0, p_vitesse, 0);
 		break;
 		case 'q'://gauche
-			m_moteurManager->gauchePWM(p_vitesse, 0);
-			m_moteurManager->droitePWM(0, p_vitesse);
+			MOT::CMoteurPWM::inst()->setMoteurSpeed(p_vitesse, 0, 0, p_vitesse);
 		break;
 		case 'd': //droite
-			m_moteurManager->gauchePWM(0, p_vitesse);
-			m_moteurManager->droitePWM(p_vitesse, 0);
+			MOT::CMoteurPWM::inst()->setMoteurSpeed(0, p_vitesse, p_vitesse, 0);
 		break;
 		case 'a': //stop
-			m_moteurManager->gauchePWM(0, 0);
-			m_moteurManager->droitePWM(0, 0);
+			MOT::CMoteurPWM::inst()->setMoteurSpeed(0, 0 ,0, 0);
 		break;
 		case 'b': //stop
-			m_moteurManager->gauchePWM(p_vitesse, 0);
-			m_moteurManager->droitePWM(0, 0);
+			MOT::CMoteurPWM::inst()->setMoteurSpeed(0, 0, 0, p_vitesse);
 		break;
 		case 'n': //stop
-			m_moteurManager->gauchePWM(0, 0);
-			m_moteurManager->droitePWM(p_vitesse, 0);
+			MOT::CMoteurPWM::inst()->setMoteurSpeed(0, p_vitesse, 0, 0);
 		break;
 		case 'i': //servoAction
 
@@ -206,25 +199,25 @@ int STR::CRemote::askedSpeed(int p_cmd)
 		case '0':
 			return 0;
 		case '1':
-			return (int)(255*10/100);
+			return 10;
 		case '2':
-			return (int)(255*20/100);
+			return 20;
 		case '3':
-			return (int)(255*30/100);
+			return 30;
 		case '4':
-			return (int)(255*40/100);
+			return 40;
 		case '5':
-			return (int)(255*50/100);
+			return 50;
 		case '6':
-			return (int)(255*60/100);
+			return 60;
 		case '7':
-			return (int)(255*70/100);
+			return 70;
 		case '8':
-			return (int)(255*80/100);
+			return 80;
 		case '9':
-			return (int)(255*90/100);
+			return 90;
 		case '*':
-			return 255;
+			return 100;
 	}
 	return -1;
 }
