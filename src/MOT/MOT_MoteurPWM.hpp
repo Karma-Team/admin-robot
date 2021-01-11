@@ -61,7 +61,19 @@ namespace MOT
 		       * @param[in] source : source de la copie
 		       **/
 		      CMoteurPWM& operator=(const CMoteurPWM& source);
-
+		
+		protected:
+		
+			/** 
+			  * @brief Verfication des bornes de la variable
+			  * @param[in] p_min : minimum
+			  * @param[in] p_val : valeur a tester
+			  * @param[in] p_mac : maximum
+			  * @return true valeur valide entre les borne false sinon
+			  **/
+			bool isBetween(int p_min, int p_val, int p_max);
+		
+		
 		      /**
 		       * @brief application de la PWM sur le moteur de droit
 		       * @param[in] p_inAv : consigne avant 
@@ -76,17 +88,6 @@ namespace MOT
 		       * @param[in] p_inArr : consigne arriere 
 		       **/
 		      void setMoteurSpeedGauche(int p_inAv, int p_inArr);
-		
-		protected:
-		
-			/** 
-			  * @brief Verfication des bornes de la variable
-			  * @param[in] p_min : minimum
-			  * @param[in] p_val : valeur a tester
-			  * @param[in] p_mac : maximum
-			  * @return true valeur valide entre les borne false sinon
-			  **/
-			bool isBetween(int p_min, int p_val, int p_max);
     
 	};
 }
