@@ -8,21 +8,20 @@
 #include <iostream>
 #include <iomanip>      // std::setprecision
 #include "STR_Remote.hpp"
-#include "COD_SerialCodeurManager.hpp"
 #include "COD_ThreadCodeurManager.hpp"
 #include "COF_Strategie.hpp"
 #include "ASV_Asserv.hpp"
+#include "MOT_MoteurPWM.hpp"
 
 using namespace std;
 
-STR::CRemote::CRemote(MOT::CMoteurManager *p_moteurManager, COD::CThreadCodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct)
+STR::CRemote::CRemote(COD::CThreadCodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct)
 {
-	m_moteurManager = p_moteurManager;
 	m_codeursManager = p_codeursManager;
 	m_configStruct = p_configStruct;
 	m_vitesse = 0;
 
-	if(m_moteurManager == NULL || m_codeursManager == NULL || m_configStruct == NULL)
+	if( m_codeursManager == NULL || m_configStruct == NULL)
 	{
 		printf("Pointeur NULL !!!!!");
 		exit(1);
@@ -113,19 +112,12 @@ int STR::CRemote::startRemote()
 
 		}
 
-		m_moteurManager->dummy = true;
-
-		m_moteurManager->dummy = false;
-
-
 		system ("/bin/stty raw");
 
 	}
 	system ("/bin/stty cooked");
 
 	sleep(1);
-	m_moteurManager->stop();
-	m_moteurManager->apply();
 
 
 	return 0;
@@ -133,38 +125,28 @@ int STR::CRemote::startRemote()
 
 bool STR::CRemote::askedMove(int p_cmd, int p_vitesse)
 {
-
-	bool ServoUtiliser = false;
-
 	switch(p_cmd)
 	{
 		case 'z': //haut
-			m_moteurManager->gauchePWM(0, p_vitesse);
-			m_moteurManager->droitePWM(0, p_vitesse);
+			MOT::CMoteurPWM::inst()->setMoteurSpeed(0, p_vitesse, 0, p_vitesse);
 		break;
 		case 's': //bas
-			m_moteurManager->gauchePWM(p_vitesse, 0);
-			m_moteurManager->droitePWM(p_vitesse, 0);
+			MOT::CMoteurPWM::inst()->setMoteurSpeed(p_vitesse, 0, p_vitesse, 0);
 		break;
 		case 'q'://gauche
-			m_moteurManager->gauchePWM(p_vitesse, 0);
-			m_moteurManager->droitePWM(0, p_vitesse);
+			MOT::CMoteurPWM::inst()->setMoteurSpeed(p_vitesse, 0, 0, p_vitesse);
 		break;
 		case 'd': //droite
-			m_moteurManager->gauchePWM(0, p_vitesse);
-			m_moteurManager->droitePWM(p_vitesse, 0);
+			MOT::CMoteurPWM::inst()->setMoteurSpeed(0, p_vitesse, p_vitesse, 0);
 		break;
 		case 'a': //stop
-			m_moteurManager->gauchePWM(0, 0);
-			m_moteurManager->droitePWM(0, 0);
+			MOT::CMoteurPWM::inst()->setMoteurSpeed(0, 0 ,0, 0);
 		break;
 		case 'b': //stop
-			m_moteurManager->gauchePWM(p_vitesse, 0);
-			m_moteurManager->droitePWM(0, 0);
+			MOT::CMoteurPWM::inst()->setMoteurSpeed(0, 0, 0, p_vitesse);
 		break;
 		case 'n': //stop
-			m_moteurManager->gauchePWM(0, 0);
-			m_moteurManager->droitePWM(p_vitesse, 0);
+			MOT::CMoteurPWM::inst()->setMoteurSpeed(0, p_vitesse, 0, 0);
 		break;
 		case 'i': //servoAction
 
@@ -173,8 +155,6 @@ bool STR::CRemote::askedMove(int p_cmd, int p_vitesse)
 		default:
 			return false;
 	}
-	if(ServoUtiliser == false)
-		m_moteurManager->apply();
 
 	return true;
 }
@@ -206,25 +186,25 @@ int STR::CRemote::askedSpeed(int p_cmd)
 		case '0':
 			return 0;
 		case '1':
-			return (int)(255*10/100);
+			return 10;
 		case '2':
-			return (int)(255*20/100);
+			return 20;
 		case '3':
-			return (int)(255*30/100);
+			return 30;
 		case '4':
-			return (int)(255*40/100);
+			return 40;
 		case '5':
-			return (int)(255*50/100);
+			return 50;
 		case '6':
-			return (int)(255*60/100);
+			return 60;
 		case '7':
-			return (int)(255*70/100);
+			return 70;
 		case '8':
-			return (int)(255*80/100);
+			return 80;
 		case '9':
-			return (int)(255*90/100);
+			return 90;
 		case '*':
-			return 255;
+			return 100;
 	}
 	return -1;
 }
@@ -251,7 +231,7 @@ void STR::CRemote::asservTest()
 	ODO::COdometrie odometrie = ODO::COdometrie(pointStrategieDeplacement, m_configStruct, m_codeursManager);
 	odometrie.initialiser();
 	
-	ASV::CAsserv asserv = ASV::CAsserv(m_moteurManager, m_configStruct, &odometrie);
+	ASV::CAsserv asserv = ASV::CAsserv(m_configStruct, &odometrie);
 	
 	indexStrategie++;
 	pointStrategieDeplacement = csvStrategieDeplacement.getStrategieDeplacement(indexStrategie);

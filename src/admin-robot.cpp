@@ -52,9 +52,6 @@ int main(int argc, char** argv) {
 
 	cout << "Fin de la lecture de la configuration du robot" << endl;
 
-	// Construction du manageur moteur
-	MOT::CMoteurManager moteurManager = MOT::CMoteurManager(configRobot->moteursI2cAddr);
-
 	// Construction du manager des codeurs et de la communication serie
 	//COD::CSerialCodeurManager codeurManager = COD::CSerialCodeurManager(configRobot->codeurSerieTty);
 	COD::CThreadCodeurManager codeurManager = COD::CThreadCodeurManager();
@@ -66,7 +63,7 @@ int main(int argc, char** argv) {
 	}
 	//else
 	//{
-		STR::CRemote remoteManager = STR::CRemote(&moteurManager, &codeurManager, configRobot);
+		STR::CRemote remoteManager = STR::CRemote(&codeurManager, configRobot);
 		remoteManager.startRemote();
 	//}
 
