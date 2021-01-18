@@ -3,11 +3,14 @@
 #include <wiringPi.h>
 #include <string.h>
 
-
+#include "COD_ThreadCodeurManager.hpp"
+#include "COF_Strategie.hpp"
+#include "ASV_Asserv.hpp"
+#include "MOT_MoteurPWM.hpp"
 #include "STR_Autonome.hpp"
 
 
-STR::CAutonome::CAutonome(COD::CSerialCodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct)
+STR::CAutonome::CAutonome(COD::CThreadCodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct)
 {
 	m_aliveAsservThread = false;
 	m_aliveTcpClientThread = false;
@@ -47,7 +50,7 @@ void STR::CAutonome::startAutonome()
 	}
 }
 
-void STR::CAutonome::asserv(bool* p_aliveAsservThread, COD::CSerialCodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct)
+void STR::CAutonome::asserv(bool* p_aliveAsservThread, COD::CThreadCodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct)
 {
 	*p_aliveAsservThread = true;
 
