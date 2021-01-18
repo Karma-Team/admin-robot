@@ -58,14 +58,14 @@ int main(int argc, char** argv) {
 
 	if(argv[1] != NULL)
 	{
-		///STR::CAutonome autonomeManager = STR::CAutonome(&moteurManager,&codeurManager, configRobot);
-		//autonomeManager.startAutonome();
+		STR::CAutonome autonomeManager = STR::CAutonome(&codeurManager, configRobot);
+		autonomeManager.startAutonome();
 	}
-	//else
-	//{
+	else
+	{
 		STR::CRemote remoteManager = STR::CRemote(&codeurManager, configRobot);
 		remoteManager.startRemote();
-	//}
+	}
 
 	return 0;
 }
