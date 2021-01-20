@@ -6,7 +6,7 @@
  */
 
 #include "ASV_Asserv.hpp"
-#include "MOT_MoteurPWM.hpp"
+#include "MOT_MoteurManager.hpp"
 
 using namespace std;
 
