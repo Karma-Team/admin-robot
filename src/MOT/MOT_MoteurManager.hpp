@@ -4,82 +4,86 @@
 #ifndef _MOTMOTEUR_
 #define _MOTMOTEUR_
 
-namespace MOT
-{
-	class CMoteurManager
-	{
+namespace MOT {
+class CMoteurManager {
 
-		public:
-		      /**
-		       * @brief Retourne l'instance unique de la classe (singleton)
-		       * @return Singleton de la classe
-		       **/
-		       static CMoteurManager* inst();
+public:
+	/**
+	 * @brief Retourne l'instance unique de la classe (singleton)
+	 * @return Singleton de la classe
+	 **/
+	static CMoteurManager* inst();
 
-			/**
-			* init
-			*/
-			void init(int p_i2cAddrMoteur);
-		
-			/**
-			 * @brief commande moteur gauche PWM
-			 */
-			void gauchePWM(int p_arr, int p_avt);
+	/**
+	 * init
+	 */
+	void init(int p_i2cAddrMoteur);
 
-			/**
-			 * @brief commande moteur droite PWM
-			 */
-			void droitePWM(int p_arr, int p_avt);
+	/**
+	 * @brief commande moteur gauche PWM
+	 */
+	void gauchePWM(int p_arr, int p_avt);
 
-			/**
-			 * @brief Stopper les moteurs
-			 */
-			void stop();
+	/**
+	 * @brief commande moteur droite PWM
+	 */
+	void droitePWM(int p_arr, int p_avt);
 
-			/**
-			 * @brief  Appliquer les nouvelle commandes
-			 */
-			void apply();
+	/**
+	 * @brief Stopper les moteurs
+	 */
+	void stop();
 
-			/**
-			 * @brief recuperation des ordres de commande gauche
-			 */
-			uint8_t getOrdreGauche() const;
+	/**
+	 * @brief  Appliquer les nouvelle commandes
+	 */
+	void apply();
 
-			/**
-			 * @brief recuperation des ordres de commande droite
-			 */
-			uint8_t getOrdreDroit() const;
+	/**
+	 * @brief recuperation des ordres de commande gauche
+	 */
+	uint8_t getOrdreGauche() const;
 
-			/**
-			 * @brief calculerOrdre au moteur
-			 */
-			uint8_t calculerOrdreI2c(int p_arr, int p_avt);
+	/**
+	 * @brief recuperation des ordres de commande droite
+	 */
+	uint8_t getOrdreDroit() const;
 
-			bool debug=false; //< mettre le debug
-			bool dummy = false;
-			bool dummyBlocage = false;
+protected:
+	/**
+	 * @brief calculerOrdre au moteur
+	 */
+	uint8_t calculerOrdreI2c(int p_arr, int p_avt);
 
-	private:
+	bool debug = false; //< mettre le debug
+	bool dummy = false;
+	bool dummyBlocage = false;
 
-		/**
-		 * @breif Constructeur par recopie
-		 * @param[in] source : source de la copie
-		 **/
-		 CMoteurManager(const CMoteurManager& source);
+private:
 
-		/**
-		 * @brief Operateur d'affectation prive pour interdire son utilisation
-		 * @param[in] source : source de la copie
-		**/
-		CMoteurManager& operator=(const CMoteurManager& source);
-		
-		uint8_t m_ordreGauche;//< ordre moteur gauche PWM
+	/**
+	 * @brief Constructeur
+	 */
+	CMoteurManager();
 
-		uint8_t m_ordreDroit;//< ordre moteur droite PWM
+	/**
+	 * @breif Constructeur par recopie
+	 * @param[in] source : source de la copie
+	 **/
+	CMoteurManager(const CMoteurManager &source);
 
-		int m_i2cAddrMoteur;//< addresse i2c
-	};
+	/**
+	 * @brief Operateur d'affectation prive pour interdire son utilisation
+	 * @param[in] source : source de la copie
+	 **/
+	CMoteurManager& operator=(const CMoteurManager &source);
+
+	uint8_t m_ordreGauche; //< ordre moteur gauche PWM
+
+	uint8_t m_ordreDroit; //< ordre moteur droite PWM
+
+	int m_i2cAddrMoteur; //< addresse i2c
+};
 }
 
 #endif /* _CONFCONFIG_ */

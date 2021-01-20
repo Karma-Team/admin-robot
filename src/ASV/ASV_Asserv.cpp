@@ -73,8 +73,8 @@ void ASV::CAsserv::calculCmdMoteur()
 	m_cmdMoteur.cmdMoteurDroit +=  m_structPid.distancePid;
         m_cmdMoteur.cmdMoteurGauche += m_structPid.distancePid;
 
-	m_cmdMoteur.cmdMoteurDroit *= /*m_odometrie->getOdometrieVariables()->vitesse*/ 50 / 100;
-	m_cmdMoteur.cmdMoteurGauche *= /*m_odometrie->getOdometrieVariables()->vitesse*/ 50 / 100;
+	m_cmdMoteur.cmdMoteurDroit *= /*m_odometrie->getOdometrieVariables()->vitesse*/ (50 / 100)*255;
+	m_cmdMoteur.cmdMoteurGauche *= /*m_odometrie->getOdometrieVariables()->vitesse*/ (50 / 100)*255;
 
 	verifOverflowCommandes();
 	appliquerCmdMoteur();
@@ -83,11 +83,11 @@ void ASV::CAsserv::calculCmdMoteur()
 
 void ASV::CAsserv::verifOverflowCommandes()
 {
-	if (m_cmdMoteur.cmdMoteurGauche < -100) m_cmdMoteur.cmdMoteurGauche = -100;
-	else if(m_cmdMoteur.cmdMoteurGauche > 100) m_cmdMoteur.cmdMoteurGauche = 100;
+	if (m_cmdMoteur.cmdMoteurGauche < -255) m_cmdMoteur.cmdMoteurGauche = -255;
+	else if(m_cmdMoteur.cmdMoteurGauche > 255) m_cmdMoteur.cmdMoteurGauche = 255;
 
-	if (m_cmdMoteur.cmdMoteurDroit < -100) m_cmdMoteur.cmdMoteurDroit = -100;
-	else if (m_cmdMoteur.cmdMoteurDroit > 100) m_cmdMoteur.cmdMoteurDroit = 100;
+	if (m_cmdMoteur.cmdMoteurDroit < -255) m_cmdMoteur.cmdMoteurDroit = -255;
+	else if (m_cmdMoteur.cmdMoteurDroit > 255) m_cmdMoteur.cmdMoteurDroit = 255;
 }
 
 void ASV::CAsserv::appliquerCmdMoteur()
@@ -110,7 +110,7 @@ void ASV::CAsserv::appliquerCmdMoteur()
 	{ // Marche arrière
 
 			if (m_cmdMoteur.cmdMoteurDroit < 0)
-				MOT::CMoteurManager::inst()->>gauchePWM(0, abs(m_cmdMoteur.cmdMoteurDroit));
+				MOT::CMoteurManager::inst()->gauchePWM(0, abs(m_cmdMoteur.cmdMoteurDroit));
 			else
 				MOT::CMoteurManager::inst()->gauchePWM(m_cmdMoteur.cmdMoteurDroit, 0);
 

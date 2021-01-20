@@ -16,7 +16,7 @@ MOT::CMoteurManager* MOT::CMoteurManager::inst()
 
 MOT::CMoteurManager::CMoteurManager()
 {
-  //rien a faire
+  m_i2cAddrMoteur = 0;
 }
 
 // Constructeur par défaut : on stoppe les moteurs
@@ -29,11 +29,6 @@ void MOT::CMoteurManager::init(int p_i2cAddrMoteur)
 	//Arret des moteurs
 	apply();
 
-}
-
-MOT::CMoteurManager::~CMoteurManager()
-{
-	//rien a faire
 }
 
 uint8_t MOT::CMoteurManager::calculerOrdreI2c(int p_arr, int p_avt)

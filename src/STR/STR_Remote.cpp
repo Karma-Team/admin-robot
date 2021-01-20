@@ -153,7 +153,7 @@ bool STR::CRemote::askedMove(int p_cmd, int p_vitesse)
 		break;
 		case 'n': //stop
 			MOT::CMoteurManager::inst()->gauchePWM(0, 0);
-			MOT::CMoteurManager::inst()->>droitePWM(p_vitesse, 0);
+			MOT::CMoteurManager::inst()->droitePWM(p_vitesse, 0);
 		break;
 			
 		case 'i': //servoAction
