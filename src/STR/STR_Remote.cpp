@@ -128,26 +128,34 @@ bool STR::CRemote::askedMove(int p_cmd, int p_vitesse)
 	switch(p_cmd)
 	{
 		case 'z': //haut
-			MOT::CMoteurPWM::inst()->setMoteurSpeed(0, p_vitesse, 0, p_vitesse);
+			MOT::CMoteurManager::inst()->gauchePWM(0, p_vitesse);
+			MOT::CMoteurManager::inst()->droitePWM(0, p_vitesse);
 		break;
 		case 's': //bas
-			MOT::CMoteurPWM::inst()->setMoteurSpeed(p_vitesse, 0, p_vitesse, 0);
+			MOT::CMoteurManager::inst()->gauchePWM(p_vitesse, 0);
+			MOT::CMoteurManager::inst()->droitePWM(p_vitesse, 0);
 		break;
 		case 'q'://gauche
-			MOT::CMoteurPWM::inst()->setMoteurSpeed(p_vitesse, 0, 0, p_vitesse);
+			MOT::CMoteurManager::inst()->gauchePWM(p_vitesse, 0);
+			MOT::CMoteurManager::inst()->droitePWM(0, p_vitesse);
 		break;
 		case 'd': //droite
-			MOT::CMoteurPWM::inst()->setMoteurSpeed(0, p_vitesse, p_vitesse, 0);
+			MOT::CMoteurManager::inst()->gauchePWM(0, p_vitesse);
+			MOT::CMoteurManager::inst()->droitePWM(p_vitesse, 0);
 		break;
 		case 'a': //stop
-			MOT::CMoteurPWM::inst()->setMoteurSpeed(0, 0 ,0, 0);
+			MOT::CMoteurManager::inst()->gauchePWM(0, 0);
+			MOT::CMoteurManager::inst()->droitePWM(0, 0);
 		break;
 		case 'b': //stop
-			MOT::CMoteurPWM::inst()->setMoteurSpeed(0, 0, 0, p_vitesse);
+			MOT::CMoteurManager::inst()->gauchePWM(p_vitesse, 0);
+			MOT::CMoteurManager::inst()->droitePWM(0, 0);
 		break;
 		case 'n': //stop
-			MOT::CMoteurPWM::inst()->setMoteurSpeed(0, p_vitesse, 0, 0);
+			MOT::CMoteurManager::inst()->gauchePWM(0, 0);
+			MOT::CMoteurManager::inst()->>droitePWM(p_vitesse, 0);
 		break;
+			
 		case 'i': //servoAction
 
 		break;
@@ -186,25 +194,25 @@ int STR::CRemote::askedSpeed(int p_cmd)
 		case '0':
 			return 0;
 		case '1':
-			return 10;
+			return (int)(255*10/100);
 		case '2':
-			return 20;
+			return (int)(255*20/100);
 		case '3':
-			return 30;
+			return (int)(255*30/100);
 		case '4':
-			return 40;
+			return (int)(255*40/100);
 		case '5':
-			return 50;
+			return (int)(255*50/100);
 		case '6':
-			return 60;
+			return (int)(255*60/100);
 		case '7':
-			return 70;
+			return (int)(255*70/100);
 		case '8':
-			return 80;
+			return (int)(255*80/100);
 		case '9':
-			return 90;
+			return (int)(255*90/100);
 		case '*':
-			return 100;
+			return 255;
 	}
 	return -1;
 }
