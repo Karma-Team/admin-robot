@@ -11,7 +11,7 @@
 #include "COD_ThreadCodeurManager.hpp"
 #include "COF_Strategie.hpp"
 #include "ASV_Asserv.hpp"
-#include "MOT_MoteurPWM.hpp"
+#include "MOT_MoteurManager.hpp"
 
 using namespace std;
 
