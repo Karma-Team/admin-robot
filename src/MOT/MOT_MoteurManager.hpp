@@ -19,7 +19,7 @@ namespace MOT
 			/**
 			* init
 			*/
-			init(int p_i2cAddrMoteur);
+			void init(int p_i2cAddrMoteur);
 		
 			/**
 			 * @brief commande moteur gauche PWM
