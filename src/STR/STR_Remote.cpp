@@ -164,6 +164,8 @@ bool STR::CRemote::askedMove(int p_cmd, int p_vitesse)
 			return false;
 	}
 
+	MOT::CMoteurManager::inst()->apply();
+
 	return true;
 }
 
