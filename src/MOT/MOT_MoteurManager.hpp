@@ -10,16 +10,17 @@ namespace MOT
 	{
 
 		public:
+		      /**
+		       * @brief Retourne l'instance unique de la classe (singleton)
+		       * @return Singleton de la classe
+		       **/
+		       static CMoteurManager* inst();
 
-			/**
-			 * Constructeur
-			 */
-			CMoteurManager(int p_i2cAddrMoteur);
-
-			/**
-			 * Destructeur
-			 */
-			virtual ~CMoteurManager();
+		       /**
+			* Destructeur
+			**/
+		
+			void init();
 
 			/**
 			 * @brief commande moteur gauche PWM
@@ -61,7 +62,28 @@ namespace MOT
 			bool dummyBlocage = false;
 
 	private:
+		/**
+		* Constructeur
+		*/
+		CMoteurManager(int p_i2cAddrMoteur);
 
+		/**
+		 * Destructeur
+		 */
+		virtual ~CMoteurManager();
+		
+		/**
+		 * @breif Constructeur par recopie
+		 * @param[in] source : source de la copie
+		 **/
+		 CMoteurManager(const CMoteurManager& source);
+
+		/**
+		 * @brief Operateur d'affectation prive pour interdire son utilisation
+		 * @param[in] source : source de la copie
+		**/
+		CMoteurManager& operator=(const CMoteurManager& source);
+		
 		uint8_t m_ordreGauche;//< ordre moteur gauche PWM
 
 		uint8_t m_ordreDroit;//< ordre moteur droite PWM
