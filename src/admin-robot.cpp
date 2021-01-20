@@ -13,6 +13,7 @@
 #include "STR_Remote.hpp"
 #include "STR_Autonome.hpp"
 #include "COD_ThreadCodeurManager.hpp"
+#include "MOT_MoteurManager.hpp"
 
 using namespace std;
 
@@ -53,8 +54,10 @@ int main(int argc, char** argv) {
 	cout << "Fin de la lecture de la configuration du robot" << endl;
 
 	// Construction du manager des codeurs et de la communication serie
-	//COD::CSerialCodeurManager codeurManager = COD::CSerialCodeurManager(configRobot->codeurSerieTty);
 	COD::CThreadCodeurManager codeurManager = COD::CThreadCodeurManager();
+	
+	// Initialisation de la communication avec le pont H
+	MOT::CMoteurManager::inst()->init(configRobot->moteursI2cAddr);
 
 	if(argv[1] != NULL)
 	{
