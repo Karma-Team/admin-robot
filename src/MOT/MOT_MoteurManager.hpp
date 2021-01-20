@@ -16,12 +16,11 @@ namespace MOT
 		       **/
 		       static CMoteurManager* inst();
 
-		       /**
-			* Destructeur
-			**/
+			/**
+			* init
+			*/
+			init(int p_i2cAddrMoteur);
 		
-			void init();
-
 			/**
 			 * @brief commande moteur gauche PWM
 			 */
@@ -62,16 +61,7 @@ namespace MOT
 			bool dummyBlocage = false;
 
 	private:
-		/**
-		* Constructeur
-		*/
-		CMoteurManager(int p_i2cAddrMoteur);
 
-		/**
-		 * Destructeur
-		 */
-		virtual ~CMoteurManager();
-		
 		/**
 		 * @breif Constructeur par recopie
 		 * @param[in] source : source de la copie
