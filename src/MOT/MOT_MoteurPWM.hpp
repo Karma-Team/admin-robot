@@ -75,6 +75,11 @@ namespace MOT
 			 **/
 			void setMoteurSpeedGauche(int p_inAv, int p_inArr);
 
+			/**
+			 * @brief Debug
+			 */
+			void debug();
+
 	};
 }
 

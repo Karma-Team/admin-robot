@@ -77,21 +77,21 @@ void MOT::CMoteurPWM::setMoteurSpeedGauche(int p_inAv, int p_inArr)
 	if(p_inAv > 0 && p_inArr == 0)
 	{
 		digitalWrite(SensRotationAGaucheIn3, HIGH);
-		digitalWrite(SensRotationBDroiteIn2, LOW);
+		digitalWrite(SensRotationBGaucheIn4, LOW);
 		softPwmWrite(PwmMoteurGauche, p_inAv);
 		//pwmWrite(PwmMoteurGauche, 1024);
 	}
 	else if(p_inAv == 0 && p_inArr > 0)
 	{
 		digitalWrite(SensRotationAGaucheIn3, LOW);
-		digitalWrite(SensRotationBDroiteIn2, HIGH);
+		digitalWrite(SensRotationBGaucheIn4, HIGH);
 		softPwmWrite(PwmMoteurGauche, p_inArr);
 		//pwmWrite(PwmMoteurGauche, 1024);
 	}
 	else
 	{
 		digitalWrite(SensRotationAGaucheIn3, HIGH);
-		digitalWrite(SensRotationBDroiteIn2, HIGH);
+		digitalWrite(SensRotationBGaucheIn4, HIGH);
 		softPwmWrite(PwmMoteurGauche, 0);
 	}
 }
@@ -102,6 +102,7 @@ bool MOT::CMoteurPWM::isBetween(int p_min, int p_val, int p_max)
                 return false;
         return true;
  }
+
 void MOT::CMoteurPWM::setMoteurSpeed(int p_dArr, int p_dAvt, int p_gArr, int p_gAvt)
 {
   if((isBetween(0, p_dArr, 100) == true) && (isBetween(0, p_dAvt, 100) == true))
@@ -121,4 +122,18 @@ void MOT::CMoteurPWM::setMoteurSpeed(int p_dArr, int p_dAvt, int p_gArr, int p_g
   {
     setMoteurSpeedGauche(0,0);
   }
+
+  //debug();
 }
+
+void MOT::CMoteurPWM::debug()
+{
+	cout << " SensRotationADroiteIn1 " << digitalRead(SensRotationADroiteIn1) << endl;
+	cout << " SensRotationBDroiteIn2 " << digitalRead(SensRotationBDroiteIn2) << endl;
+	cout << " PwmMoteurDroite " << analogRead(PwmMoteurDroite) << endl;
+	cout << " SensRotationAGaucheIn3 " << digitalRead(SensRotationAGaucheIn3) << endl;
+	cout << " SensRotationBGaucheIn4 " << digitalRead(SensRotationBGaucheIn4) << endl;
+	cout << " PwmMoteurGauche " << analogRead(PwmMoteurGauche) << endl;
+}
+
+
