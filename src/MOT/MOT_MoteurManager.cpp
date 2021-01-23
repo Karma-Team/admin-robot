@@ -7,8 +7,20 @@
 
 using namespace std;
 
+MOT::CMoteurManager* MOT::CMoteurManager::inst()
+{
+  static CMoteurManager m_singleton;
+  
+  return(&m_singleton);
+}
+
+MOT::CMoteurManager::CMoteurManager()
+{
+  m_i2cAddrMoteur = 0;
+}
+
 // Constructeur par défaut : on stoppe les moteurs
-MOT::CMoteurManager::CMoteurManager(int p_i2cAddrMoteur)
+void MOT::CMoteurManager::init(int p_i2cAddrMoteur)
 {
 	m_ordreGauche = 128;
 	m_ordreDroit =  128;
@@ -17,11 +29,6 @@ MOT::CMoteurManager::CMoteurManager(int p_i2cAddrMoteur)
 	//Arret des moteurs
 	apply();
 
-}
-
-MOT::CMoteurManager::~CMoteurManager()
-{
-	//rien a faire
 }
 
 uint8_t MOT::CMoteurManager::calculerOrdreI2c(int p_arr, int p_avt)

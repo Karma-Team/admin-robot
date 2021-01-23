@@ -11,17 +11,19 @@
 #include "COD_ThreadCodeurManager.hpp"
 #include "COF_Strategie.hpp"
 #include "ASV_Asserv.hpp"
+#include "MOT_MoteurManager.hpp"
 #include "MOT_MoteurPWM.hpp"
 
 using namespace std;
 
-STR::CRemote::CRemote(COD::CThreadCodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct)
+STR::CRemote::CRemote(COD::CThreadCodeurManager* p_codeursManager, MOT::CMoteurPWM* p_moteurManager, COF::SConfigRobot* p_configStruct)
 {
 	m_codeursManager = p_codeursManager;
 	m_configStruct = p_configStruct;
+	m_moteurManager = p_moteurManager;
 	m_vitesse = 0;
 
-	if( m_codeursManager == NULL || m_configStruct == NULL)
+	if( m_codeursManager == NULL || m_configStruct == NULL || m_moteurManager == NULL)
 	{
 		printf("Pointeur NULL !!!!!");
 		exit(1);
@@ -37,7 +39,7 @@ int STR::CRemote::startRemote()
 {
 	int cmd;
 	int lastMove = 'a';
-	int vitesse = 150;
+	int vitesse = 50;
 	int tmp;
 
 	printCommands();
@@ -128,26 +130,41 @@ bool STR::CRemote::askedMove(int p_cmd, int p_vitesse)
 	switch(p_cmd)
 	{
 		case 'z': //haut
-			MOT::CMoteurPWM::inst()->setMoteurSpeed(0, p_vitesse, 0, p_vitesse);
+			m_moteurManager->setMoteurSpeed(0, p_vitesse, 0, p_vitesse);
+			//MOT::CMoteurManager::inst()->gauchePWM(0, p_vitesse);
+			//MOT::CMoteurManager::inst()->droitePWM(0, p_vitesse);
 		break;
 		case 's': //bas
-			MOT::CMoteurPWM::inst()->setMoteurSpeed(p_vitesse, 0, p_vitesse, 0);
+			m_moteurManager->setMoteurSpeed(p_vitesse, 0, p_vitesse, 0);
+			//MOT::CMoteurManager::inst()->gauchePWM(p_vitesse, 0);
+			//MOT::CMoteurManager::inst()->droitePWM(p_vitesse, 0);
 		break;
 		case 'q'://gauche
-			MOT::CMoteurPWM::inst()->setMoteurSpeed(p_vitesse, 0, 0, p_vitesse);
+			m_moteurManager->setMoteurSpeed(p_vitesse, 0, 0, p_vitesse);
+			//MOT::CMoteurManager::inst()->gauchePWM(p_vitesse, 0);
+			//MOT::CMoteurManager::inst()->droitePWM(0, p_vitesse);
 		break;
 		case 'd': //droite
-			MOT::CMoteurPWM::inst()->setMoteurSpeed(0, p_vitesse, p_vitesse, 0);
+			m_moteurManager->setMoteurSpeed(0, p_vitesse, p_vitesse, 0);
+			//MOT::CMoteurManager::inst()->gauchePWM(0, p_vitesse);
+			//MOT::CMoteurManager::inst()->droitePWM(p_vitesse, 0);
 		break;
 		case 'a': //stop
-			MOT::CMoteurPWM::inst()->setMoteurSpeed(0, 0 ,0, 0);
+			m_moteurManager->setMoteurSpeed(0, 0 ,0, 0);
+			//MOT::CMoteurManager::inst()->gauchePWM(0, 0);
+			//MOT::CMoteurManager::inst()->droitePWM(0, 0);
 		break;
 		case 'b': //stop
-			MOT::CMoteurPWM::inst()->setMoteurSpeed(0, 0, 0, p_vitesse);
+			//MOT::CMoteurManager::inst()->gauchePWM(p_vitesse, 0);
+			//MOT::CMoteurManager::inst()->droitePWM(0, 0);
+			m_moteurManager->setMoteurSpeed(0, 0, 0, p_vitesse);
 		break;
 		case 'n': //stop
-			MOT::CMoteurPWM::inst()->setMoteurSpeed(0, p_vitesse, 0, 0);
+			//MOT::CMoteurManager::inst()->gauchePWM(0, 0);
+			//MOT::CMoteurManager::inst()->droitePWM(p_vitesse, 0);
+			m_moteurManager->setMoteurSpeed(0, p_vitesse, 0, 0);
 		break;
+			
 		case 'i': //servoAction
 
 		break;
@@ -155,6 +172,8 @@ bool STR::CRemote::askedMove(int p_cmd, int p_vitesse)
 		default:
 			return false;
 	}
+
+	//MOT::CMoteurManager::inst()->apply();
 
 	return true;
 }
@@ -187,24 +206,34 @@ int STR::CRemote::askedSpeed(int p_cmd)
 			return 0;
 		case '1':
 			return 10;
+			//return (int)(255*10/100);
 		case '2':
 			return 20;
+			//return (int)(255*20/100);
 		case '3':
 			return 30;
+			//return (int)(255*30/100);
 		case '4':
 			return 40;
+			//return (int)(255*40/100);
 		case '5':
 			return 50;
+			//return (int)(255*50/100);
 		case '6':
 			return 60;
+			//return (int)(255*60/100);
 		case '7':
 			return 70;
+			//return (int)(255*70/100);
 		case '8':
 			return 80;
+			//return (int)(255*80/100);
 		case '9':
 			return 90;
+			//return (int)(255*90/100);
 		case '*':
 			return 100;
+			//return 255;
 	}
 	return -1;
 }
@@ -231,7 +260,7 @@ void STR::CRemote::asservTest()
 	ODO::COdometrie odometrie = ODO::COdometrie(pointStrategieDeplacement, m_configStruct, m_codeursManager);
 	odometrie.initialiser();
 	
-	ASV::CAsserv asserv = ASV::CAsserv(m_configStruct, &odometrie);
+	ASV::CAsserv asserv = ASV::CAsserv(m_moteurManager, m_configStruct, &odometrie);
 	
 	indexStrategie++;
 	pointStrategieDeplacement = csvStrategieDeplacement.getStrategieDeplacement(indexStrategie);

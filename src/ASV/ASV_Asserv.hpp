@@ -6,6 +6,7 @@
  */
 
 #include "ODO_Odometrie.hpp"
+#include "MOT_MoteurPWM.hpp"
 
 #ifndef _ASV_ASSERV_HPP_
 #define _ASV_ASSERV_HPP_
@@ -40,7 +41,7 @@ namespace ASV
 	{
 		public:
 
-			CAsserv(COF::SConfigRobot* p_configStruct, ODO::COdometrie* p_odometrie);
+			CAsserv(MOT::CMoteurPWM* p_moteurManager, COF::SConfigRobot* p_configStruct, ODO::COdometrie* p_odometrie);
 
 			virtual ~CAsserv();
 
@@ -57,6 +58,7 @@ namespace ASV
 			SCmdMoteur m_cmdMoteur;
 			COF::SConfigRobot* m_configStruct;
 			ODO::COdometrie* m_odometrie;
+			MOT::CMoteurPWM* m_moteurManager;
 	};
 }
 

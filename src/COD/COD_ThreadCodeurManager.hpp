@@ -1,12 +1,11 @@
 #include "THD_Queue.hpp"
 #include "THD_ThreadSafeObject.hpp"
 
-#define PIN_GPIO_SA_DROITE 0 ///< gpio 27 ou en partan du haut gpio 7
-#define PIN_GPIO_SB_DROITE 5 ///< gpio 29 ou en partan du haut gpio 6
+#define PIN_GPIO_SA_DROITE 25 ///< gpio 22
+#define PIN_GPIO_SB_DROITE 8  ///< gpio 24
 
-#define PIN_GPIO_SA_GAUCHE 6 ///< gpio 31 ou en partan du haut gpio 5
-#define PIN_GPIO_SB_GAUCHE 13 ///< gpio 33 ou en partan du haut gpio 4
-
+#define PIN_GPIO_SA_GAUCHE 7 ///< gpio 26
+#define PIN_GPIO_SB_GAUCHE 1 ///< gpio 28
 namespace COD
 {
 	class CThreadCodeurManager

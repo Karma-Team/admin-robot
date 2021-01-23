@@ -13,10 +13,22 @@
 #include "STR_Remote.hpp"
 #include "STR_Autonome.hpp"
 #include "COD_ThreadCodeurManager.hpp"
+#include "MOT_MoteurManager.hpp"
+#include "MOT_MoteurPWM.hpp"
 
 using namespace std;
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
+
+	// Setup wiringPi library
+
+	if (wiringPiSetupGpio() < 0) {
+
+		cerr << "Erreur d'initialisation de wiringPi: " << strerror(errno)
+				<< endl;
+		exit(1);
+	}
 
 	// Lecture de la configuration
 	cout << "Lecture de la Configuration du robot" << endl;
@@ -53,17 +65,21 @@ int main(int argc, char** argv) {
 	cout << "Fin de la lecture de la configuration du robot" << endl;
 
 	// Construction du manager des codeurs et de la communication serie
-	//COD::CSerialCodeurManager codeurManager = COD::CSerialCodeurManager(configRobot->codeurSerieTty);
 	COD::CThreadCodeurManager codeurManager = COD::CThreadCodeurManager();
+	
+	// Initialisation de la communication avec le pont H
+	//MOT::CMoteurManager::inst()->init(configRobot->moteursI2cAddr);
+
+	MOT::CMoteurPWM moteurManager = MOT::CMoteurPWM();
 
 	if(argv[1] != NULL)
 	{
-		STR::CAutonome autonomeManager = STR::CAutonome(&codeurManager, configRobot);
+		STR::CAutonome autonomeManager = STR::CAutonome(&codeurManager, &moteurManager, configRobot);
 		autonomeManager.startAutonome();
 	}
 	else
 	{
-		STR::CRemote remoteManager = STR::CRemote(&codeurManager, configRobot);
+		STR::CRemote remoteManager = STR::CRemote(&codeurManager, &moteurManager, configRobot);
 		remoteManager.startRemote();
 	}
 

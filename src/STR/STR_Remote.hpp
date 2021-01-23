@@ -1,6 +1,7 @@
 #include "COF_ConfigurationRobot.hpp"
 #include "COF_Strategie.hpp"
 #include "ODO_Odometrie.hpp"
+#include "MOT_MoteurPWM.hpp"
 
 namespace COD { class CSerialCodeurManager; class CSPICodeurManager; class CThreadCodeurManager;};
 
@@ -13,13 +14,14 @@ namespace STR
 	{
 		public:
 
-			CRemote(COD::CThreadCodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct);
+			CRemote(COD::CThreadCodeurManager* p_codeursManager, MOT::CMoteurPWM* p_moteurManager, COF::SConfigRobot* p_configStruct);
 
 			virtual ~CRemote();
 
 			int startRemote();
 
 		private:
+
 			void printCommands();
 
 			int askedSpeed(int p_cmd);
@@ -33,7 +35,11 @@ namespace STR
 			void testCodeurValue();
 
 			int m_vitesse;
+
 			COD::CThreadCodeurManager* m_codeursManager;
+
+			MOT::CMoteurPWM* m_moteurManager;
+
 			COF::SConfigRobot* m_configStruct;
 	};
 }

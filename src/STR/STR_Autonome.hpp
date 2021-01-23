@@ -1,6 +1,7 @@
 #include "COF_ConfigurationRobot.hpp"
 #include "TCP/TCP_Client.hpp"
 #include "TCP/TCP_Server.hpp"
+#include "MOT_MoteurPWM.hpp"
 
 namespace COD { class CSerialCodeurManager; class CSPICodeurManager; class CThreadCodeurManager;};
 
@@ -15,7 +16,7 @@ namespace STR
 	{
 		public:
 
-			CAutonome(COD::CThreadCodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct);
+			CAutonome(COD::CThreadCodeurManager* p_codeursManager, MOT::CMoteurPWM* p_moteurManager, COF::SConfigRobot* p_configStruct);
 
 			virtual ~CAutonome();
 
@@ -23,7 +24,7 @@ namespace STR
 
 		private:
 
-			static void asserv(bool* p_aliveAsservThread, COD::CThreadCodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct);
+			static void asserv(bool* p_aliveAsservThread, COD::CThreadCodeurManager* p_codeursManager,  COF::SConfigRobot* p_configStruct);
 
 			static void tcpClient(bool* p_aliveTcpClientThread, TCP::CTcpClient* p_tcpClient, SPathMsg* p_pathMsgPath);
 
