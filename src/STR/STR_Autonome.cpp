@@ -10,7 +10,7 @@
 #include "STR_Autonome.hpp"
 
 
-STR::CAutonome::CAutonome(COD::CThreadCodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct)
+STR::CAutonome::CAutonome(COD::CThreadCodeurManager* p_codeursManager, MOT::CMoteurPWM* p_moteurManager, COF::SConfigRobot* p_configStruct)
 {
 	m_aliveAsservThread = false;
 	m_aliveTcpClientThread = false;

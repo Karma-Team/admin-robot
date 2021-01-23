@@ -38,15 +38,6 @@ COD::CThreadCodeurManager::~CThreadCodeurManager()
 
 void COD::CThreadCodeurManager::initialisation()
 {
-	// Setup wiringPi library
-
-	if (wiringPiSetupGpio() < 0) {
-
-		cerr << "Erreur d'initialisation de wiringPi: " << strerror(errno)
-				<< endl;
-		exit(1);
-	}
-
 	printf("Initialisation codeur\n");
 	pinMode(PIN_GPIO_SA_DROITE,INPUT);
 	pinMode(PIN_GPIO_SB_DROITE,INPUT);
