@@ -10,13 +10,13 @@
 #include "STR_Autonome.hpp"
 
 
-STR::CAutonome::CAutonome(COD::CThreadCodeurManager* p_codeursManager, MOT::CMoteurPWM* p_moteurManager, COF::SConfigRobot* p_configStruct)
+STR::CAutonome::CAutonome(COD::CThreadCodeurManager* p_codeursManager, MOT::CMoteurPWM* p_moteurManager)
 {
 	m_aliveAsservThread = false;
 	m_aliveTcpClientThread = false;
 
 	m_codeursManager = p_codeursManager;
-	m_configStruct = p_configStruct;
+	m_configStruct = COF::CConfigurationRobot::inst()->getConfRobot();;
 
 	if (p_codeursManager == NULL || m_configStruct == NULL) {
 		printf("Pointeur NULL !!!!!");
@@ -38,7 +38,7 @@ STR::CAutonome::~CAutonome()
 
 void STR::CAutonome::startAutonome()
 {
-	thread threadAsserv(asserv, &m_aliveAsservThread, m_codeursManager, m_configStruct);
+	thread threadAsserv(asserv, &m_aliveAsservThread, m_codeursManager);
 	thread threadTcpClient(tcpClient, &m_aliveTcpClientThread, &m_tcpClient, &m_pathMsgPath);
 
 	system ("/bin/stty raw");
@@ -50,7 +50,7 @@ void STR::CAutonome::startAutonome()
 	}
 }
 
-void STR::CAutonome::asserv(bool* p_aliveAsservThread, COD::CThreadCodeurManager* p_codeursManager, COF::SConfigRobot* p_configStruct)
+void STR::CAutonome::asserv(bool* p_aliveAsservThread, COD::CThreadCodeurManager* p_codeursManager)
 {
 	*p_aliveAsservThread = true;
 

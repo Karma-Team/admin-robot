@@ -46,7 +46,7 @@ namespace ODO
 	{
 		public:
 
-			COdometrie(COF::SStrategieDeplacement* p_strategieDeplacement, COF::SConfigRobot* p_configStruct,  COD::CThreadCodeurManager* p_codeursManager);
+			COdometrie(COF::SStrategieDeplacement* p_strategieDeplacement, COD::CThreadCodeurManager* p_codeursManager);
 
 			virtual ~COdometrie();
 

@@ -52,12 +52,18 @@ namespace COF
 			 * @brief Constructeur
 			 * @param[in] p_csvConfigFile : nom du fichier de config a lire
 			 */
-			CConfigurationRobot(char * p_csvConfigFile);
+			//CConfigurationRobot(char * p_csvConfigFile);
+
+			/**
+			 * @brief Retourne l'instance unique de la classe (singleton)
+			 * @return Singleton de la classe
+			 **/
+			static CConfigurationRobot* inst();
 
 			/**
 			 * @brief Destructeur
 			 */
-			virtual ~CConfigurationRobot();
+			//virtual ~CConfigurationRobot();
 
 			/**
 			 * @brief retourne la structure de la configuration du robot
@@ -65,15 +71,33 @@ namespace COF
 			 */
 			SConfigRobot* getConfRobot();
 
+			/**
+			 * @brief read csv
+			 */
+			void readCsv(char * p_csvConfigFile);
+
 
 		private:
 
 			/**
-			 * @brief read csv
+			 * @brief Constructeur
 			 */
-			void readCsv();
+			CConfigurationRobot();
 
-			char m_csvConfigFileName[20]; //< nom du fichier csv de la configuration robot
+			/**
+			 * @breif Constructeur par recopie
+			 * @param[in] source : source de la copie
+			 **/
+			CConfigurationRobot(const CConfigurationRobot &source);
+
+			/**
+			 * @brief Operateur d'affectation prive pour interdire son utilisation
+			 * @param[in] source : source de la copie
+			 **/
+			CConfigurationRobot& operator=(const CConfigurationRobot &source);
+
+
+			//char m_csvConfigFileName[20]; //< nom du fichier csv de la configuration robot
 			SConfigRobot m_configRobotStruc; //< copnfiguration du robot dans la structure
 
 

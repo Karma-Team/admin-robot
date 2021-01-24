@@ -11,9 +11,9 @@
 
 using namespace std;
 
-ASV::CAsserv::CAsserv(MOT::CMoteurPWM* p_moteurManager, COF::SConfigRobot* p_configStruct, ODO::COdometrie* p_odometrie)
+ASV::CAsserv::CAsserv(MOT::CMoteurPWM* p_moteurManager, ODO::COdometrie* p_odometrie)
 {
-	m_configStruct = p_configStruct;
+	m_configStruct = COF::CConfigurationRobot::inst()->getConfRobot();;
 	m_moteurManager = p_moteurManager;
 	m_odometrie = p_odometrie;
 	m_structPid = {0};

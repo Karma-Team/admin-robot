@@ -41,7 +41,7 @@ namespace ASV
 	{
 		public:
 
-			CAsserv(MOT::CMoteurPWM* p_moteurManager, COF::SConfigRobot* p_configStruct, ODO::COdometrie* p_odometrie);
+			CAsserv(MOT::CMoteurPWM* p_moteurManager, ODO::COdometrie* p_odometrie);
 
 			virtual ~CAsserv();
 

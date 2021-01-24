@@ -16,14 +16,13 @@
 
 using namespace std;
 
-STR::CRemote::CRemote(COD::CThreadCodeurManager* p_codeursManager, MOT::CMoteurPWM* p_moteurManager, COF::SConfigRobot* p_configStruct)
+STR::CRemote::CRemote(COD::CThreadCodeurManager* p_codeursManager, MOT::CMoteurPWM* p_moteurManager)
 {
 	m_codeursManager = p_codeursManager;
-	m_configStruct = p_configStruct;
 	m_moteurManager = p_moteurManager;
 	m_vitesse = 0;
 
-	if( m_codeursManager == NULL || m_configStruct == NULL || m_moteurManager == NULL)
+	if( m_codeursManager == NULL || m_moteurManager == NULL)
 	{
 		printf("Pointeur NULL !!!!!");
 		exit(1);
@@ -255,15 +254,15 @@ void STR::CRemote::testCodeurValue()
 void STR::CRemote::asservTest()
 {
 	int indexStrategie = 0;
-	COF::CStrategieDeplacement csvStrategieDeplacement = COF::CStrategieDeplacement("StDeplacement.csv");
-	COF::SStrategieDeplacement* pointStrategieDeplacement = csvStrategieDeplacement.getStrategieDeplacement(indexStrategie);
-	ODO::COdometrie odometrie = ODO::COdometrie(pointStrategieDeplacement, m_configStruct, m_codeursManager);
+	COF::CStrategieDeplacement::inst()->readCsv("StDeplacement.csv");
+	COF::SStrategieDeplacement* pointStrategieDeplacement = COF::CStrategieDeplacement::inst()->getStrategieDeplacement(indexStrategie);
+	ODO::COdometrie odometrie = ODO::COdometrie(pointStrategieDeplacement, m_codeursManager);
 	odometrie.initialiser();
 	
-	ASV::CAsserv asserv = ASV::CAsserv(m_moteurManager, m_configStruct, &odometrie);
+	ASV::CAsserv asserv = ASV::CAsserv(m_moteurManager, &odometrie);
 	
 	indexStrategie++;
-	pointStrategieDeplacement = csvStrategieDeplacement.getStrategieDeplacement(indexStrategie);
+	pointStrategieDeplacement = COF::CStrategieDeplacement::inst()->getStrategieDeplacement(indexStrategie);
 	
 	while(1)//indexStrategie != csvStrategieDeplacement.getSizeStrategie())
 	{
@@ -274,7 +273,7 @@ void STR::CRemote::asservTest()
 		if(asserv.asservirVersCible())
 		{
 			indexStrategie++;
-			pointStrategieDeplacement = csvStrategieDeplacement.getStrategieDeplacement(indexStrategie);
+			pointStrategieDeplacement = COF::CStrategieDeplacement::inst()->getStrategieDeplacement(indexStrategie);
 		}
 		asserv.debug();
 		usleep(10000);

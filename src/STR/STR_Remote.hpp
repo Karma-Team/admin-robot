@@ -14,7 +14,7 @@ namespace STR
 	{
 		public:
 
-			CRemote(COD::CThreadCodeurManager* p_codeursManager, MOT::CMoteurPWM* p_moteurManager, COF::SConfigRobot* p_configStruct);
+			CRemote(COD::CThreadCodeurManager* p_codeursManager, MOT::CMoteurPWM* p_moteurManager);
 
 			virtual ~CRemote();
 
@@ -39,8 +39,6 @@ namespace STR
 			COD::CThreadCodeurManager* m_codeursManager;
 
 			MOT::CMoteurPWM* m_moteurManager;
-
-			COF::SConfigRobot* m_configStruct;
 	};
 }
 

@@ -16,7 +16,7 @@ namespace STR
 	{
 		public:
 
-			CAutonome(COD::CThreadCodeurManager* p_codeursManager, MOT::CMoteurPWM* p_moteurManager, COF::SConfigRobot* p_configStruct);
+			CAutonome(COD::CThreadCodeurManager* p_codeursManager, MOT::CMoteurPWM* p_moteurManager);
 
 			virtual ~CAutonome();
 
@@ -24,7 +24,7 @@ namespace STR
 
 		private:
 
-			static void asserv(bool* p_aliveAsservThread, COD::CThreadCodeurManager* p_codeursManager,  COF::SConfigRobot* p_configStruct);
+			static void asserv(bool* p_aliveAsservThread, COD::CThreadCodeurManager* p_codeursManager);
 
 			static void tcpClient(bool* p_aliveTcpClientThread, TCP::CTcpClient* p_tcpClient, SPathMsg* p_pathMsgPath);
 

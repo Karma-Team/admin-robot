@@ -12,11 +12,11 @@
 using namespace std;
 
 
-ODO::COdometrie::COdometrie(COF::SStrategieDeplacement* p_strategieDeplacement, COF::SConfigRobot* p_configStruct, COD::CThreadCodeurManager* p_codeursManager)
+ODO::COdometrie::COdometrie(COF::SStrategieDeplacement* p_strategieDeplacement, COD::CThreadCodeurManager* p_codeursManager)
 {
 	m_odometrieStruct = {0};
 	m_strategieDepalcement = p_strategieDeplacement;
-	m_configStruct = p_configStruct;
+	m_configStruct = COF::CConfigurationRobot::inst()->getConfRobot();
 	m_codeursManager = p_codeursManager;
 	m_index = 0;
 	m_cmdMoteurDroit = 0;

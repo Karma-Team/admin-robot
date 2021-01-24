@@ -13,7 +13,7 @@
 using namespace std;
 
 
-COF::CConfigurationRobot::CConfigurationRobot(char * p_csvConfigFile)
+/*COF::CConfigurationRobot::CConfigurationRobot(char * p_csvConfigFile)
 {
 	snprintf(m_csvConfigFileName, sizeof(m_csvConfigFileName), "%s", p_csvConfigFile);
 	CConfigurationRobot::readCsv();
@@ -22,14 +22,27 @@ COF::CConfigurationRobot::CConfigurationRobot(char * p_csvConfigFile)
 COF::CConfigurationRobot::~CConfigurationRobot()
 {
 	// rien a faire
+}*/
+
+COF::CConfigurationRobot* COF::CConfigurationRobot::inst()
+{
+  static CConfigurationRobot m_singleton;
+
+  return(&m_singleton);
 }
 
-void COF::CConfigurationRobot::readCsv()
+COF::CConfigurationRobot::CConfigurationRobot()
+{
+
+}
+
+
+void COF::CConfigurationRobot::readCsv(char * p_csvConfigFile)
 {
 	char* type;
 
 
-	io::CSVReader<2> in(m_csvConfigFileName);
+	io::CSVReader<2> in(p_csvConfigFile);
 
 	char* ip;
 

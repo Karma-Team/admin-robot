@@ -33,8 +33,8 @@ int main(int argc, char** argv)
 	// Lecture de la configuration
 	cout << "Lecture de la Configuration du robot" << endl;
 
-	COF::CConfigurationRobot csvConfigurationRobot = COF::CConfigurationRobot("CofRobotGlouton.csv");
-	COF::SConfigRobot* configRobot = csvConfigurationRobot.getConfRobot();
+	COF::CConfigurationRobot::inst()->readCsv("CofRobotGlouton.csv");
+	COF::SConfigRobot* configRobot = COF::CConfigurationRobot::inst()->getConfRobot();
 
 	cout << "IpServeurTcp = " <<  setprecision(15) << configRobot->ipTcpServeur << endl;
 
@@ -74,12 +74,12 @@ int main(int argc, char** argv)
 
 	if(argv[1] != NULL)
 	{
-		STR::CAutonome autonomeManager = STR::CAutonome(&codeurManager, &moteurManager, configRobot);
+		STR::CAutonome autonomeManager = STR::CAutonome(&codeurManager, &moteurManager);
 		autonomeManager.startAutonome();
 	}
 	else
 	{
-		STR::CRemote remoteManager = STR::CRemote(&codeurManager, &moteurManager, configRobot);
+		STR::CRemote remoteManager = STR::CRemote(&codeurManager, &moteurManager);
 		remoteManager.startRemote();
 	}
 
