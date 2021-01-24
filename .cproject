@@ -43,6 +43,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/STR}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cmn-lib/src/THD}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/ODO}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/SSV}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.780555570" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -67,6 +68,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/STR}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cmn-lib/src/THD}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/ODO}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/SSV}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.249918427" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
@@ -100,6 +102,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/STR}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cmn-lib/src/THD}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/ODO}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/admin-robot/src/SSV}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.281922442" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>

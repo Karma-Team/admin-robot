@@ -6,6 +6,8 @@
  */
 
 #include "ATL_CsvAtelierDecode.hpp"
+#include "COF_ConfigurationRobot.hpp"
+#include "SSV_SerialServoApi.hpp"
 
 #include <csv.hpp>
 #include <stdio.h>
@@ -42,11 +44,32 @@ ATL::CCsvAtelierDecode::CCsvAtelierDecode()
 
 void ATL::CCsvAtelierDecode::readCsv(char * p_csvAtelierFile)
 {
+	SSV::CSerialServoApi serialServoApi = SSV::CSerialServoApi(COF::CConfigurationRobot::inst()->getConfRobot()->servoSerieTty, 115200);
+
 	io::CSVReader<8> in(p_csvAtelierFile);
 
 	while(in.read_row(m_scsvAtelierAction.id, m_scsvAtelierAction.modeServo, m_scsvAtelierAction.vitesseAngleServo, m_scsvAtelierAction.vitesseDeplacement,m_scsvAtelierAction.angleDeplacement, m_scsvAtelierAction.xDeplacement, m_scsvAtelierAction.yDeplacement, m_scsvAtelierAction.timeout))
 	{
+		switch (m_scsvAtelierAction.modeServo)
+		{
+			case 'm':
+			{
+				(void)serialServoApi.activerServoAngle(m_scsvAtelierAction.id, m_scsvAtelierAction.vitesseAngleServo, m_scsvAtelierAction.timeout);
+			}
+			break;
 
+			case 'a':
+			{
+				(void)serialServoApi.activerServoMoteur(m_scsvAtelierAction.id, m_scsvAtelierAction.vitesseAngleServo, m_scsvAtelierAction.timeout);
+			}
+			break;
+
+			default:
+			{
+				// rien a faire
+			}
+			break;
+		}
 	}
 
 }

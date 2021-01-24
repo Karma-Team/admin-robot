@@ -5,6 +5,7 @@
  *      Author: thomas
  */
 
+#include <iostream>
 #include "ODO_Odometrie.hpp"
 #include "MOT_MoteurPWM.hpp"
 
@@ -20,14 +21,14 @@ namespace ATL
 	 */
 	struct SCsvAtelierAction
 	{
-		int id;
+		uint32_t id;
 		char modeServo;
-		int vitesseAngleServo;
+		double vitesseAngleServo;
 		int vitesseDeplacement;
 		int angleDeplacement;
 		int xDeplacement;
 		int yDeplacement;
-		int timeout;
+		uint32_t timeout;
 	};
 
 	/**
