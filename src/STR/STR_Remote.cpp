@@ -13,6 +13,7 @@
 #include "ASV_Asserv.hpp"
 #include "MOT_MoteurManager.hpp"
 #include "MOT_MoteurPWM.hpp"
+#include "ATL_CsvAtelierDecode.hpp"
 
 using namespace std;
 
@@ -105,6 +106,15 @@ int STR::CRemote::startRemote()
 				asservTest();
 			}
 			break;
+				
+			case 'f':
+			{
+				char fileAtelier[20] = {0};
+				printf("Entrer le nom du fichier d'atelier : ");
+				scanf("%s",&fileAtelier);
+				ATL::CCsvAtelierDecode::inst()->readCsv(fileAtelier);
+			}
+			break;
 
 			default:
 				// rien a faire
@@ -187,6 +197,7 @@ void STR::CRemote::printCommands()
 	printf("E : Récupérer les valeurs des codeurs (fausse la génération de points !)\n");
 	printf("T : Test le retour des codeurs)\n");
 	printf("W : Test Asserv");
+	printf("F : Test Atelier File");
 	printf("0-9-* : Réglage de la vitesse du robot de 0 à 100\n");
 	printf(" . puis CTRL-C : Quitter\n");
 }
