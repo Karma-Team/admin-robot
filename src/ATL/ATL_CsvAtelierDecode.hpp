@@ -88,7 +88,12 @@ namespace ATL
 			 * @param[in] source : source de la copie
 			 **/
 			CCsvAtelierDecode& operator=(const CCsvAtelierDecode &source);
-
+			
+			/**
+			 * @brief thread d'activation des actionneur de l'atelier
+			 **/
+			void threadActionneurAtelier();
+		
 			//char m_csvAtelierDecodeFile[20]; //< nom du fichier
 			SCsvAtelierAction m_scsvAtelierAction;
 			int m_index;
