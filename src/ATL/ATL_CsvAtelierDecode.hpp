@@ -24,11 +24,12 @@ namespace ATL
 		uint32_t id;
 		char modeServo;
 		double vitesseAngleServo;
+		uint32_t timeoutServo;
 		int vitesseDeplacement;
 		int angleDeplacement;
 		int xDeplacement;
 		int yDeplacement;
-		uint32_t timeout;
+		uint32_t timeoutAtelier;
 	};
 
 	/**
