@@ -22,6 +22,7 @@ bool SSV::CSerialServoApi::activerServoAngle(uint32_t p_idServo, double p_angle,
 	bool valide = false;
 	uint32_t time = 0;
 	signed short positionServo;
+	int positionConvertie = 0;
 	m_pilotageServo.readDeviceSerialPort(p_idServo, SSV_SERVO_MESSAGE_POS_READ, &positionServo);
 
 	// envoie de la nouvelle position
@@ -29,11 +30,12 @@ bool SSV::CSerialServoApi::activerServoAngle(uint32_t p_idServo, double p_angle,
 	m_pilotageServo.writeDeviceSerialPort(p_idServo, SSV_SERVO_MESSAGE_MOVE_TIME_WRITE, m_parameters);
 
 
-	while((positionServo != p_angle) && (time < p_timeout))
+	while((positionConvertie != p_angle) || (time < p_timeout))
 	{
 		m_pilotageServo.readDeviceSerialPort(p_idServo, SSV_SERVO_MESSAGE_POS_READ, &positionServo);
+		positionConvertie = (position*1000)/240;
 		time++;
-		usleep(1);
+		usleep(1 * 1000);
 	}
 
 	valide = true;
@@ -51,7 +53,7 @@ bool SSV::CSerialServoApi::activerServoMoteur(uint32_t p_idServo, double p_speed
 	while(time < p_timeout)
 	{
 		time++;
-		usleep(1);
+		usleep(1 * 1000);
 	}
 
 	// Arret du moteur
