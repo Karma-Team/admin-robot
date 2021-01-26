@@ -8,6 +8,7 @@
 #include <iostream>
 #include "ODO_Odometrie.hpp"
 #include "MOT_MoteurPWM.hpp"
+#include "SSV_SerialServoApi.hpp"
 
 #ifndef _ATL_CSVATELIERDECODE_HPP_
 #define _ATL_CSVATELIERDECODE_HPP_
@@ -92,7 +93,7 @@ namespace ATL
 			/**
 			 * @brief thread d'activation des actionneur de l'atelier
 			 **/
-			void threadActionneurAtelier(char p_modeServo, uint32_t p_id, double p_vitesseAngleServo, uint32_t p_timeoutServo);
+			static void threadActionneurAtelier(SSV::CSerialServoApi* p_serialServoApi, char* p_modeServo, uint32_t* p_id, double* p_vitesseAngleServo, uint32_t* p_timeoutServo);
 		
 			//char m_csvAtelierDecodeFile[20]; //< nom du fichier
 			SCsvAtelierAction m_scsvAtelierAction;

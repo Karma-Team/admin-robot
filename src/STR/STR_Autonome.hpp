@@ -26,19 +26,13 @@ namespace STR
 
 			static void asserv(bool* p_aliveAsservThread, COD::CThreadCodeurManager* p_codeursManager);
 
-			static void tcpClient(bool* p_aliveTcpClientThread, TCP::CTcpClient* p_tcpClient, SPathMsg* p_pathMsgPath);
-
-			COD::CThreadCodeurManager* m_codeursManager;
-			COF::SConfigRobot* m_configStruct;
-
-			TCP::CTcpClient m_tcpClient;
+			static void tcpClient(bool* p_aliveTcpClientThread, TCP::CTcpClient* p_tcpClient, SMsgOrderPathBody* p_pathMsgPath);
 
 			bool m_aliveAsservThread;
 			bool m_aliveTcpClientThread;
 
 			string m_ipServeur;
 
-			SPathMsg m_pathMsgPath = {.hd={MSG_ID_PATH, 			sizeof(SPathMsg)}};
 
 	};
 }

@@ -35,8 +35,8 @@ namespace COF
 		double coeffAngleRoueDroite; //< Coefficient d'angle pour la roue droite
 
 		int moteursI2cAddr;	//< addresse i2c du controleur moteur
-		char codeurSerieTty[8]; //< nom du device serie des codeurs
-		char servoSerieTty[8]; //< nom du device serie des servos
+		char codeurSerieTty[13]; //< nom du device serie des codeurs
+		char servoSerieTty[13]; //< nom du device serie des servos
 
 	};
 
