@@ -29,7 +29,7 @@ bool SSV::CSerialServoApi::activerServoAngle(uint32_t p_idServo, double p_angle,
 	m_pilotageServo.writeDeviceSerialPort(p_idServo, SSV_SERVO_MESSAGE_MOVE_TIME_WRITE, m_parameters);
 
 
-	while((positionServo != p_angle) || (time < p_timeout))
+	while((positionServo != p_angle) && (time < p_timeout))
 	{
 		m_pilotageServo.readDeviceSerialPort(p_idServo, SSV_SERVO_MESSAGE_POS_READ, &positionServo);
 		time++;
