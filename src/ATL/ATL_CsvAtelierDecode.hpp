@@ -92,7 +92,7 @@ namespace ATL
 			/**
 			 * @brief thread d'activation des actionneur de l'atelier
 			 **/
-			void threadActionneurAtelier();
+			void threadActionneurAtelier(char p_modeServo, uint32_t p_id, double p_vitesseAngleServo, uint32_t p_timeoutServo);
 		
 			//char m_csvAtelierDecodeFile[20]; //< nom du fichier
 			SCsvAtelierAction m_scsvAtelierAction;
