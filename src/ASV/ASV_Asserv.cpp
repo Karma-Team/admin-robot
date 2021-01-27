@@ -66,14 +66,15 @@ bool ASV::CAsserv::asservirVersCible()
 
 void ASV::CAsserv::calculCmdMoteur()
 {
-	//m_cmdMoteur.cmdMoteurDroit += m_structPid.orientationPid + m_structPid.distancePid;
-	//m_cmdMoteur.cmdMoteurGauche -= m_structPid.orientationPid + m_structPid.distancePid;
 
+	m_cmdMoteur.cmdMoteurDroit =  m_structPid.distancePid;
+    	m_cmdMoteur.cmdMoteurGauche = m_structPid.distancePid;
+	
 	verifOverflowCommandes();
-	appliquerCmdMoteur();
+	
+	m_cmdMoteur.cmdMoteurDroit += m_structPid.orientationPid;
+	m_cmdMoteur.cmdMoteurGauche -= m_structPid.orientationPid;
 
-	m_cmdMoteur.cmdMoteurDroit +=  m_structPid.distancePid;
-    m_cmdMoteur.cmdMoteurGauche += m_structPid.distancePid;
 
 	m_cmdMoteur.cmdMoteurDroit *= /*m_odometrie->getOdometrieVariables()->vitesse*/ (50 / 100);
 	m_cmdMoteur.cmdMoteurGauche *= /*m_odometrie->getOdometrieVariables()->vitesse*/ (50 / 100);
