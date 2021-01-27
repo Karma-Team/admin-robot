@@ -19,27 +19,30 @@ namespace ODO
 {
 	struct SOdometrieVariables
 	{
+		int xInit;
+		int yInit;
+		int angleInit;
 		int xDepart;
 		int yDepart;
 		int xArrive;
 		int yArrive;
 		int xActuel;
 		int yActuel;
-		float xDelta;
-		float yDelta;
+		int xDelta;
+		int yDelta;
 		int angleConsigne;
 		int angleActuel;
 		int vitesse;
 		int nbTickDroit;
 		int nbTickGauche;
-		float orientationActuel;
-		float orientationConsigne;
-		float orientationDerive;
-		float orientationMoyenne;
-		float orientationVersCible;
-		float distanceParcourue;
-		float distancePrecedent;
-		float distanceConsigne;
+		int orientationActuel;
+		int orientationConsigne;
+		int orientationDerive;
+		int orientationMoyenne;
+		int orientationVersCible;
+		int distanceParcourue;
+		int distancePrecedent;
+		int distanceConsigne;
 	};
 
 	class COdometrie
