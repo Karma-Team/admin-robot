@@ -75,9 +75,16 @@ void ASV::CAsserv::calculCmdMoteur()
 	m_cmdMoteur.cmdMoteurDroit += m_structPid.orientationPid;
 	m_cmdMoteur.cmdMoteurGauche -= m_structPid.orientationPid;
 
+	// Calcul de la pente d’accélération
+	// PenteAcc est un pourcentage, 10% ou 50% selon la vitesse initiale
+	int penteAcc = 50;
+	if (penteAcc < m_odometrie->getOdometrieVariables()->vitesse) 
+	{
+		penteAcc += 1;
+	}
 
-	m_cmdMoteur.cmdMoteurDroit *= /*m_odometrie->getOdometrieVariables()->vitesse*/ (50 / 100);
-	m_cmdMoteur.cmdMoteurGauche *= /*m_odometrie->getOdometrieVariables()->vitesse*/ (50 / 100);
+	m_cmdMoteur.cmdMoteurDroit *= penteAcc / 100;
+	m_cmdMoteur.cmdMoteurGauche *= penteAcc / 100;
 
 	verifOverflowCommandes();
 	appliquerCmdMoteur();
