@@ -35,9 +35,14 @@ ODO::COdometrie::~COdometrie()
 
 void ODO::COdometrie::initialiser()
 {
+	m_odometrieStruct.xInit = m_strategieDepalcement->x;
+	m_odometrieStruct.yInit = m_strategieDepalcement->y;
+	m_odometrieStruct.angleInit = m_strategieDepalcement->angle;
+	
 	m_odometrieStruct.xActuel = m_strategieDepalcement->x;
 	m_odometrieStruct.yActuel = m_strategieDepalcement->y;
 	m_odometrieStruct.angleConsigne = m_strategieDepalcement->angle;
+	
 	m_odometrieStruct.vitesse = 0;
 }
 
@@ -54,7 +59,7 @@ void ODO::COdometrie::miseAJourPosition()
 	m_codeursManager->reset();
 
 	// Calcul de l'orientation du robot actuel
-	m_odometrieStruct.orientationActuel = (m_configStruct->coeffAngleRoueGauche * m_odometrieStruct.nbTickGauche - m_configStruct->coeffAngleRoueDroite * m_odometrieStruct.nbTickDroit) - m_odometrieStruct.orientationDerive;
+	m_odometrieStruct.orientationActuel = m_odometrieStruct.angleInit + (m_configStruct->coeffAngleRoueGauche * m_odometrieStruct.nbTickGauche - m_configStruct->coeffAngleRoueDroite * m_odometrieStruct.nbTickDroit);
 	m_odometrieStruct.orientationDerive = m_odometrieStruct.orientationActuel;
 
 	// Calcul de la distance parcourue
@@ -82,19 +87,29 @@ void ODO::COdometrie::calculConsigneDeplacement()
 	m_odometrieStruct.distanceConsigne = sqrt(((m_odometrieStruct.xArrive - m_odometrieStruct.xActuel) * (m_odometrieStruct.xArrive - m_odometrieStruct.xActuel)) + ((m_odometrieStruct.yArrive - m_odometrieStruct.yActuel) * (m_odometrieStruct.yArrive - m_odometrieStruct.yActuel)));
 	
 	// Calcul de l'orientation du robot pour faire face a la cible
-	float xdistance = (m_odometrieStruct.xArrive - m_odometrieStruct.xActuel);
-	float ydistance = (m_odometrieStruct.yArrive - m_odometrieStruct.yActuel);
-
+	int xdistance = (m_odometrieStruct.xArrive - m_odometrieStruct.xActuel);
+	int ydistance = (m_odometrieStruct.yArrive - m_odometrieStruct.yActuel);
+	
+	//On regarde si la cible est à gauche ou à droite du robot utile ?
+	int signe = 0;
+	if(m_odometrieStruct.yActuel > ydistance)
+	{
+		signe = 1;
+	}else
+	{
+		signe = -1;
+	}
+	
 	if((xdistance != 0) && (ydistance != 0))
 	{
-		m_odometrieStruct.orientationVersCible = atan(xdistance/ydistance);
+		m_odometrieStruct.orientationVersCible = signe * atan(xdistance/ydistance);
 	}
 	else
 	{
 		m_odometrieStruct.orientationVersCible = 0;
 	}
 
-	m_odometrieStruct.orientationConsigne -= m_odometrieStruct.orientationVersCible - m_odometrieStruct.orientationActuel;
+	m_odometrieStruct.orientationConsigne = m_odometrieStruct.orientationVersCible - m_odometrieStruct.orientationActuel;
 }
 
 ODO::SOdometrieVariables* ODO::COdometrie::getOdometrieVariables()
