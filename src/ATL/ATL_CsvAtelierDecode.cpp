@@ -47,7 +47,8 @@ void ATL::CCsvAtelierDecode::readCsv(char * p_csvAtelierFile)
 	SSV::CSerialServoApi serialServoApi = SSV::CSerialServoApi(COF::CConfigurationRobot::inst()->getConfRobot()->servoSerieTty, 115200);
 
 	io::CSVReader<9> in(p_csvAtelierFile);
-
+	in.read_header(io::ignore_extra_column, "idServo", "ModeServo", "Angle/Vitesse", "TimeoutServo", "VitesseDeplacement", "AngleDeplacement", "xDeplacement", "yDeplacement", "timeoutAtelier");
+	
 	while(in.read_row(m_scsvAtelierAction.id, m_scsvAtelierAction.modeServo, m_scsvAtelierAction.vitesseAngleServo, m_scsvAtelierAction.timeoutServo, m_scsvAtelierAction.vitesseDeplacement,m_scsvAtelierAction.angleDeplacement, m_scsvAtelierAction.xDeplacement, m_scsvAtelierAction.yDeplacement, m_scsvAtelierAction.timeoutAtelier))
 	{
 		uint32_t timeout = 0;
