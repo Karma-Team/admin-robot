@@ -52,9 +52,9 @@ void ATL::CCsvAtelierDecode::readCsv(char * p_csvAtelierFile)
 	{
 		uint32_t timeout = 0;
 		std::thread threadSeralServoAtelier (threadActionneurAtelier,&serialServoApi, &m_scsvAtelierAction.modeServo, &m_scsvAtelierAction.id, &m_scsvAtelierAction.vitesseAngleServo, &m_scsvAtelierAction.timeoutServo);
-		threadSeralServoAtelier.join();
+		threadSeralServoAtelier.detach(); // Execution du thread sans bloquer le thread principal
 		
-		while(timeout < m_scsvAtelierAction.timeoutAtelier )
+		while(timeout < m_scsvAtelierAction.timeoutAtelier ) // Attente de la fin de l'action de la ligne de l'atelier pour passer a la suivante
 		{
 			timeout++;
 			usleep(1 * 1000);
