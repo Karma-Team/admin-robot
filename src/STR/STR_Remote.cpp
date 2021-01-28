@@ -21,7 +21,8 @@ STR::CRemote::CRemote(COD::CThreadCodeurManager* p_codeursManager, MOT::CMoteurP
 {
 	m_codeursManager = p_codeursManager;
 	m_moteurManager = p_moteurManager;
-	m_vitesse = 0;
+	m_odometrie = ODO::COdometrie(m_codeursManager);
+	m_vitesse = 0; 
 
 	if( m_codeursManager == NULL || m_moteurManager == NULL)
 	{
@@ -113,6 +114,14 @@ int STR::CRemote::startRemote()
 				printf("Entrer le nom du fichier d'atelier : ");
 				scanf("%s",&fileAtelier);
 				ATL::CCsvAtelierDecode::inst()->readCsv(fileAtelier);
+				
+				// init position init du robot
+				COF::SStrategieDeplacement pointStrategieDeplacement = {0,0,0,0,0,"null"};
+				m_odometrie.setStrategieDeplacement(pointStrategieDeplacement);
+				m_odometrie.initialiser();
+				
+				// lancement de l'atelier
+				ATL::CCsvAtelierDecode::inst()->lancerAtelier(m_moteurManager, m_odometrie)
 			}
 			break;
 
@@ -267,8 +276,9 @@ void STR::CRemote::asservTest()
 	int indexStrategie = 0;
 	COF::CStrategieDeplacement::inst()->readCsv("StDeplacement.csv");
 	COF::SStrategieDeplacement* pointStrategieDeplacement = COF::CStrategieDeplacement::inst()->getStrategieDeplacement(indexStrategie);
-	ODO::COdometrie odometrie = ODO::COdometrie(pointStrategieDeplacement, m_codeursManager);
-	odometrie.initialiser();
+	
+	m_odometrie.setStrategieDeplacement(pointStrategieDeplacement);
+	m_odometrie.initialiser();
 	
 	ASV::CAsserv asserv = ASV::CAsserv(m_moteurManager, &odometrie);
 	
