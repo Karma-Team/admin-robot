@@ -13,7 +13,7 @@ using namespace std;
 
 ASV::CAsserv::CAsserv(MOT::CMoteurPWM* p_moteurManager, ODO::COdometrie* p_odometrie)
 {
-	m_configStruct = COF::CConfigurationRobot::inst()->getConfRobot();;
+	m_configStruct = COF::CConfigurationRobot::inst()->getConfRobot();
 	m_moteurManager = p_moteurManager;
 	m_odometrie = p_odometrie;
 	m_structPid = {0};
@@ -31,7 +31,7 @@ ASV::CAsserv::~CAsserv()
 	// rien a faire
 }
 
-bool ASV::CAsserv::asservirVersCible()
+bool ASV::CAsserv::asservirVersCible(COF::SStrategieDeplacement* p_pointStrategieDeplacement)
 {
 	bool enCours = false;
 	
