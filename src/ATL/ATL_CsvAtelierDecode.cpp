@@ -95,12 +95,14 @@ void ATL::CCsvAtelierDecode::threadActionneurAtelier(SSV::CSerialServoApi* p_ser
 	{
 		case 'a':
 		{
+			while(p_serialServoApi->getBusyFlag() != true);
 			(void)p_serialServoApi->activerServoAngle(*p_id, *p_vitesseAngleServo, *p_timeoutServo);
 		}
 		break;
 
 		case 'm':
 		{
+			while(p_serialServoApi->getBusyFlag() != true);
 			(void)p_serialServoApi->activerServoMoteur(*p_id, *p_vitesseAngleServo, *p_timeoutServo);
 		}
 		break;
