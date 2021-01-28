@@ -35,6 +35,12 @@ bool ASV::CAsserv::asservirVersCible(COF::SStrategieDeplacement* p_pointStrategi
 {
 	bool enCours = false;
 	
+	// Calcule de l'odometrie
+	m_odometrie->setStrategieDeplacement(p_pointStrategieDeplacement);
+	m_odometrie->miseAJourPosition();
+	m_odometrie->calculConsigneDeplacement();
+	m_odometrie->debug();
+		
 	// Calcul PID de orientation
 	m_structPid.erreurOrientationKp = m_odometrie->getOdometrieVariables()->orientationConsigne - m_odometrie->getOdometrieVariables()->orientationActuel;
 	m_structPid.sommeErreurOrientationKi += m_structPid.erreurOrientationKp;
@@ -59,7 +65,8 @@ bool ASV::CAsserv::asservirVersCible(COF::SStrategieDeplacement* p_pointStrategi
 	{
 		enCours =  true;
 	}
-
+	
+	debug();
 
 	return enCours;
 }
