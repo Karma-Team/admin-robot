@@ -1,3 +1,3 @@
-x,y,angle,vitesse,atelier
-0,0,0,0,null
-100,0,90,150,null
+x,y,angle,vitesse,timeout,atelier
+0,0,0,0,10000,null
+100,0,90,150,10000,null
