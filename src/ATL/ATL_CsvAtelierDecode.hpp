@@ -69,7 +69,12 @@ namespace ATL
 			/**
 			* @brief read csv
 			*/
-			void readCsv(char * p_csvAtelierFile, MOT::CMoteurPWM* p_moteurManager,  ODO::COdometrie* p_odometrie);
+			void readCsv(char * p_csvAtelierFile);
+		
+			/**
+			* @brief appliquer action
+			*/
+			bool lancerAtelier(MOT::CMoteurPWM* p_moteurManager,  ODO::COdometrie* p_odometrie);
 
 
 		private:
@@ -103,6 +108,7 @@ namespace ATL
 		
 			//char m_csvAtelierDecodeFile[20]; //< nom du fichier
 			SCsvAtelierAction m_scsvAtelierAction;
+			SCsvAtelierAction m_scsvAtelierActionTab[];
 			int m_index;
 
 		};
