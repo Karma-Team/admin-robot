@@ -68,7 +68,7 @@ namespace ATL
 			/**
 			* @brief read csv
 			*/
-			void readCsv(char * p_csvAtelierFile);
+			void readCsv(char * p_csvAtelierFile, MOT::CMoteurPWM* p_moteurManager);
 
 
 		private:
@@ -94,6 +94,11 @@ namespace ATL
 			 * @brief thread d'activation des actionneur de l'atelier
 			 **/
 			static void threadActionneurAtelier(SSV::CSerialServoApi* p_serialServoApi, char* p_modeServo, uint32_t* p_id, double* p_vitesseAngleServo, uint32_t* p_timeoutServo);
+			
+			/**
+			 * @brief thread de deplacement pendant l'atelier
+			 **/
+			static voir threadDeplacementAtelier(
 		
 			//char m_csvAtelierDecodeFile[20]; //< nom du fichier
 			SCsvAtelierAction m_scsvAtelierAction;
