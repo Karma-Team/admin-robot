@@ -49,7 +49,10 @@ namespace ODO
 	{
 		public:
 
-			COdometrie(COF::SStrategieDeplacement* p_strategieDeplacement, COD::CThreadCodeurManager* p_codeursManager);
+			COdometrie(COD::CThreadCodeurManager* p_codeursManager);
+
+			COdometrie();
+
 
 			virtual ~COdometrie();
 

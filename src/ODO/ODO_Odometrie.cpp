@@ -20,11 +20,23 @@ ODO::COdometrie::COdometrie(COD::CThreadCodeurManager* p_codeursManager)
 	m_index = 0;
 	m_cmdMoteurDroit = 0;
 	m_cmdMoteurGauche = 0;
+	m_strategieDepalcement = {0};
 
 	if (m_codeursManager == NULL || m_configStruct == NULL) {
 		printf("Pointeur NULL !!!!!");
 		exit(1);
 	}
+}
+
+ODO::COdometrie::COdometrie()
+{
+	m_odometrieStruct = {0};
+	m_configStruct = COF::CConfigurationRobot::inst()->getConfRobot();
+	m_codeursManager = NULL;
+	m_index = 0;
+	m_cmdMoteurDroit = 0;
+	m_cmdMoteurGauche = 0;
+	m_strategieDepalcement = {0};
 }
 
 ODO::COdometrie::~COdometrie()

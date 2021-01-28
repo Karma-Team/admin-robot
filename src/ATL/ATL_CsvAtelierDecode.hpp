@@ -108,7 +108,7 @@ namespace ATL
 		
 			//char m_csvAtelierDecodeFile[20]; //< nom du fichier
 			SCsvAtelierAction m_scsvAtelierAction;
-			SCsvAtelierAction m_scsvAtelierActionTab[];
+			SCsvAtelierAction m_scsvAtelierActionTab[20000];
 			int m_index;
 
 		};

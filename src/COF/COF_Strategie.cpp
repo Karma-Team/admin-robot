@@ -33,7 +33,7 @@ void COF::CStrategieDeplacement::readCsv(char * p_csvStrategieDeplacementFile)
 	char* actions;
 	int index = 0;
 
-	io::CSVReader<5> in(p_csvStrategieDeplacementFile);
+	io::CSVReader<6> in(p_csvStrategieDeplacementFile);
 	in.read_header(io::ignore_extra_column, "x", "y", "angle", "vitesse", "timeout","atelier");
 	
 	while(in.read_row(x, y, angle, vitesse, timeout, actions))

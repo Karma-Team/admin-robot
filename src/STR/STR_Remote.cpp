@@ -117,11 +117,11 @@ int STR::CRemote::startRemote()
 				
 				// init position init du robot
 				COF::SStrategieDeplacement pointStrategieDeplacement = {0,0,0,0,0,"null"};
-				m_odometrie.setStrategieDeplacement(pointStrategieDeplacement);
+				m_odometrie.setStrategieDeplacement(&pointStrategieDeplacement);
 				m_odometrie.initialiser();
 				
 				// lancement de l'atelier
-				ATL::CCsvAtelierDecode::inst()->lancerAtelier(m_moteurManager, m_odometrie)
+				ATL::CCsvAtelierDecode::inst()->lancerAtelier(m_moteurManager, &m_odometrie);
 			}
 			break;
 
@@ -266,14 +266,14 @@ void STR::CRemote::asservTest()
 	m_odometrie.setStrategieDeplacement(pointStrategieDeplacement);
 	m_odometrie.initialiser();
 	
-	ASV::CAsserv asserv = ASV::CAsserv(m_moteurManager, &odometrie);
+	ASV::CAsserv asserv = ASV::CAsserv(m_moteurManager, &m_odometrie);
 	
 	indexStrategie++;
 	pointStrategieDeplacement = COF::CStrategieDeplacement::inst()->getStrategieDeplacement(indexStrategie);
 	
 	int  timer = 0;
 	
-	while(indexStrategie != COF::CStrategieDeplacement::inst()->getSizeStrategie)
+	while(indexStrategie != COF::CStrategieDeplacement::inst()->getSizeStrategie())
 	{
 		while(timer < pointStrategieDeplacement->timeout && asserv.asservirVersCible(pointStrategieDeplacement))
 		{
