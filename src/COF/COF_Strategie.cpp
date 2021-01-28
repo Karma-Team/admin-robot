@@ -42,18 +42,20 @@ void COF::CStrategieDeplacement::readCsv(char * p_csvStrategieDeplacementFile)
 	int y = 0;
 	int angle = 0;
 	int vitesse = 0;
+	int timeout = 0;
 	char* actions;
 	int index = 0;
 
 	io::CSVReader<5> in(p_csvStrategieDeplacementFile);
-	in.read_header(io::ignore_extra_column, "x", "y", "angle", "vitesse", "atelier");
+	in.read_header(io::ignore_extra_column, "x", "y", "angle", "vitesse", "timeout","atelier");
 	
-	while(in.read_row(x, y, angle, vitesse, actions))
+	while(in.read_row(x, y, angle, vitesse, timeout, actions))
 	{
 		m_strategieDeplacementStruct[index].x = x;
 		m_strategieDeplacementStruct[index].y = y;
 		m_strategieDeplacementStruct[index].angle = angle;
 		m_strategieDeplacementStruct[index].vitesse = vitesse;
+		m_strategieDeplacementStruct[index].timeout = timeout;
 		snprintf(m_strategieDeplacementStruct[index].actions, sizeof(m_strategieDeplacementStruct[index].actions), "%s", actions);
 		index++;
 	}
