@@ -31,6 +31,7 @@ bool SSV::CSerialServoApi::activerServoAngle(uint32_t p_idServo, double p_angle,
 
 	while((positionServo != p_angle) && (time < p_timeout))
 	{
+		while(m_pilotageServo->getBusyFlag() != true);
 		m_pilotageServo.readDeviceSerialPort(p_idServo, SSV_SERVO_MESSAGE_POS_READ, &positionServo);
 		time++;
 		usleep(1 * 1000);
@@ -60,3 +61,9 @@ bool SSV::CSerialServoApi::activerServoMoteur(uint32_t p_idServo, double p_speed
 
 	return true;
 }
+
+CLx16a* SSV::CSerialServoApi::getInstanceDriverSSV()
+{
+	return &m_pilotageServo;
+}
+
