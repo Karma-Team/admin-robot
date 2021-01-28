@@ -40,7 +40,7 @@ namespace STR
 
 			MOT::CMoteurPWM* m_moteurManager;
 		
-			ODO::COdometrie* m_odometrie;
+			ODO::COdometrie m_odometrie;
 	};
 }
 
