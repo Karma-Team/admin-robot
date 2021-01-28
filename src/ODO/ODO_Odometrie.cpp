@@ -12,17 +12,16 @@
 using namespace std;
 
 
-ODO::COdometrie::COdometrie(COF::SStrategieDeplacement* p_strategieDeplacement, COD::CThreadCodeurManager* p_codeursManager)
+ODO::COdometrie::COdometrie(COD::CThreadCodeurManager* p_codeursManager)
 {
 	m_odometrieStruct = {0};
-	m_strategieDepalcement = p_strategieDeplacement;
 	m_configStruct = COF::CConfigurationRobot::inst()->getConfRobot();
 	m_codeursManager = p_codeursManager;
 	m_index = 0;
 	m_cmdMoteurDroit = 0;
 	m_cmdMoteurGauche = 0;
 
-	if (m_strategieDepalcement == NULL || m_codeursManager == NULL || m_configStruct == NULL) {
+	if (m_codeursManager == NULL || m_configStruct == NULL) {
 		printf("Pointeur NULL !!!!!");
 		exit(1);
 	}
