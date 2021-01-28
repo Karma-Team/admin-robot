@@ -12,18 +12,6 @@
 
 using namespace std;
 
-
-/*COF::CConfigurationRobot::CConfigurationRobot(char * p_csvConfigFile)
-{
-	snprintf(m_csvConfigFileName, sizeof(m_csvConfigFileName), "%s", p_csvConfigFile);
-	CConfigurationRobot::readCsv();
-}
-
-COF::CConfigurationRobot::~CConfigurationRobot()
-{
-	// rien a faire
-}*/
-
 COF::CConfigurationRobot* COF::CConfigurationRobot::inst()
 {
   static CConfigurationRobot m_singleton;
