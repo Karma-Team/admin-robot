@@ -1,4 +1,4 @@
-idServo,ModeServo,Angle/Vitesse,TimeoutServo,VitesseDeplacement,AngleDeplacement,xDeplacement,yDeplacement,timeoutAtelier
+idServo,ModeServo,Angle/Vitesse,TimeoutServo,xDeplacement,yDeplacement,AngleDeplacement,VitesseDeplacement,timeoutAtelier
 1,a,0,2000,0,0,0,0,0
 3,a,1000,2000,0,0,0,0,3000
 1,a,1000,2000,0,0,0,0,0
