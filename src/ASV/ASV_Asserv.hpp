@@ -45,7 +45,7 @@ namespace ASV
 
 			virtual ~CAsserv();
 
-			bool asservirVersCible();
+			bool asservirVersCible(COF::SStrategieDeplacement* p_pointStrategieDeplacement);
 			void debug();
 
 		private:
