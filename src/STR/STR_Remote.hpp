@@ -39,6 +39,8 @@ namespace STR
 			COD::CThreadCodeurManager* m_codeursManager;
 
 			MOT::CMoteurPWM* m_moteurManager;
+		
+			ODO::COdometrie* m_odometrie;
 	};
 }
 
