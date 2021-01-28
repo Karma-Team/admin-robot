@@ -12,19 +12,6 @@
 
 using namespace std;
 
-
-/*COF::CStrategieDeplacement::CStrategieDeplacement(char * p_csvStrategieDeplacementFile)
-{
-	snprintf(m_csvStrategieDeplacementFile, sizeof(m_csvStrategieDeplacementFile), "%s", p_csvStrategieDeplacementFile);
-	m_index = 0;
-	CStrategieDeplacement::readCsv();
-}
-
-COF::CStrategieDeplacement::~CStrategieDeplacement()
-{
-	// rien a faire
-}*/
-
 COF::CStrategieDeplacement* COF::CStrategieDeplacement::inst()
 {
   static CStrategieDeplacement m_singleton;
