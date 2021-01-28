@@ -63,7 +63,7 @@ void ATL::CCsvAtelierDecode::readCsv(char * p_csvAtelierFile, MOT::CMoteurPWM* p
 		threadSeralServoAtelier.detach(); // Execution du thread sans bloquer le thread principal
 		
 		SStrategieDeplacement strategieDeplacementAtelier = {m_scsvAtelierAction.xDeplacement, m_scsvAtelierAction.yDeplacement, m_scsvAtelierAction.angleDeplacement, m_scsvAtelierAction.vitesseDeplacement, "null"};
-		std::thread threadAsservDeplacmentAtelier (threadDeplacementAtelier, p_moteurManager, p_odometrie, &strategieDeplacementAtelier);
+		std::thread threadAsservDeplacmentAtelier (threadDeplacementAtelier, p_moteurManager, p_odometrie, &strategieDeplacementAtelier, &m_scsvAtelierAction.timeoutAtelier);
 		threadAsservDeplacmentAtelier.detach(); // Execution du thread sans bloquer le thread principal
 		
 		while(timeout < m_scsvAtelierAction.timeoutAtelier ) // Attente de la fin de l'action de la ligne de l'atelier pour passer a la suivante
@@ -100,7 +100,14 @@ void ATL::CCsvAtelierDecode::threadActionneurAtelier(SSV::CSerialServoApi* p_ser
 	}
 }
 
-void ATL::CCsvAtelierDecode::threadDeplacementAtelier(MOT::CMoteurPWM* p_moteurManager, ODO::COdometrie* p_odometrie, COF::SStrategieDeplacement* p_pointStrategieAtelier)
+void ATL::CCsvAtelierDecode::threadDeplacementAtelier(MOT::CMoteurPWM* p_moteurManager, ODO::COdometrie* p_odometrie, COF::SStrategieDeplacement* p_pointStrategieAtelier, uint32_t* p_timeoutAtelier)
 {
+	ASV::CAsserv asserv = ASV::CAsserv(p_moteurManager, p_odometrie);
+	int timer = 0;
 	
+	while(timer < p_timeoutAtelier && asserv.asservirVersCible(p_pointStrategieAtelier))
+	{
+		usleep(10*1000);
+		timer = timer + 10;
+	}
 }
