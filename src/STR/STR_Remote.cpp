@@ -136,10 +136,7 @@ int STR::CRemote::startRemote()
 
 	}
 	system ("/bin/stty cooked");
-
-	sleep(1);
-
-
+	
 	return 0;
 }
 
