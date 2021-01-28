@@ -19,6 +19,7 @@ namespace COF
 		int y;
 		int angle;
 		int vitesse;
+		int timeout;
 		char actions[10];
 	};
 
