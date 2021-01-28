@@ -68,7 +68,7 @@ namespace ATL
 			/**
 			* @brief read csv
 			*/
-			void readCsv(char * p_csvAtelierFile, MOT::CMoteurPWM* p_moteurManager);
+			void readCsv(char * p_csvAtelierFile, MOT::CMoteurPWM* p_moteurManager,  ODO::COdometrie* p_odometrie);
 
 
 		private:
