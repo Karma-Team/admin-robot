@@ -98,7 +98,7 @@ namespace ATL
 			/**
 			 * @brief thread de deplacement pendant l'atelier
 			 **/
-			static voir threadDeplacementAtelier(
+			static void threadDeplacementAtelier(MOT::CMoteurPWM* p_moteurManager, ODO::COdometrie* p_odometrie, COF::SStrategieDeplacement* p_pointStrategieAtelier); 
 		
 			//char m_csvAtelierDecodeFile[20]; //< nom du fichier
 			SCsvAtelierAction m_scsvAtelierAction;
