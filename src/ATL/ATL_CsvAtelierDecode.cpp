@@ -19,18 +19,6 @@
 
 using namespace std;
 
-/*ATL::CCsvAtelierDecode::CCsvAtelierDecode(char * p_csvAtelierFile)
-{
-	snprintf(m_csvAtelierDecodeFile, sizeof(m_csvAtelierDecodeFile), "%s", p_csvAtelierFile);
-	m_index = 0;
-	CCsvAtelierDecode::readCsv();
-}
-
-ATL::CCsvAtelierDecode::~CCsvAtelierDecode()
-{
-	// rien a faire
-}*/
-
 ATL::CCsvAtelierDecode* ATL::CCsvAtelierDecode::inst()
 {
   static CCsvAtelierDecode m_singleton;
