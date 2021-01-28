@@ -275,19 +275,18 @@ void STR::CRemote::asservTest()
 	indexStrategie++;
 	pointStrategieDeplacement = COF::CStrategieDeplacement::inst()->getStrategieDeplacement(indexStrategie);
 	
-	while(1)//indexStrategie != csvStrategieDeplacement.getSizeStrategie())
+	int  timer = 0;
+	
+	while(indexStrategie != COF::CStrategieDeplacement::inst()->getSizeStrategie)
 	{
-		odometrie.setStrategieDeplacement(pointStrategieDeplacement);
-		odometrie.miseAJourPosition();
-		odometrie.calculConsigneDeplacement();
-		odometrie.debug();
-		if(asserv.asservirVersCible())
+		while(timer < pointStrategieDeplacement->timeout && asserv.asservirVersCible(pointStrategieDeplacement))
 		{
-			indexStrategie++;
-			pointStrategieDeplacement = COF::CStrategieDeplacement::inst()->getStrategieDeplacement(indexStrategie);
+			usleep(10*1000);
+			timer = timer + 10;
 		}
-		asserv.debug();
-		usleep(10000);
+		timer = 0;
+		indexStrategie++;
+		pointStrategieDeplacement = COF::CStrategieDeplacement::inst()->getStrategieDeplacement(indexStrategie);
 	}
 }
 
