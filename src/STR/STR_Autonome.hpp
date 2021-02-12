@@ -2,6 +2,7 @@
 #include "TCP/TCP_Client.hpp"
 #include "TCP/TCP_Server.hpp"
 #include "MOT_MoteurPWM.hpp"
+#include <string.h>
 
 namespace COD { class CSerialCodeurManager; class CSPICodeurManager; class CThreadCodeurManager;};
 
@@ -31,7 +32,7 @@ namespace STR
 			bool m_aliveAsservThread;
 			bool m_aliveTcpClientThread;
 
-			string m_ipServeur;
+			std::string m_ipServeur;
 
 
 	};
