@@ -1,3 +1,6 @@
+#ifndef _MOTMOTEURPWM_
+#define _MOTMOTEURPWM_
+
 #include <unistd.h>
 #include <stdint.h>
 
@@ -16,8 +19,7 @@
 //In1 	In3 	|        LOW 		 |	 HIGH 	|	LOW 	|		HIGH		  |
 //In2 	In4 	|        LOW 		 |	 LOW 	|	HIGH 	|		HIGH		  |
 
-#ifndef _MOTMOTEURPWM_
-#define _MOTMOTEURPWM_
+
 
 namespace MOT
 {

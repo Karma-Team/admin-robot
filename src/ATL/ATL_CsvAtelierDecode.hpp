@@ -5,14 +5,16 @@
  *      Author: thomas
  */
 
+#ifndef _ATL_CSVATELIERDECODE_HPP_
+#define _ATL_CSVATELIERDECODE_HPP_
+
 #include <iostream>
 #include "ODO_Odometrie.hpp"
 #include "MOT_MoteurPWM.hpp"
 #include "COF_Strategie.hpp"
 #include "SSV_SerialServoApi.hpp"
 
-#ifndef _ATL_CSVATELIERDECODE_HPP_
-#define _ATL_CSVATELIERDECODE_HPP_
+
 
 
 namespace ATL

@@ -5,12 +5,12 @@
  *      Author: thomas
  */
 
-#include "ODO_Odometrie.hpp"
-#include "MOT_MoteurPWM.hpp"
-
 #ifndef _ASV_ASSERV_HPP_
 #define _ASV_ASSERV_HPP_
 
+
+#include "ODO_Odometrie.hpp"
+#include "MOT_MoteurPWM.hpp"
 
 namespace ASV
 {

@@ -188,8 +188,8 @@ void STR::CRemote::printCommands()
 	printf("A : Arrêt du robot\n");
 	printf("E : Récupérer les valeurs des codeurs (fausse la génération de points !)\n");
 	printf("T : Test le retour des codeurs)\n");
-	printf("W : Test Asserv");
-	printf("F : Test Atelier File");
+	printf("W : Test Asserv\n");
+	printf("F : Test Atelier File\n");
 	printf("0-9-* : Réglage de la vitesse du robot de 0 à 100\n");
 	printf(" . puis CTRL-C : Quitter\n");
 }

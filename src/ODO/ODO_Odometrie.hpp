@@ -4,16 +4,16 @@
  *  Created on: 17 nov. 2020
  *      Author: thomas
  */
+
+#ifndef _ODO_ODOMETRIE_HPP_
+#define _ODO_ODOMETRIE_HPP_
+
 #include "COF_Strategie.hpp"
 #include "COF_ConfigurationRobot.hpp"
 #include <iostream>
 #include <math.h>
 
 namespace COD { class CSerialCodeurManager; class CSPICodeurManager; class CThreadCodeurManager;};
-
-#ifndef _ODO_ODOMETRIE_HPP_
-#define _ODO_ODOMETRIE_HPP_
-
 
 namespace ODO
 {

@@ -1,12 +1,12 @@
+#ifndef _REMOTE_
+#define _REMOTE_
+
 #include "COF_ConfigurationRobot.hpp"
 #include "COF_Strategie.hpp"
 #include "ODO_Odometrie.hpp"
 #include "MOT_MoteurPWM.hpp"
 
 namespace COD { class CSerialCodeurManager; class CSPICodeurManager; class CThreadCodeurManager;};
-
-#ifndef _REMOTE_
-#define _REMOTE_
 
 namespace STR
 {

@@ -1,3 +1,6 @@
+#ifndef _AUTONOME_
+#define _AUTONOME_
+
 #include "COF_ConfigurationRobot.hpp"
 #include "TCP/TCP_Client.hpp"
 #include "TCP/TCP_Server.hpp"
@@ -6,9 +9,6 @@
 
 namespace COD { class CSerialCodeurManager; class CSPICodeurManager; class CThreadCodeurManager;};
 
-
-#ifndef _AUTONOME_
-#define _AUTONOME_
 
 namespace STR
 {

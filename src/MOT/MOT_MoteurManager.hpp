@@ -1,8 +1,10 @@
+#ifndef _MOTMOTEUR_
+#define _MOTMOTEUR_
+
+
 #include <unistd.h>
 #include <stdint.h>
 
-#ifndef _MOTMOTEUR_
-#define _MOTMOTEUR_
 
 namespace MOT {
 class CMoteurManager {

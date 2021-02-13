@@ -5,12 +5,12 @@
  *      Author: thomas
  */
 
+#ifndef _ASV_ASSERV_HPP_
+#define _ASV_ASSERV_HPP_
+
 #include "ODO_Odometrie.hpp"
 #include "MOT_MoteurPWM.hpp"
 #include "ATL_CsvAtelierDecode.hpp"
-
-#ifndef _ASV_ASSERV_HPP_
-#define _ASV_ASSERV_HPP_
 
 
 namespace ATL

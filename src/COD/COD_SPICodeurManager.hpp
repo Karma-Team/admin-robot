@@ -1,3 +1,6 @@
+#ifndef _CSPICODEURMANAGER_
+#define _CSPICODEURMANAGER_
+
 
 #define SPI_CHANNEL 0
 #define SPI_CLOCK_SPEED 1000000
@@ -29,3 +32,4 @@ namespace COD
 	};
 }
 
+#endif

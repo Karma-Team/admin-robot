@@ -3,10 +3,10 @@
  * @brief permet de charger la configuration du robot au demarrage
  */
 
-#include "TCP/TCP_Common.hpp"
-
 #ifndef _CONFCONFIG_
 #define _CONFCONFIG_
+
+#include "TCP/TCP_Common.hpp"
 
 namespace COF
 {

@@ -1,5 +1,9 @@
+#ifndef _CTHREADCODEURMANAGER_
+#define _CTHREADCODEURMANAGER_
+
 #include "THD_Queue.hpp"
 #include "THD_ThreadSafeObject.hpp"
+
 
 #define PIN_GPIO_SA_DROITE 25 ///< gpio 22
 #define PIN_GPIO_SB_DROITE 8  ///< gpio 24
@@ -32,3 +36,4 @@ namespace COD
 	};
 }
 
+#endif

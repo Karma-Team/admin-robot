@@ -1,4 +1,7 @@
 
+#ifndef _CSERIALCODEURMANAGER_
+#define _CSERIALCODEURMANAGER_
+
 #define CMD_RESET -3
 
 namespace COD
@@ -28,4 +31,6 @@ namespace COD
 
 	};
 }
+
+#endif
 

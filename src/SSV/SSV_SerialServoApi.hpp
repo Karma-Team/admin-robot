@@ -1,9 +1,13 @@
 /**
  * SSV_SerialServoApi.hpp
  */
+#ifndef _CSERIALSERVOAPI_
+#define _CSERIALSERVOAPI_
+
 #include <iostream>
 #include "SSV/SSV_ReadWrite.hpp"
 #include <string.h>
+
 
 namespace SSV
 {
@@ -25,3 +29,5 @@ namespace SSV
 
 	};
 }
+
+#endif
