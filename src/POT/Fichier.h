@@ -1,3 +1,6 @@
+#ifndef _FICHIER_H_
+#define _FICHIER_H_
+
 #pragma once
 #include "Point.h"
 #include <fstream>
@@ -14,3 +17,5 @@ class Fichier{
 	//static vector<Point> writePoints(string);
 	static int countSubstring(const std::string&, const std::string&);
 };
+
+#endif

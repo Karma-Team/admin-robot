@@ -1,5 +1,5 @@
-#ifndef _MOTMOTEUR_
-#define _MOTMOTEUR_
+#ifndef _MOTMOTEURMANAGER_
+#define _MOTMOTEURMANAGER_
 
 
 #include <unistd.h>

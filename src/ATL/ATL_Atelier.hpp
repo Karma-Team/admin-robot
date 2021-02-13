@@ -5,8 +5,8 @@
  *      Author: thomas
  */
 
-#ifndef _ASV_ASSERV_HPP_
-#define _ASV_ASSERV_HPP_
+#ifndef _ATL_ATELIER_HPP_
+#define _ATL_ATELIER_HPP_
 
 #include "ODO_Odometrie.hpp"
 #include "MOT_MoteurPWM.hpp"
