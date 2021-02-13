@@ -48,6 +48,7 @@ void ATL::CCsvAtelierDecode::readCsv(char * p_csvAtelierFile)
 		m_scsvAtelierActionTab[m_index].id = m_scsvAtelierAction.id;
 		m_scsvAtelierActionTab[m_index].modeServo = m_scsvAtelierAction.modeServo;
 		m_scsvAtelierActionTab[m_index].vitesseAngleServo = m_scsvAtelierAction.vitesseAngleServo;
+		m_scsvAtelierActionTab[m_index].timeoutServo = m_scsvAtelierAction.timeoutServo;
 		m_scsvAtelierActionTab[m_index].xDeplacement = m_scsvAtelierAction.xDeplacement;
 		m_scsvAtelierActionTab[m_index].yDeplacement = m_scsvAtelierAction.yDeplacement;
 		m_scsvAtelierActionTab[m_index].angleDeplacement = m_scsvAtelierAction.angleDeplacement;
