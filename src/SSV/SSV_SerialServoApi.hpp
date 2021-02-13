@@ -19,9 +19,9 @@ namespace SSV
 			CLx16a* getInstanceDriverSSV();
 
 		private:
-			SSV::CLx16a		m_pilotageServo;
-			std::string	m_inputMsg;
-			double		m_parameters[SSV_PARAMETERS_NB_MAX];
+			SSV::CLx16a	*	m_pilotageServo;
+			std::string		m_inputMsg;
+			double			m_parameters[SSV_PARAMETERS_NB_MAX];
 
 	};
 }
