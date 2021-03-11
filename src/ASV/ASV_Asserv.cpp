@@ -90,10 +90,13 @@ void ASV::CAsserv::calculCmdMoteur()
 		penteAcc += 1;
 	}
 
-	m_cmdMoteur.cmdMoteurDroit *= penteAcc / 100;
-	m_cmdMoteur.cmdMoteurGauche *= penteAcc / 100;
-
 	verifOverflowCommandes();
+
+	float acc = ((float)penteAcc/(float)100);
+
+	m_cmdMoteur.cmdMoteurDroit = m_cmdMoteur.cmdMoteurDroit*acc;
+	m_cmdMoteur.cmdMoteurGauche = m_cmdMoteur.cmdMoteurGauche*acc;
+
 	appliquerCmdMoteur();
 
 }
@@ -113,7 +116,22 @@ void ASV::CAsserv::verifOverflowCommandes()
 
 void ASV::CAsserv::appliquerCmdMoteur()
 {
-	if (true)
+	if (m_cmdMoteur.cmdMoteurGauche < 0 && m_cmdMoteur.cmdMoteurDroit < 0)
+		m_moteurManager->setMoteurSpeed(abs(m_cmdMoteur.cmdMoteurDroit), 0 ,abs(m_cmdMoteur.cmdMoteurGauche), 0);
+
+	else if (m_cmdMoteur.cmdMoteurGauche < 0 && m_cmdMoteur.cmdMoteurDroit > 0)
+		m_moteurManager->setMoteurSpeed(0, abs(m_cmdMoteur.cmdMoteurDroit) ,abs(m_cmdMoteur.cmdMoteurGauche), 0);
+
+	else if (m_cmdMoteur.cmdMoteurGauche > 0 && m_cmdMoteur.cmdMoteurDroit < 0)
+		m_moteurManager->setMoteurSpeed(abs(m_cmdMoteur.cmdMoteurDroit), 0 , 0, abs(m_cmdMoteur.cmdMoteurGauche));
+
+	else if (m_cmdMoteur.cmdMoteurGauche > 0 && m_cmdMoteur.cmdMoteurDroit > 0)
+		m_moteurManager->setMoteurSpeed(0, abs(m_cmdMoteur.cmdMoteurDroit) , 0, abs(m_cmdMoteur.cmdMoteurGauche));
+
+	else
+		m_moteurManager->setMoteurSpeed( 0, 0, 0, 0);
+
+	/*if (true)
 	{ // Marche avant
 
 			if (m_cmdMoteur.cmdMoteurGauche < 0)
@@ -147,7 +165,7 @@ void ASV::CAsserv::appliquerCmdMoteur()
 			else
 				m_moteurManager->setMoteurSpeed(0, 0 ,0, abs(m_cmdMoteur.cmdMoteurGauche));
 				//MOT::CMoteurManager::inst()->droitePWM(m_cmdMoteur.cmdMoteurGauche, 0);
-	}
+	}*/
 	MOT::CMoteurManager::inst()->apply();
 }
 

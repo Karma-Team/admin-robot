@@ -273,7 +273,13 @@ void STR::CRemote::asservTest()
 	
 	int  timer = 0;
 	
-	while(indexStrategie != COF::CStrategieDeplacement::inst()->getSizeStrategie())
+	while(1)
+	{
+		usleep(10*1000);
+		asserv.asservirVersCible(pointStrategieDeplacement);
+	}
+
+	/*while(indexStrategie != COF::CStrategieDeplacement::inst()->getSizeStrategie())
 	{
 		while(timer < pointStrategieDeplacement->timeout && asserv.asservirVersCible(pointStrategieDeplacement))
 		{
@@ -283,7 +289,7 @@ void STR::CRemote::asservTest()
 		timer = 0;
 		indexStrategie++;
 		pointStrategieDeplacement = COF::CStrategieDeplacement::inst()->getStrategieDeplacement(indexStrategie);
-	}
+	}*/
 }
 
 
